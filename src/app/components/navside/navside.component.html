@@ -1,0 +1,65 @@
+<div class="navside">
+    <div class="top">
+        <button (click)="toggleSidebar()">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <span>Menu de Navegação</span>
+    </div>
+    <hr>
+    <nav class="nav-links">
+        <ul>
+            <li>
+                <button class="links-bnt" href="#" (click)="toggleSubmenu()">
+                    <mat-icon>group</mat-icon>
+                    <span>Gerência de Usuário</span>
+                </button>
+                <div class="submenu" *ngIf="isSubmenuOpen">
+                    <ul>
+                        <li><a href="#">Opção 1</a></li>
+                        <li><a href="#">Opção 2</a></li>
+                        <li><a href="#">Opção 3</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li>
+                <button href="#" class="links-bnt" (click)="toggleSubmenu()">
+                    <mat-icon>photo_album</mat-icon>
+                    <span>Gerência de Produtos</span>
+                </button>
+                <div class="submenu" *ngIf="isSubmenuOpen">
+                    <ul>
+                        <li><a href="#">Opção 1</a></li>
+                        <li><a href="#">Opção 2</a></li>
+                        <li><a href="#">Opção 3</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li>
+                <button href="#" class="links-bnt" (click)="toggleSubmenu()">
+                    <mat-icon>shopping_cart</mat-icon>
+                    <span>Pedidos</span>
+                </button>
+                <div class="submenu" *ngIf="isSubmenuOpen">
+                    <ul>
+                        <li><a href="#">Opção 1</a></li>
+                        <li><a href="#">Opção 2</a></li>
+                        <li><a href="#">Opção 3</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li>
+                <button href="#" class="links-bnt" (click)="toggleSubmenu()">
+                    <mat-icon>assignment</mat-icon>
+                    <span>Relatorios</span>
+                </button>
+                <div class="submenu" *ngIf="isSubmenuOpen">
+                    <ul>
+                        <li><a href="#">Opção 1</a></li>
+                        <li><a href="#">Opção 2</a></li>
+                        <li><a href="#">Opção 3</a></li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </nav>
+</div>
