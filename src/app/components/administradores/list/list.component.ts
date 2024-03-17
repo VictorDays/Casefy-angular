@@ -8,8 +8,8 @@ import { MatTableModule } from '@angular/material/table';
 import { Subscription } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 
-import { AdministradorService } from '../services/admistrador.service';
-import { Administrador } from '../models/administrador.model';
+import { AdministradorService } from '../../services/admistrador.service';
+import { Administrador } from '../../models/administrador.model';
 
 @Component({
   selector: 'app-list',
