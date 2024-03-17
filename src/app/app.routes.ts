@@ -4,7 +4,6 @@ import { ListAdmComponent } from './components/administradores/list/list.compone
 import { FormAdmComponent } from './components/administradores/form/form.component';
 
 export const routes: Routes = [
-    { path: 'teste', component: HeaderComponent, title: 'teste'},
 
     { path: 'adm/list', component: ListAdmComponent, title: 'Administradores'},
     { path: 'adm/form', component: FormAdmComponent, title: 'Cadastro de Administradores'},
