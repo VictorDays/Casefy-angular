@@ -3,8 +3,8 @@
 main {
     display: flex;
     flex-direction: column;
-
-    margin-top: 115px;
+    width: 78%;
+    margin-top: 80px;
     margin-left: 280px;
 
     font-family: "Lato", sans-serif;
@@ -13,11 +13,13 @@ main {
 h2 {
     font-size: 25px;
 }
+
 .content {
     display: flex;
-    justify-content: space-between; 
-    align-items: center; 
+    justify-content: space-between;
+    align-items: center;
 }
+
 .bnt-cadastro {
     height: 50px;
     width: 110px;
@@ -45,7 +47,7 @@ h2 {
     font-size: 20px;
     font-family: "Lato", sans-serif;
     font-weight: 500;
-    border-right:  200px;
+    border-right: 200px;
 }
 
 .search input {
@@ -56,16 +58,51 @@ h2 {
     width: 500px;
 
     border-radius: 8px;
-    /* Define o raio da borda */
     padding: 8px;
-    /* Adiciona algum preenchimento para espaçamento interno */
     border: 1px solid #808080;
-    /* Define uma borda sólida com uma cor cinza claro */
     transition: border-color 0.3s ease;
-    /* Adiciona uma transição suave para a cor da borda */
 
 }
+
 .search input:focus {
-    outline: none; /* Remove a borda de foco padrão */
-    border-color: #007bff; /* Altera a cor da borda quando o campo de entrada está em foco */
+    outline: none;
+    border-color: #007bff;
+}
+
+/* Tabela */
+.mat-table{
+    border-style: dotted;
+}
+.flex-container {
+    display: flex;
+    align-items: center;
+}
+
+.mat-column-nome {
+    width: 25%;
+
+}
+
+.mat-column-matricula {
+    width: 25%;
+    text-align: center;
+}
+
+.mat-column-Nivel {
+    width: 25%;
+    text-align: center;
+}
+
+.mat-column-acao {
+    width: 40%;
+    min-width: 10em;
+    text-align: center;
+}
+
+table button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #fff;
+    transform: scale(1.0)
 }
