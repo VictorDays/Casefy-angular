@@ -13,7 +13,13 @@ main {
 h2 {
     font-size: 25px;
 }
-
+a {
+    text-decoration: none; /* Remove a decoração de texto padrão (como sublinhado) */
+    display: inline-block; 
+    border-bottom: none; /* Remove a linha de baixo */
+    margin: 0px 0px;
+    padding: 5px; /* Adiciona um preenchimento para melhorar a aparência do link */
+}
 .content {
     display: flex;
     justify-content: space-between;
@@ -84,25 +90,57 @@ h2 {
 }
 
 .mat-column-matricula {
-    width: 25%;
+    width: 20%;
     text-align: center;
 }
 
 .mat-column-Nivel {
-    width: 25%;
+    width: 20%;
     text-align: center;
 }
 
 .mat-column-acao {
-    width: 40%;
     min-width: 10em;
     text-align: center;
 }
 
 table button {
-    background: none;
-    border: none;
+    background: #b6aeae;
+
+    width: 50px;
+    height: 40px;
+
+    border-radius: 20px;
+    border-style: none;
+
     cursor: pointer;
     color: #fff;
     transform: scale(1.0)
+}
+
+
+/* Estilos padrão dos botões */
+.bnt-visualizar {
+    background-color: transparent; /* Cor de fundo transparente para o botão de visualização */
+}
+
+.bnt-editar {
+    background-color: transparent; /* Cor de fundo transparente para o botão de edição */
+}
+
+.bnt-apagar {
+    background-color: transparent; /* Cor de fundo transparente para o botão de exclusão */
+}
+
+/* Estilos dos botões quando o mouse passa por cima */
+.bnt-visualizar:hover {
+    background-color: #add8e6; /* Altera a cor de fundo para azul ao passar o mouse */
+}
+
+.bnt-editar:hover {
+    background-color: #ffff99; /* Altera a cor de fundo para amarelo ao passar o mouse */
+}
+
+.bnt-apagar:hover {
+    background-color: #ffb6c1; /* Altera a cor de fundo para vermelho ao passar o mouse */
 }

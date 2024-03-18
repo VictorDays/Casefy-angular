@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TableComponent } from './table.component';
+import { ViewDialogComponent } from './view-dialog.component';
 
-describe('TableComponent', () => {
-  let component: TableComponent;
-  let fixture: ComponentFixture<TableComponent>;
+describe('ViewDialogComponent', () => {
+  let component: ViewDialogComponent;
+  let fixture: ComponentFixture<ViewDialogComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TableComponent]
+      imports: [ViewDialogComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(TableComponent);
+    fixture = TestBed.createComponent(ViewDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
+
+.popup-content {
+  top: 0px;
+  background-color: #fff;
+  margin: 10% auto;
+  padding: 32px;
+  width: 80%;
+  height: 90%;
+  max-width: 800px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  font-family: "Lato", sans-serif;
+}
+
+h2 {
+  font-size: 28px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.userInfo {
+  font-size: 18px;
+  color: #555;
+  margin-bottom: 15px;
+}
+.userInfo .title{
+  margin-top: 10px;
+}
+
+.userInfo .two {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  gap: -100px;
+}
+.popup-bnt{
+  display: flex;
+  justify-content: space-around;
+}
+.bnt-cancelar{
+  height: 50px;
+  width: 120px;
+  margin: 25px 0;
+  background: #CCCCCC;
+  font-size: 20px;
+  color: CCCCCC ;
+  color: #444f5e;
+
+  text-decoration: none;
+  border-radius: 10px;
+  border-style: none;
+  cursor: pointer;
+}
+
+.bnt-editar{
+  height: 50px;
+  width: 120px;
+  margin: 25px 0;
+  background: #FFD700;
+  font-size: 20px;
+  color: CCCCCC ;
+  color: #444f5e;
+
+  text-decoration: none;
+  border-radius: 10px;
+  border-style: none;
+  cursor: pointer;
+}

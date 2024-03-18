@@ -6,25 +6,32 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { Subscription } from 'rxjs';
-import { FormsModule } from '@angular/forms';
-
+import { FormsModule, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { AdministradorService } from '../services/admistrador.service';
 import { Administrador } from '../models/administrador.model';
+import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
+import { ViewDialogComponent } from '../view-dialog/view-dialog.component';
+
 
 @Component({
   selector: 'app-list',
   standalone: true,
-  imports: [FormsModule, HeaderComponent, NavsideComponent, MatInputModule, MatFormFieldModule,
+  imports: [ViewDialogComponent, ConfirmationDialogComponent, ReactiveFormsModule, FormsModule,
+    HeaderComponent, NavsideComponent, MatInputModule, MatFormFieldModule,
     MatIconModule, MatTableModule],
   templateUrl: './list.component.html',
   styleUrl: './list.component.css'
 })
 export class ListAdmComponent {
-  displayedColumns: string[] = ['nome', 'matricula', 'nivel', 'acao'];
+  displayedColumns: string[] = ['id', 'nome', 'matricula', 'nivel', 'acao'];
+
   administradores: Administrador[] = [];
+
   administradoresSubscription: Subscription | undefined;
 
-  constructor(private administradorService: AdministradorService) { }
+  constructor(private dialog: MatDialog,
+    private administradorService: AdministradorService) { }
 
   ngOnInit(): void {
     this.administradoresSubscription = this.administradorService.findAll().subscribe(data => {
@@ -42,33 +49,55 @@ export class ListAdmComponent {
 
   // Campo de Pesquisa:
   searchText: string = '';
-
   search() {
-    // Se não houver texto na caixa de busca, exiba todos os administradores
+    // Se o texto de busca estiver vazio, busque todos os administradores
     if (!this.searchText.trim()) {
-      this.administradorService.findAll().subscribe(data => {
-        this.administradores = data;
-      });
+      this.administradorService.findAll().subscribe(
+        data => {
+          this.administradores = data;
+        },
+        error => {
+          console.error('Erro ao buscar administradores:', error);
+        }
+      );
       return;
     }
-    let matricula: number = parseInt(this.searchText, 10);
-    // Verifica se o searchText é uma string numérica
-    if (!isNaN(parseInt(this.searchText))) {
-      console.log("entrou nos numero");
-      let matricula: number = parseInt(this.searchText, 10);
-      // Chama o método findByMatricula do serviço
-      this.administradorService.findByMatricula(matricula).subscribe(data => {
+    // Converter searchText para minúsculas para busca insensível a maiúsculas e minúsculas
+    const termoDeBusca = this.searchText.toLowerCase();
+    this.administradorService.findByNome(termoDeBusca).subscribe(
+      data => {
         this.administradores = data;
-      });
-
-    } else {
-      // Converta o texto da caixa de busca para minúsculas para tornar a busca insensível a maiúsculas e minúsculas
-      const termoDeBusca = this.searchText.toLowerCase();
-      // Filtrar a lista de administradores com base no termo de busca
-      this.administradorService.findByNome(this.searchText).subscribe(data => {
-        this.administradores = data;
-      });
-    }
-
+      },
+      error => {
+        console.error('Erro ao buscar por nome:', error);
+      }
+    );
   }
+
+  //Caixa de dialogo para excluir 
+  confirmDelete(administrador: Administrador): void {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === true && administrador && administrador.id !== undefined) {
+
+        this.administradorService.delete(administrador).subscribe(
+          () => {
+            // Atualizar lista de administradores após exclusão
+            this.administradores = this.administradores.filter(adm => adm.id !== administrador.id);
+          }
+        );
+      }
+    });
+  }
+
+  visualizarDados(administrador: Administrador): void {
+    this.dialog.open(ViewDialogComponent, {
+      width: '600px',
+      height: '545px',
+      data: administrador
+    });
+  }
+
+
 }
