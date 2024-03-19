@@ -1,6 +1,4 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { HeaderComponent } from '../../header/header.component';
-import { NavsideComponent } from '../../navside/navside.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
@@ -8,12 +6,14 @@ import { MatTableModule } from '@angular/material/table';
 import { Subscription } from 'rxjs';
 import { FormsModule, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { ConfirmationDialogComponent } from '../confirmation/confirmation-dialog.component';
-import { ViewDialogComponent } from '../view/view-dialog.component';
 import { RouterModule } from '@angular/router';
 
 import { AdministradorService } from '../../../crud-adm/services/admistrador.service';
 import { Administrador } from '../../../crud-adm/models/administrador.model';
+import { ViewDialogComponent } from '../../../components/view/view-dialog.component';
+import { ConfirmationDialogComponent } from '../../../components/confirmation/confirmation-dialog.component';
+import { HeaderComponent } from '../../../components/header/header.component';
+import { NavsideComponent } from '../../../components/navside/navside.component';
 
 @Component({
   selector: 'app-list',

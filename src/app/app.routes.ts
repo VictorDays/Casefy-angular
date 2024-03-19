@@ -1,9 +1,9 @@
 import { Routes } from '@angular/router';
 import { HeaderComponent } from './components/header/header.component';
-import { ListAdmComponent } from './components/administradores/list/list.component';
-import { FormAdmComponent } from './components/administradores/form/form.component';
-import { estadoResolver } from './components/administradores/resolver/estado-resolver';
+import { estadoResolver } from './crud-adm/administrador/resolver/estado-resolver';
 import { ModeloListComponent } from './crud-adm/modelo/list/list.component';
+import { FormAdmComponent } from './crud-adm/administrador/form/form.component';
+import { ListAdmComponent } from './crud-adm/administrador/list/list.component';
 
 export const routes: Routes = [
 

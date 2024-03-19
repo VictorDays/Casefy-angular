@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { HeaderComponent } from '../../header/header.component';
-import { NavsideComponent } from '../../navside/navside.component';
 import { FormsModule, ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -13,7 +11,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { AdministradorService } from '../../../crud-adm/services/admistrador.service';
 import { Administrador } from '../../../crud-adm/models/administrador.model';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ConfirmationDialogComponent } from '../confirmation/confirmation-dialog.component';
+import { ConfirmationDialogComponent } from '../../../components/confirmation/confirmation-dialog.component';
+import { HeaderComponent } from '../../../components/header/header.component';
+import { NavsideComponent } from '../../../components/navside/navside.component';
 @Component({
   selector: 'app-form',
   standalone: true,

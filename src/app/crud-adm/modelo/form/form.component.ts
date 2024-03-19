@@ -9,7 +9,7 @@ import { RouterModule } from '@angular/router';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HeaderComponent } from '../../../components/header/header.component';
 import { NavsideComponent } from '../../../components/navside/navside.component';
-import { ConfirmationDialogComponent } from '../../../components/administradores/confirmation/confirmation-dialog.component';
+import { ConfirmationDialogComponent } from '../../../components/confirmation/confirmation-dialog.component';
 import { Modelo } from '../../models/modelocapinha.model';
 import { ModeloService } from '../../services/modelo.service';
 @Component({
