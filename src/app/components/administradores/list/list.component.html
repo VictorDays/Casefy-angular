@@ -8,7 +8,7 @@
         <a href="/src/app/components/administradores/list/list.component.html">Lista de Administradores</a>
     </div>
     <div class="content">
-        <button class="bnt-cadastro">Cadastrar</button>
+        <button class="bnt-cadastro" [routerLink]="['/adm/form']">Cadastrar</button>
         <div class="search">
             <label for="">Buscar: </label>
             <input type="text" placeholder=" Pesquise pelo nome" [(ngModel)]="searchText" (keyup)="search()">
@@ -44,7 +44,7 @@
                 <button class="bnt-visualizar" (click)="visualizarDados(element)">
                     <mat-icon>visibility</mat-icon>
                 </button>
-                <button class="bnt-editar">
+                <button class="bnt-editar" [routerLink]="['/adm/edit', element.id]">
                     <mat-icon>edit</mat-icon>
                 </button>
                 <button class="bnt-apagar" (click)="confirmDelete(element)">

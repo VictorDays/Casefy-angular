@@ -1,6 +1,10 @@
 
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+<<<<<<< HEAD:src/app/components/administradores/view-dialog/view-dialog.component.ts
+=======
+import { Administrador } from '../../models/administrador.model';
+>>>>>>> ada34da5a57b317bd284f3ada8b8c1226d15d591:src/app/components/administradores/view/view-dialog.component.ts
 import { Router, RouterModule } from '@angular/router';
 import { Administrador } from '../../models/administrador.model';
 
@@ -22,7 +26,7 @@ export class ViewDialogComponent {
 
 
   editar(id: number): void {
-    this.router.navigate(['/adm/form', id]);
+    this.router.navigate(['/adm/edit', id]);
     this.dialogRef.close(); // Fechar o popup após a navegação
   }
 
