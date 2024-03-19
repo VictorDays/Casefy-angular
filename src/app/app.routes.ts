@@ -12,4 +12,6 @@ export const routes: Routes = [
     { path: 'adm/edit/:id', component: FormAdmComponent, resolve: { administrador: estadoResolver }},
 
     { path: 'modelos/list', component: ModeloListComponent, title: 'Modelos'},
+    { path: 'modelos/form', component: ModeloListComponent, title: 'Modelos'},
+    
 ];
