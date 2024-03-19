@@ -21,7 +21,8 @@ h2 {
 }
 
 .userInfo {
-  font-size: 18px;
+  padding: 25px;
+  font-size: 15px;
   color: #555;
   margin-bottom: 15px;
 }
@@ -40,14 +41,12 @@ h2 {
   justify-content: space-around;
 }
 .bnt-cancelar{
-  height: 50px;
-  width: 120px;
+  height: 40px;
+  width: 100px;
   margin: 25px 0;
   background: #CCCCCC;
-  font-size: 20px;
-  color: CCCCCC ;
-  color: #444f5e;
-
+  color: #555;
+  font-weight: bold;
   text-decoration: none;
   border-radius: 10px;
   border-style: none;
@@ -55,14 +54,12 @@ h2 {
 }
 
 .bnt-editar{
-  height: 50px;
-  width: 120px;
+  height: 40px;
+  width: 100px;
   margin: 25px 0;
   background: #FFD700;
-  font-size: 20px;
-  color: CCCCCC ;
-  color: #444f5e;
-
+  color: #555;
+  font-weight: bold;
   text-decoration: none;
   border-radius: 10px;
   border-style: none;

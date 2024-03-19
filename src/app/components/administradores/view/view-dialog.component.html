@@ -12,12 +12,12 @@
         <div class="title" class="two">
             <span><strong>CPF:</strong></span>
             <span ><strong>Matricula:</strong></span>
-            <span><strong>Perfil:</strong></span>
+            <span><strong>Senha:</strong></span>
         </div>
         <div class="infor" class="two">
             <span>{{data.cpf}}</span>
             <span >{{data.matricula}}</span>
-            <span>{{data.perfil}}</span>
+            <span >{{data.senha}}</span>
         </div>
         <div class="title">
             <span ><strong>Email:</strong></span>
@@ -28,6 +28,6 @@
     </div>
     <div class="popup-bnt">
         <button class="bnt-cancelar" (click)="cancelar()">Cancelar</button>
-        <button class="bnt-editar" [routerLink]="'/adm/form/' + data.id">Editar</button>
+        <button class="bnt-editar" (click)="editar(data.id)">Editar</button>
     </div>
 </div>

@@ -8,9 +8,9 @@ import { MatTableModule } from '@angular/material/table';
 import { Subscription } from 'rxjs';
 import { FormsModule, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
-import { ViewDialogComponent } from '../view-dialog/view-dialog.component';
-
+import { ConfirmationDialogComponent } from '../confirmation/confirmation-dialog.component';
+import { ViewDialogComponent } from '../view/view-dialog.component';
+import { RouterModule } from '@angular/router';
 
 import { AdministradorService } from '../../services/admistrador.service';
 import { Administrador } from '../../models/administrador.model';
@@ -18,7 +18,7 @@ import { Administrador } from '../../models/administrador.model';
 @Component({
   selector: 'app-list',
   standalone: true,
-  imports: [ViewDialogComponent, ConfirmationDialogComponent, ReactiveFormsModule, FormsModule,
+  imports: [RouterModule, ViewDialogComponent, ConfirmationDialogComponent, ReactiveFormsModule, FormsModule,
     HeaderComponent, NavsideComponent, MatInputModule, MatFormFieldModule,
     MatIconModule, MatTableModule],
   templateUrl: './list.component.html',
