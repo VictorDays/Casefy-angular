@@ -3,11 +3,13 @@
 <main>
     <h2 class="titulo">Cadastro de Administradores</h2>
     <div class="historic">
-        <a href="/src/app/components/administradores/form/form.component.html">Home</a>
+
+        <a [routerLink]="['/']">Home</a>
         /
-        <a href="/src/app/components/administradores/list/list.component.html">Lista de Administradores</a>
+        <a [routerLink]="['/adm/list']">Lista de Administradores</a>
         /
-        <a href="/src/app/components/administradores/list/list.component.html">Administrador</a>
+        <a href="#">Administrador</a>
+        /
     </div>
     <div class="content">
         <span>Dados do Usuário Administrador</span>

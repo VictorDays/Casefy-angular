@@ -12,8 +12,8 @@ import { ConfirmationDialogComponent } from '../confirmation/confirmation-dialog
 import { ViewDialogComponent } from '../view/view-dialog.component';
 import { RouterModule } from '@angular/router';
 
-import { AdministradorService } from '../../services/admistrador.service';
-import { Administrador } from '../../models/administrador.model';
+import { AdministradorService } from '../../../crud-adm/services/admistrador.service';
+import { Administrador } from '../../../crud-adm/models/administrador.model';
 
 @Component({
   selector: 'app-list',

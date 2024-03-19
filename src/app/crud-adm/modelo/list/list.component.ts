@@ -1,17 +1,17 @@
 import { Component } from '@angular/core';
-import { NavsideComponent } from "../../navside/navside.component";
-import { HeaderComponent } from "../../header/header.component";
-import { Modelo } from '../../models/modelocapinha.model';
 import { Subscription } from 'rxjs';
-import { ModeloService } from '../../services/modelo.service';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
+import { NavsideComponent } from '../../../components/navside/navside.component';
+import { HeaderComponent } from '../../../components/header/header.component';
+import { Modelo } from '../../models/modelocapinha.model';
+import { ModeloService } from '../../services/modelo.service';
 
 @Component({
     selector: 'app-modelo-list',
     standalone: true,
-    templateUrl: './modelo-list.component.html',
-    styleUrl: './modelo-list.component.css',
+    templateUrl: './list.component.html',
+    styleUrl: './list.component.css',
     imports: [NavsideComponent, HeaderComponent, FormsModule, ReactiveFormsModule, MatTableModule]
 })
 export class ModeloListComponent {

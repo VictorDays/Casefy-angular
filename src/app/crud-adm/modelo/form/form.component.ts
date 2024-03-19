@@ -1,22 +1,22 @@
 import { Component } from '@angular/core';
-import { HeaderComponent } from '../../header/header.component';
-import { NavsideComponent } from '../../navside/navside.component';
 import { FormsModule, ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { NgIf } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { Modelo } from '../../models/modelocapinha.model';
-import { ModeloService } from '../../services/modelo.service';
 
 import { ActivatedRoute, Router } from '@angular/router';
-import { ConfirmationDialogComponent } from '../../administradores/confirmation/confirmation-dialog.component';
+import { HeaderComponent } from '../../../components/header/header.component';
+import { NavsideComponent } from '../../../components/navside/navside.component';
+import { ConfirmationDialogComponent } from '../../../components/administradores/confirmation/confirmation-dialog.component';
+import { Modelo } from '../../models/modelocapinha.model';
+import { ModeloService } from '../../services/modelo.service';
 @Component({
     selector: 'app-modelo-form',
     standalone: true,
-    templateUrl: './modelo-form.component.html',
-    styleUrl: './modelo-form.component.css',
+    templateUrl: './form.component.html',
+    styleUrl: './form.component.css',
     imports: [RouterModule, NgIf, HeaderComponent, NavsideComponent, ReactiveFormsModule, FormsModule,
       NavsideComponent, MatInputModule, MatFormFieldModule, MatIconModule, ConfirmationDialogComponent]
 })
