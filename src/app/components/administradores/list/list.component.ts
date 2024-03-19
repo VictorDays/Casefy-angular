@@ -26,7 +26,6 @@ import { Administrador } from '../../models/administrador.model';
 })
 export class ListAdmComponent {
   displayedColumns: string[] = ['id', 'nome', 'matricula', 'nivel', 'acao'];
-
   administradores: Administrador[] = [];
 
   administradoresSubscription: Subscription | undefined;

@@ -7,6 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { NgIf } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
 
 
 import { AdministradorService } from '../../services/admistrador.service';
@@ -16,7 +17,7 @@ import { ConfirmationDialogComponent } from '../confirmation/confirmation-dialog
 @Component({
   selector: 'app-form',
   standalone: true,
-  imports: [RouterModule, NgIf, HeaderComponent, NavsideComponent, ReactiveFormsModule, FormsModule,
+  imports: [ RouterModule, NgIf, HeaderComponent, NavsideComponent, ReactiveFormsModule, FormsModule,
     NavsideComponent, MatInputModule, MatFormFieldModule, MatIconModule, ConfirmationDialogComponent],
   templateUrl: './form.component.html',
   styleUrl: './form.component.css'
@@ -24,13 +25,13 @@ import { ConfirmationDialogComponent } from '../confirmation/confirmation-dialog
 export class FormAdmComponent {
   administradores: Administrador[] = [];
   formGroup!: FormGroup;
-  dialog: any;
 
   constructor(
     private formBuilder: FormBuilder,
     private administradorService: AdministradorService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private dialog: MatDialog
   ) {
     const administrador: Administrador = this.activatedRoute.snapshot.data['administrador'];
     this.formGroup = this.formBuilder.group({
@@ -88,6 +89,27 @@ console.log('Formulário válido:', this.formGroup.valid);
         });
       }
     }
+  }
+
+  confirmDelete(administrador: Administrador): void {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent);
+
+    dialogRef.afterClosed().subscribe((result: boolean) => {
+      if (result === true && administrador && administrador.id !== undefined) {
+        this.administradorService.delete(administrador).subscribe(
+          () => {
+            // Atualizar lista de administradores após exclusão
+            this.administradores = this.administradores.filter(adm => adm.id !== administrador.id);
+
+            // Redirecionar para '/adm/list'
+            this.router.navigateByUrl('/adm/list');
+          },
+          error => {
+            console.log('Erro ao excluir administrador:', error);
+          }
+        );
+      }
+    });
   }
 
 }

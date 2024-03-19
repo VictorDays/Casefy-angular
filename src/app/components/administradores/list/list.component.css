@@ -78,6 +78,7 @@ a {
 /* Tabela */
 .mat-table{
     border-style: dotted;
+    width: 500px;
 }
 .flex-container {
     display: flex;
