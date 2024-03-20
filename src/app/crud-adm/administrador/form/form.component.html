@@ -72,6 +72,11 @@
                         {{ nivel.label }}
                     </mat-option>
                 </mat-select>
+                <mat-error *ngIf="formGroup.get('idNivelAcesso') 
+                                   && formGroup.get('idNivelAcesso')?.invalid
+                                   && formGroup.get('idNivelAcesso')?.touched">
+                    O Nivel de Acesso é obrigatorio.
+                </mat-error>
             </div>
         </div>
         

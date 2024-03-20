@@ -16,10 +16,12 @@ import { HeaderComponent } from '../../../components/header/header.component';
 import { NavsideComponent } from '../../../components/navside/navside.component';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
+import { ErrorComponent } from '../../../components/error/error.component';
+import { HttpErrorResponse } from '@angular/common/http';
 @Component({
   selector: 'app-form',
   standalone: true,
-  imports: [ CommonModule, MatSelectModule, MatOptionModule, RouterModule, NgIf, HeaderComponent, NavsideComponent, ReactiveFormsModule, FormsModule,
+  imports: [ErrorComponent, CommonModule, MatSelectModule, MatOptionModule, RouterModule, NgIf, HeaderComponent, NavsideComponent, ReactiveFormsModule, FormsModule,
     NavsideComponent, MatInputModule, MatFormFieldModule, MatIconModule, ConfirmationDialogComponent],
   templateUrl: './form.component.html',
   styleUrl: './form.component.css'
@@ -38,7 +40,8 @@ export class FormAdmComponent {
     private administradorService: AdministradorService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private dialogError: MatDialog
   ) {
     const administrador: Administrador = this.activatedRoute.snapshot.data['administrador'];
     this.formGroup = this.formBuilder.group({
@@ -55,24 +58,37 @@ export class FormAdmComponent {
 
 
   salvar() {
-    console.log(this.niveisAcesso)
-    console.log('Entrou no salvar')
+    console.log(this.niveisAcesso);
+    console.log('Entrou no salvar');
     console.log('Formulário:', this.formGroup.value);
     console.log('Formulário válido:', this.formGroup.valid);
+
+    // Validar o formulário antes de prosseguir
+    this.enviarFormulario();
+
+    // Verificar se o formulário é válido
     if (this.formGroup.valid) {
-      console.log('Formulario valido')
       const administrador = this.formGroup.value;
+      // Verificar se é uma inserção ou atualização
       if (administrador.id == null) {
-        console.log(administrador.nivelAcesso)
+        console.log(administrador.nivelAcesso);
+        // Inserir novo administrador
         this.administradorService.insert(administrador).subscribe({
           next: (administradorService) => {
             this.router.navigateByUrl('/adm/list');
           },
           error: (err) => {
             console.log('Erro ao Incluir' + JSON.stringify(err));
+            if (err instanceof HttpErrorResponse && err.error && err.error.errors && err.error.errors.length > 0) {
+              const errorMessage = err.error.errors[0].message;
+              this.mostrarErro(errorMessage);
+            } else {
+              this.mostrarErro('Erro ao criar administrador: ' + err.message);
+            }
           }
         });
       } else {
+        // Atualizar administrador existente
         this.administradorService.update(administrador).subscribe({
           next: (administradorService) => {
             this.router.navigateByUrl('/adm/list');
@@ -82,8 +98,13 @@ export class FormAdmComponent {
           }
         });
       }
+    } else {
+      // Se o formulário for inválido, exibir mensagem de erro
+      console.log('Formulário inválido');
+      this.mostrarErro('Por favor, preencha todos os campos obrigatórios.');
     }
   }
+
 
   excluir() {
     if (this.formGroup.valid) {
@@ -122,4 +143,14 @@ export class FormAdmComponent {
     });
   }
 
+  mostrarErro(mensagemErro: string): void {
+    this.dialog.open(ErrorComponent, {
+      data: mensagemErro
+    });
+  }
+
+  enviarFormulario(): void {
+
+
+  }
 }

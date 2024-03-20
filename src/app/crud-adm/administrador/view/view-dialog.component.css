@@ -38,7 +38,8 @@ h2 {
 }
 .popup-bnt{
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+  gap: 20px;
 }
 .bnt-cancelar{
   height: 40px;

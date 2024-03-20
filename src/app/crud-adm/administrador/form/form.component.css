@@ -104,7 +104,9 @@ mat-select{
 mat-error{
     color: #f36b7f;
     font-family: "Lato", sans-serif;
+    font-size: 10px;
 }
+
 .form-group select{
     flex: 3;
     font-size: 15px;
@@ -140,7 +142,8 @@ mat-error{
 
 .bnt-group{
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
+    gap: 25px;
 
     margin-top: 15px;
 }
