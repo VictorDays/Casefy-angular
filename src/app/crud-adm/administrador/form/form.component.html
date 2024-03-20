@@ -67,7 +67,7 @@
             </div> 
             <div class="form-group">
                 <label for="nivel">Nível:</label>
-                <mat-select formControlName="niveisAcesso">
+                <mat-select id="nivel" formControlName="idNivelAcesso">
                     <mat-option *ngFor="let nivel of niveisAcesso" [value]="nivel.id">
                         {{ nivel.label }}
                     </mat-option>

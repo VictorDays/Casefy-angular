@@ -1,0 +1,37 @@
+<div class="popup-content">
+
+    <h2>Informações do Usuário</h2>
+
+    <div class="userInfo">
+        <div class="title">
+            <span><strong>Nome:</strong></span>
+        </div>
+        <div class="infor">
+            <span>{{data.nome}}</span>
+        </div>
+        <div class="title" class="two">
+            <span><strong>CPF:</strong></span>
+            <span ><strong>Matricula:</strong></span>
+            <span><strong>Nivel de Acesso:</strong></span>
+        </div>
+        <div class="infor" class="two">
+            <span>{{data.cpf}}</span>
+            <span >{{data.matricula}}</span>
+            <span >{{data.idNivelAcesso.label}}</span>
+        </div>
+        <div class="title" class="two">
+            <span><strong>Email:</strong></span>
+            <span ><strong>Senha:</strong></span>
+            <span><strong>Perfil de Usuário:</strong></span>
+        </div>
+        <div class="infor" class="two">
+            <span>{{data.email}}</span>
+            <span >{{data.senha}}</span>
+            <span >{{data.perfil}}</span>
+        </div>
+    </div>
+    <div class="popup-bnt">
+        <button class="bnt-cancelar" (click)="cancelar()">Cancelar</button>
+        <button class="bnt-editar" (click)="editar(data.id)">Editar</button>
+    </div>
+</div>

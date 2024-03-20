@@ -1,3 +1,7 @@
+export class NivelAcesso {
+    id!: number;
+    label!: string;
+}
 export class Administrador {
     id!: number;
     nome!: string;
@@ -5,5 +9,6 @@ export class Administrador {
     cpf!: string;
     email!: string;
     senha!: string;
-    nivelAcesso!: number;
+    perfil!: string;
+    idNivelAcesso!: NivelAcesso;
 }

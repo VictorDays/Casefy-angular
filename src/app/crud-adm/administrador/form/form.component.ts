@@ -48,7 +48,7 @@ export class FormAdmComponent {
       matricula: [administrador?.matricula || '', Validators.required],
       senha: [administrador?.senha || '', Validators.required],
       email: [administrador?.email || '', [Validators.required, Validators.email]],
-      nivelAcesso: [administrador?.nivelAcesso || '', Validators.required],
+      idNivelAcesso: [administrador?.idNivelAcesso || '', Validators.required],
     });
   }
 
