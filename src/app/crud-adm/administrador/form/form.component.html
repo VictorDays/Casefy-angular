@@ -8,8 +8,8 @@
         /
         <a [routerLink]="['/adm/list']">Lista de Administradores</a>
         /
-        <a href="#">Administrador</a>
-        /
+        <a>Administrador</a>
+    
     </div>
     <div class="content">
         <span>Dados do Usuário Administrador</span>
@@ -65,7 +65,16 @@
                     O senha é obrigatorio.
                 </mat-error>
             </div> 
+            <div class="form-group">
+                <label for="nivel">Nível:</label>
+                <mat-select formControlName="niveisAcesso">
+                    <mat-option *ngFor="let nivel of niveisAcesso" [value]="nivel.id">
+                        {{ nivel.label }}
+                    </mat-option>
+                </mat-select>
+            </div>
         </div>
+        
     </form>
     <div class="bnt-group">
         <button type="submit" class="btn-cancelar" [routerLink]="['/adm/list']">Cancelar</button>

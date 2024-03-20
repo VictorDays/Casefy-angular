@@ -3,7 +3,7 @@ import { FormsModule, ReactiveFormsModule, FormGroup, FormBuilder, Validators } 
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
-import { NgIf } from '@angular/common';
+import { CommonModule, NgIf } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 
@@ -14,10 +14,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmationDialogComponent } from '../../../components/confirmation/confirmation-dialog.component';
 import { HeaderComponent } from '../../../components/header/header.component';
 import { NavsideComponent } from '../../../components/navside/navside.component';
+import { MatSelectModule } from '@angular/material/select';
+import { MatOptionModule } from '@angular/material/core';
 @Component({
   selector: 'app-form',
   standalone: true,
-  imports: [ RouterModule, NgIf, HeaderComponent, NavsideComponent, ReactiveFormsModule, FormsModule,
+  imports: [ CommonModule, MatSelectModule, MatOptionModule, RouterModule, NgIf, HeaderComponent, NavsideComponent, ReactiveFormsModule, FormsModule,
     NavsideComponent, MatInputModule, MatFormFieldModule, MatIconModule, ConfirmationDialogComponent],
   templateUrl: './form.component.html',
   styleUrl: './form.component.css'
@@ -25,6 +27,11 @@ import { NavsideComponent } from '../../../components/navside/navside.component'
 export class FormAdmComponent {
   administradores: Administrador[] = [];
   formGroup!: FormGroup;
+  niveisAcesso = [
+    { id: 1, label: 'Analista' },
+    { id: 2, label: 'Supervisor' },
+    { id: 3, label: 'Gerente' }
+  ];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -41,19 +48,22 @@ export class FormAdmComponent {
       matricula: [administrador?.matricula || '', Validators.required],
       senha: [administrador?.senha || '', Validators.required],
       email: [administrador?.email || '', [Validators.required, Validators.email]],
+      nivelAcesso: [administrador?.nivelAcesso || '', Validators.required],
     });
   }
 
 
 
   salvar() {
+    console.log(this.niveisAcesso)
     console.log('Entrou no salvar')
     console.log('Formulário:', this.formGroup.value);
-console.log('Formulário válido:', this.formGroup.valid);
+    console.log('Formulário válido:', this.formGroup.valid);
     if (this.formGroup.valid) {
       console.log('Formulario valido')
       const administrador = this.formGroup.value;
       if (administrador.id == null) {
+        console.log(administrador.nivelAcesso)
         this.administradorService.insert(administrador).subscribe({
           next: (administradorService) => {
             this.router.navigateByUrl('/adm/list');

@@ -5,4 +5,5 @@ export class Administrador {
     cpf!: string;
     email!: string;
     senha!: string;
+    nivelAcesso!: number;
 }
