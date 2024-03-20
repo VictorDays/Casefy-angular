@@ -98,6 +98,4 @@ export class ListAdmComponent {
       data: administrador
     });
   }
-
-
 }

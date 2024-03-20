@@ -85,6 +85,10 @@ form .group {
     border-color: #007bff;
 }
 
+mat-error{
+    color: #f36b7f;
+    font-family: "Lato", sans-serif;
+}
 .form-group select{
     flex: 3;
     font-size: 15px;
