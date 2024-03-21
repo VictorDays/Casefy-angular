@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
+
+.popup-content {
+  top: 120px;
+  background-color: #fff;
+  margin: 10% auto;
+  padding: 32px;
+  width: 80%;
+  height: 90%;
+  max-width: 800px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  font-family: "Lato", sans-serif;
+}
+
+h2 {
+  font-size: 28px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.userInfo {
+  padding: 25px;
+  font-size: 15px;
+  color: #555;
+  margin-bottom: 15px;
+  margin-top: -30px;
+}
+
+.title {
+  margin-top: 10px;
+}
+
+.three {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: -100px;
+}
+
+.two {
+  display: grid;
+  grid-template-columns: auto 1fr; 
+  gap: 10px; 
+  margin-top: 10px;
+}
+
+.two span:first-child {
+  justify-self: start; /* Alinha o primeiro span à esquerda */
+}
+
+.two span:last-child {
+  justify-self: center; /* Alinha o segundo span ao centro */
+}
+
+.twoo{
+  margin-top: 10px;
+}
+.telefones{
+  display: flex;
+  justify-content: space-between;
+  margin-left: 0%;
+}
+
+.enderecos{
+  display: flex;
+  flex-direction: column;
+}
+
+.popup-bnt {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.bnt-cancelar {
+  height: 40px;
+  width: 100px;
+  margin: 25px 0;
+  background: #CCCCCC;
+  color: #555;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 10px;
+  border-style: none;
+  cursor: pointer;
+}
+
+.bnt-editar {
+  height: 40px;
+  width: 100px;
+  margin: 25px 0;
+  background: #FFD700;
+  color: #555;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 10px;
+  border-style: none;
+  cursor: pointer;
+}

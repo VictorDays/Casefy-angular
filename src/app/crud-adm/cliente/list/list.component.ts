@@ -12,6 +12,8 @@ import { ViewClienteComponent } from '../view/view.component';
 import { HeaderComponent } from '../../../components/header/header.component';
 import { NavsideComponent } from '../../../components/navside/navside.component';
 import { ConfirmationDialogComponent } from '../../../components/confirmation/confirmation-dialog.component';
+import { ClienteService } from '../../services/cliente.service';
+import { Cliente } from '../../models/cliente.models';
 
 @Component({
   selector: 'app-list',
@@ -22,49 +24,49 @@ import { ConfirmationDialogComponent } from '../../../components/confirmation/co
   templateUrl: './list.component.html',
   styleUrl: './list.component.css'
 })
-export class ListComponent {
-  displayedColumns: string[] = ['id', 'nome', 'matricula', 'nivel', 'acao'];
-  administradores: Administrador[] = [];
+export class ClienteListComponent {
+  displayedColumns: string[] = ['id', 'nome', 'email', 'cpf', 'acao'];
+  clientes: Cliente[] = [];
 
-  administradoresSubscription: Subscription | undefined;
+  clientesSubscription: Subscription | undefined;
 
   constructor(private dialog: MatDialog,
-    private administradorService: AdministradorService) { }
+    private clienteService: ClienteService) { }
 
   ngOnInit(): void {
-    this.administradoresSubscription = this.administradorService.findAll().subscribe(data => {
-      this.administradores = data;
+    this.clientesSubscription = this.clienteService.findAll().subscribe(data => {
+      this.clientes = data;
       console.log(data);
     });
   }
 
-  //Verifica se this.administradoresSubscription existe e não é nulo.
+  //Verifica se this.clientesSubscription existe e não é nulo.
   ngOnDestroy(): void {
-    if (this.administradoresSubscription) {
-      this.administradoresSubscription.unsubscribe();
+    if (this.clientesSubscription) {
+      this.clientesSubscription.unsubscribe();
     }
   }
 
   // Campo de Pesquisa:
   searchText: string = '';
   search() {
-    // Se o texto de busca estiver vazio, busque todos os administradores
+    // Se o texto de busca estiver vazio, busque todos os clientes
     if (!this.searchText.trim()) {
-      this.administradorService.findAll().subscribe(
+      this.clienteService.findAll().subscribe(
         data => {
-          this.administradores = data;
+          this.clientes = data;
         },
         error => {
-          console.error('Erro ao buscar administradores:', error);
+          console.error('Erro ao buscar clientes:', error);
         }
       );
       return;
     }
     // Converter searchText para minúsculas para busca insensível a maiúsculas e minúsculas
     const termoDeBusca = this.searchText.toLowerCase();
-    this.administradorService.findByNome(termoDeBusca).subscribe(
+    this.clienteService.findByNome(termoDeBusca).subscribe(
       data => {
-        this.administradores = data;
+        this.clientes = data;
       },
       error => {
         console.error('Erro ao buscar por nome:', error);
@@ -73,27 +75,27 @@ export class ListComponent {
   }
 
   //Caixa de dialogo para excluir 
-  confirmDelete(administrador: Administrador): void {
+  confirmDelete(cliente: Cliente): void {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent);
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result === true && administrador && administrador.id !== undefined) {
+      if (result === true && cliente && cliente.id !== undefined) {
 
-        this.administradorService.delete(administrador).subscribe(
+        this.clienteService.delete(cliente).subscribe(
           () => {
-            // Atualizar lista de administradores após exclusão
-            this.administradores = this.administradores.filter(adm => adm.id !== administrador.id);
+            // Atualizar lista de clientes após exclusão
+            this.clientes = this.clientes.filter(adm => adm.id !== cliente.id);
           }
         );
       }
     });
   }
 
-  visualizarDados(administrador: Administrador): void {
-    this.dialog.open(ViewAdmComponent, {
+  visualizarDados(cliente: Cliente): void {
+    this.dialog.open(ViewClienteComponent, {
       width: '600px',
-      height: '545px',
-      data: administrador
+      height: '455px',
+      data: cliente
     });
   }
 }

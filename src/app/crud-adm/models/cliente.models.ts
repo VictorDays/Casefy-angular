@@ -1,11 +1,13 @@
+import { Endereco } from "./endereco.models";
 import { Telefone } from "./telefone.models";
 
 export class Cliente {
     id!: number;
     nome!: string;
-    email!: string;
+    login!: string;
     senha!: string;
     cpf!: string;
     dataNascimento!: string;
-    telefones!: Telefone[]
+    listaTelefones!: Telefone[];
+    listaEnderecos!: Endereco[]
 }
