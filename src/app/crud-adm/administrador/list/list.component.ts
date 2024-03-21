@@ -10,6 +10,7 @@ import { RouterModule } from '@angular/router';
 
 import { AdministradorService } from '../../../crud-adm/services/admistrador.service';
 import { Administrador } from '../../../crud-adm/models/administrador.model';
+
 import { HeaderComponent } from '../../../components/header/header.component';
 import { NavsideComponent } from '../../../components/navside/navside.component';
 import { ViewAdmComponent } from '../view/view-dialog.component';
