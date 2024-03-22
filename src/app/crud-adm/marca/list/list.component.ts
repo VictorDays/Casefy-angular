@@ -4,8 +4,6 @@ import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
 import { NavsideComponent } from '../../../components/navside/navside.component';
 import { HeaderComponent } from '../../../components/header/header.component';
-import { Modelo } from '../../models/modelocapinha.model';
-import { ModeloService } from '../../services/modelo.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from '../../../components/confirmation/confirmation-dialog.component';
 import { ViewDialogComponent } from '../../../components/view/view-dialog.component';
@@ -13,9 +11,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { RouterModule } from '@angular/router';
+import { Marca } from '../../models/marca.model';
+import { MarcaService } from '../../services/marca.service';
 
 @Component({
-    selector: 'app-modelo-list',
+    selector: 'app-marca-list',
     standalone: true,
     templateUrl: './list.component.html',
     styleUrl: './list.component.css',
@@ -23,25 +23,25 @@ import { RouterModule } from '@angular/router';
         HeaderComponent, NavsideComponent, MatInputModule, MatFormFieldModule,
         MatIconModule, MatTableModule]
 })
-export class ModeloListComponent {
-    displayedColumns: string[] = ['nome', 'marca'];
-    modelos: Modelo[] = [];
-    modelosSubscription: Subscription | undefined;
+export class MarcaListComponent {
+    displayedColumns: string[] = ['nome', 'acao'];
+    marca: Marca[] = [];
+    marcaSubscription: Subscription | undefined;
 
     constructor(private dialog: MatDialog,
-        private modeloService: ModeloService) { }
+        private marcaService: MarcaService) { }
 
     ngOnInit(): void {
-        this.modelosSubscription = this.modeloService.findAll().subscribe(data => {
-          this.modelos = data;
+        this.marcaSubscription = this.marcaService.findAll().subscribe(data => {
+          this.marca = data;
           console.log(data);
         });
       }
     
       //Verifica se this.administradoresSubscription existe e não é nulo.
       ngOnDestroy(): void {
-        if (this.modelosSubscription) {
-          this.modelosSubscription.unsubscribe();
+        if (this.marcaSubscription) {
+          this.marcaSubscription.unsubscribe();
         }
       }
     
@@ -50,9 +50,9 @@ export class ModeloListComponent {
       search() {
         // Se o texto de busca estiver vazio, busque todos os administradores
         if (!this.searchText.trim()) {
-          this.modeloService.findAll().subscribe(
+          this.marcaService.findAll().subscribe(
             data => {
-              this.modelos = data;
+              this.marca = data;
             },
             error => {
               console.error('Erro ao buscar administradores:', error);
@@ -62,9 +62,9 @@ export class ModeloListComponent {
         }
         // Converter searchText para minúsculas para busca insensível a maiúsculas e minúsculas
         const termoDeBusca = this.searchText.toLowerCase();
-        this.modeloService.findByNome(termoDeBusca).subscribe(
+        this.marcaService.findByNome(termoDeBusca).subscribe(
           data => {
-            this.modelos = data;
+            this.marca = data;
           },
           error => {
             console.error('Erro ao buscar por nome:', error);
@@ -73,27 +73,27 @@ export class ModeloListComponent {
       }
     
       //Caixa de dialogo para excluir 
-      confirmDelete(modelo: Modelo): void {
+      confirmDelete(marca: Marca): void {
         const dialogRef = this.dialog.open(ConfirmationDialogComponent);
     
         dialogRef.afterClosed().subscribe(result => {
-          if (result === true && modelo && modelo.id !== undefined) {
+          if (result === true && marca && marca.id !== undefined) {
     
-            this.modeloService.delete(modelo).subscribe(
+            this.marcaService.delete(marca).subscribe(
               () => {
                 // Atualizar lista de administradores após exclusão
-                this.modelos = this.modelos.filter(adm => adm.id !== modelo.id);
+                this.marca = this.marca.filter(adm => adm.id !== marca.id);
               }
             );
           }
         });
       }
     
-      visualizarDados(modelo: Modelo): void {
+      visualizarDados(marca: Marca): void {
         this.dialog.open(ViewDialogComponent, {
           width: '600px',
           height: '545px',
-          data: modelo
+          data: marca
         });
       }
 

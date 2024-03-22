@@ -10,31 +10,31 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { HeaderComponent } from '../../../components/header/header.component';
 import { NavsideComponent } from '../../../components/navside/navside.component';
 import { ConfirmationDialogComponent } from '../../../components/confirmation/confirmation-dialog.component';
-import { Modelo } from '../../models/modelocapinha.model';
-import { ModeloService } from '../../services/modelo.service';
+import { Marca } from '../../models/marca.model';
+import { MarcaService } from '../../services/marca.service';
+
 @Component({
-    selector: 'app-modelo-form',
+    selector: 'app-marca-form',
     standalone: true,
     templateUrl: './form.component.html',
     styleUrl: './form.component.css',
     imports: [RouterModule, NgIf, HeaderComponent, NavsideComponent, ReactiveFormsModule, FormsModule,
       NavsideComponent, MatInputModule, MatFormFieldModule, MatIconModule, ConfirmationDialogComponent]
 })
-export class ModeloFormComponent {
-  modelos: Modelo[] = [];
+export class MarcaFormComponent {
+  marcas: Marca[] = [];
   formGroup!: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
-    private modeloService: ModeloService,
+    private marcaService: MarcaService,
     private router: Router,
     private activatedRoute: ActivatedRoute
   ){
-    const modelo: Modelo = this.activatedRoute.snapshot.data['modelo'];
+    const marca: Marca = this.activatedRoute.snapshot.data['marca'];
     this.formGroup = this.formBuilder.group({
-      id: [modelo?.id || null],
-      marca: [modelo?.marca || '', Validators.required],
-      nome:[modelo?.nome || '', Validators.required],
+      id: [marca?.id || null],
+      nome:[marca?.nome || '', Validators.required],
     })
 
   }
@@ -44,20 +44,20 @@ export class ModeloFormComponent {
 console.log('Formulário válido:', this.formGroup.valid);
     if (this.formGroup.valid) {
       console.log('Formulario valido')
-      const modelo = this.formGroup.value;
-      if (modelo.id == null) {
-        this.modeloService.insert(modelo).subscribe({
-          next: (modeloService) => {
-            this.router.navigateByUrl('/modelos/list');
+      const marca = this.formGroup.value;
+      if (marca.id == null) {
+        this.marcaService.insert(marca).subscribe({
+          next: (marcaService) => {
+            this.router.navigateByUrl('/marcas/list');
           },
           error: (err) => {
             console.log('Erro ao Incluir' + JSON.stringify(err));
           }
         });
       } else {
-        this.modeloService.update(modelo).subscribe({
-          next: (modeloService) => {
-            this.router.navigateByUrl('/modelos/list');
+        this.marcaService.update(marca).subscribe({
+          next: (marcaService) => {
+            this.router.navigateByUrl('/marcas/list');
           },
           error: (err) => {
             console.log('Erro ao Editar' + JSON.stringify(err));
@@ -69,11 +69,11 @@ console.log('Formulário válido:', this.formGroup.valid);
 
   excluir() {
     if (this.formGroup.valid) {
-      const modelo = this.formGroup.value;
-      if (modelo.id != null) {
-        this.modeloService.delete(modelo).subscribe({
+      const marca = this.formGroup.value;
+      if (marca.id != null) {
+        this.marcaService.delete(marca).subscribe({
           next: () => {
-            this.router.navigateByUrl('/modelos/list');
+            this.router.navigateByUrl('/marcas/list');
           },
           error: (err) => {
             console.log('Erro ao Excluir' + JSON.stringify(err));

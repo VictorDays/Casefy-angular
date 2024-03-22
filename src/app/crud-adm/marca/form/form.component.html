@@ -1,17 +1,17 @@
 <app-header></app-header>
 <app-navside></app-navside>
 <main>
-    <h2 class="titulo">Cadastro de Modelos</h2>
+    <h2 class="titulo">Cadastro de Marcas</h2>
     <div class="historic">
         <a [routerLink]="['/']">Home</a>
         /
-        <a [routerLink]="['modelos/list']">Lista de Modelos</a>
+        <a [routerLink]="['modelos/list']">Lista de Marcas de telefone</a>
         /
-        <a href="#">Modelos</a>
+        <a href="#">Marcas de telefone</a>
         /
     </div>
     <div class="content">
-        <span>Dados do Modelo da capinha</span>
+        <span>Dados da Marca</span>
     </div>
     <form [formGroup]="formGroup">
 
@@ -23,15 +23,6 @@
                                    && formGroup.get('nome')?.invalid
                                    && formGroup.get('nome')?.touched">
                     O nome é obrigatorio.
-                </mat-error>
-            </div>
-            <div class="form-group">
-                <label for="marca">Marca:</label>
-                <input type="text" id="marca" formControlName="marca">
-                <mat-error *ngIf="formGroup.get('marca') 
-                                   && formGroup.get('marca')?.invalid
-                                   && formGroup.get('marca')?.touched">
-                    A marca é obrigatorio.
                 </mat-error>
             </div>
         </div>
