@@ -12,14 +12,17 @@ import { NavsideComponent } from '../../../components/navside/navside.component'
 import { ConfirmationDialogComponent } from '../../../components/confirmation/confirmation-dialog.component';
 import { Marca } from '../../models/marca.model';
 import { MarcaService } from '../../services/marca.service';
+import { ErrorComponent } from '../../../components/error/error.component';
+import { MatDialog } from '@angular/material/dialog';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
-    selector: 'app-marca-form',
-    standalone: true,
-    templateUrl: './form.component.html',
-    styleUrl: './form.component.css',
-    imports: [RouterModule, NgIf, HeaderComponent, NavsideComponent, ReactiveFormsModule, FormsModule,
-      NavsideComponent, MatInputModule, MatFormFieldModule, MatIconModule, ConfirmationDialogComponent]
+  selector: 'app-marca-form',
+  standalone: true,
+  templateUrl: './form.component.html',
+  styleUrl: './form.component.css',
+  imports: [RouterModule, NgIf, HeaderComponent, NavsideComponent, ReactiveFormsModule, FormsModule,
+    NavsideComponent, MatInputModule, MatFormFieldModule, MatIconModule, ConfirmationDialogComponent]
 })
 export class MarcaFormComponent {
   marcas: Marca[] = [];
@@ -29,22 +32,30 @@ export class MarcaFormComponent {
     private formBuilder: FormBuilder,
     private marcaService: MarcaService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
-  ){
+    private activatedRoute: ActivatedRoute,
+    private dialog: MatDialog,
+    private dialogError: MatDialog
+  ) {
     const marca: Marca = this.activatedRoute.snapshot.data['marca'];
     this.formGroup = this.formBuilder.group({
       id: [marca?.id || null],
-      nome:[marca?.nome || '', Validators.required],
+      nome: [marca?.nome || '', Validators.required],
     })
 
   }
   salvar() {
     console.log('Entrou no salvar')
     console.log('Formulário:', this.formGroup.value);
-console.log('Formulário válido:', this.formGroup.valid);
+    console.log('Formulário válido:', this.formGroup.valid);
+
+    // Validar o formulário antes de prosseguir
+    this.enviarFormulario();
+
+    // Verificar se o formulário é válido
     if (this.formGroup.valid) {
       console.log('Formulario valido')
       const marca = this.formGroup.value;
+      // Verificar se é uma inserção ou atualização
       if (marca.id == null) {
         this.marcaService.insert(marca).subscribe({
           next: (marcaService) => {
@@ -52,9 +63,16 @@ console.log('Formulário válido:', this.formGroup.valid);
           },
           error: (err) => {
             console.log('Erro ao Incluir' + JSON.stringify(err));
+            if (err instanceof HttpErrorResponse && err.error && err.error.errors && err.error.errors.length > 0) {
+              const errorMessage = err.error.errors[0].message;
+              this.mostrarErro(errorMessage);
+            } else {
+              this.mostrarErro('Erro ao criar marca: ' + err.message);
+            }
           }
         });
       } else {
+        // Atualizar administrador existente
         this.marcaService.update(marca).subscribe({
           next: (marcaService) => {
             this.router.navigateByUrl('/marcas/list');
@@ -64,6 +82,10 @@ console.log('Formulário válido:', this.formGroup.valid);
           }
         });
       }
+    } else {
+      // Se o formulário for inválido, exibir mensagem de erro
+      console.log('Formulário inválido');
+      this.mostrarErro('Por favor, preencha todos os campos obrigatórios.');
     }
   }
 
@@ -81,5 +103,37 @@ console.log('Formulário válido:', this.formGroup.valid);
         });
       }
     }
+  }
+
+  confirmDelete(marca: Marca): void {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent);
+
+    dialogRef.afterClosed().subscribe((result: boolean) => {
+      if (result === true && marca && marca.id !== undefined) {
+        this.marcaService.delete(marca).subscribe(
+          () => {
+            // Atualizar lista de marcas após exclusão
+            this.marcas = this.marcas.filter(adm => adm.id !== marca.id);
+
+            // Redirecionar para '/adm/list'
+            this.router.navigateByUrl('/marcas/list');
+          },
+          error => {
+            console.log('Erro ao excluir marca:', error);
+          }
+        );
+      }
+    });
+  }
+
+  mostrarErro(mensagemErro: string): void {
+    this.dialog.open(ErrorComponent, {
+      data: mensagemErro
+    });
+  }
+
+  enviarFormulario(): void {
+
+
   }
 }

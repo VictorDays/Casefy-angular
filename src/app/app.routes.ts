@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import { HeaderComponent } from './components/header/header.component';
 import { FormAdmComponent } from './crud-adm/administrador/form/form.component';
 import { ListAdmComponent } from './crud-adm/administrador/list/list.component';
 import { estadoResolverAdm } from './crud-adm/administrador/resolver/estado-resolver-adm';
@@ -7,7 +6,7 @@ import { ClienteListComponent } from './crud-adm/cliente/list/list.component';
 import { ClienteFormComponent } from './crud-adm/cliente/form/form.component';
 import { MarcaListComponent } from './crud-adm/marca/list/list.component';
 import { MarcaFormComponent } from './crud-adm/marca/form/form.component';
-import { estadoResolverMarca } from './crud-adm/marca/resolver/estado-resolver-modelo';
+import { estadoResolverMarca } from './crud-adm/marca/resolver/estado-resolver-marca';
 
 export const routes: Routes = [
 

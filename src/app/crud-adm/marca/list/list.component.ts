@@ -6,7 +6,7 @@ import { NavsideComponent } from '../../../components/navside/navside.component'
 import { HeaderComponent } from '../../../components/header/header.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from '../../../components/confirmation/confirmation-dialog.component';
-import { ViewDialogComponent } from '../../../components/view/view-dialog.component';
+import { ViewMarcaComponent } from '../../../crud-adm/marca/view/view.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -19,7 +19,7 @@ import { MarcaService } from '../../services/marca.service';
     standalone: true,
     templateUrl: './list.component.html',
     styleUrl: './list.component.css',
-    imports: [RouterModule, ViewDialogComponent, ConfirmationDialogComponent, ReactiveFormsModule, FormsModule,
+    imports: [RouterModule, ViewMarcaComponent, ConfirmationDialogComponent, ReactiveFormsModule, FormsModule,
         HeaderComponent, NavsideComponent, MatInputModule, MatFormFieldModule,
         MatIconModule, MatTableModule]
 })
@@ -90,7 +90,7 @@ export class MarcaListComponent {
       }
     
       visualizarDados(marca: Marca): void {
-        this.dialog.open(ViewDialogComponent, {
+        this.dialog.open(ViewMarcaComponent, {
           width: '600px',
           height: '545px',
           data: marca

@@ -7,7 +7,7 @@ import { Marca } from '../models/marca.model';
   providedIn: 'root'
 })
 export class MarcaService {
-    private baseUrl = 'http://localhost:8080/modelos';
+    private baseUrl = 'http://localhost:8080/marcas';
   
     constructor(private httpClient: HttpClient) {  }
   

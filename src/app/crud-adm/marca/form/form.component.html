@@ -5,9 +5,9 @@
     <div class="historic">
         <a [routerLink]="['/']">Home</a>
         /
-        <a [routerLink]="['modelos/list']">Lista de Marcas de telefone</a>
+        <a [routerLink]="['marcas/list']">Lista de Marcas</a>
         /
-        <a href="#">Marcas de telefone</a>
+        <a href="#">Marcas</a>
         /
     </div>
     <div class="content">
@@ -28,7 +28,7 @@
         </div>
     </form>
     <div class="bnt-group">
-        <button type="submit" class="btn-cancelar" [routerLink]="['/modelos/list']">Cancelar</button>
+        <button type="submit" class="btn-cancelar" [routerLink]="['/marcas/list']">Cancelar</button>
         <button type="submit" class="btn-excluir"  (click)="excluir()" >Excluir</button>
         <button type="submit" class="btn-salvar" (click)="salvar()">Salvar</button>
     </div>
