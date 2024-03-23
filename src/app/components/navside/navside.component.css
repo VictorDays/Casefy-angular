@@ -68,9 +68,14 @@
 .submenu {
     display: none;
     /* Inicia oculto */
+    margin-left: 35px; /* Ligeiro recuo para a direita */
 }
 
 .submenu.active {
     display: block;
     /* Mostra quando ativado */
+}
+
+.submenu ul li {
+    margin-left: 0; /* Remove qualquer margem esquerda padrão dos itens do submenu */
 }
