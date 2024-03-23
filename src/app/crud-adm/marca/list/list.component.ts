@@ -24,7 +24,7 @@ import { MarcaService } from '../../services/marca.service';
         MatIconModule, MatTableModule]
 })
 export class MarcaListComponent {
-    displayedColumns: string[] = ['nome', 'acao'];
+    displayedColumns: string[] = ['id', 'nome', 'acao'];
     marca: Marca[] = [];
     marcaSubscription: Subscription | undefined;
 

@@ -3,7 +3,7 @@ import { FormsModule, ReactiveFormsModule, FormGroup, FormBuilder, Validators } 
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
-import { NgIf } from '@angular/common';
+import { CommonModule, NgIf } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 import { ActivatedRoute, Router } from '@angular/router';
@@ -15,18 +15,20 @@ import { MarcaService } from '../../services/marca.service';
 import { ErrorComponent } from '../../../components/error/error.component';
 import { MatDialog } from '@angular/material/dialog';
 import { HttpErrorResponse } from '@angular/common/http';
+import { MatSelectModule } from '@angular/material/select';
+import { MatOptionModule } from '@angular/material/core';
 
 @Component({
-  selector: 'app-marca-form',
+  selector: 'app-form',
   standalone: true,
+  imports: [ErrorComponent, CommonModule, MatSelectModule, MatOptionModule, RouterModule, NgIf, HeaderComponent, NavsideComponent, ReactiveFormsModule, FormsModule,
+    NavsideComponent, MatInputModule, MatFormFieldModule, MatIconModule, ConfirmationDialogComponent],
   templateUrl: './form.component.html',
-  styleUrl: './form.component.css',
-  imports: [RouterModule, NgIf, HeaderComponent, NavsideComponent, ReactiveFormsModule, FormsModule,
-    NavsideComponent, MatInputModule, MatFormFieldModule, MatIconModule, ConfirmationDialogComponent]
+  styleUrl: './form.component.css'
 })
-export class MarcaFormComponent {
+export class FormMarcaComponent {
   marcas: Marca[] = [];
-  formGroup!: FormGroup;
+  formGroupMarca!: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -37,26 +39,29 @@ export class MarcaFormComponent {
     private dialogError: MatDialog
   ) {
     const marca: Marca = this.activatedRoute.snapshot.data['marca'];
-    this.formGroup = this.formBuilder.group({
+    this.formGroupMarca = this.formBuilder.group({
       id: [marca?.id || null],
       nome: [marca?.nome || '', Validators.required],
-    })
-
+    });
   }
+
+
+
   salvar() {
-    console.log('Entrou no salvar')
-    console.log('Formulário:', this.formGroup.value);
-    console.log('Formulário válido:', this.formGroup.valid);
+    console.log('Entrou no salvar');
+    console.log('Formulário:', this.formGroupMarca.value);
+    console.log('Formulário válido:', this.formGroupMarca.valid);
 
     // Validar o formulário antes de prosseguir
     this.enviarFormulario();
 
     // Verificar se o formulário é válido
-    if (this.formGroup.valid) {
-      console.log('Formulario valido')
-      const marca = this.formGroup.value;
+    if (this.formGroupMarca.valid) {
+      const marca = this.formGroupMarca.value;
       // Verificar se é uma inserção ou atualização
       if (marca.id == null) {
+        console.log(marca.nivelAcesso);
+        // Inserir novo administrador
         this.marcaService.insert(marca).subscribe({
           next: (marcaService) => {
             this.router.navigateByUrl('/marcas/list');
@@ -67,7 +72,7 @@ export class MarcaFormComponent {
               const errorMessage = err.error.errors[0].message;
               this.mostrarErro(errorMessage);
             } else {
-              this.mostrarErro('Erro ao criar marca: ' + err.message);
+              this.mostrarErro('Erro ao criar marcas: ' + err.message);
             }
           }
         });
@@ -89,9 +94,10 @@ export class MarcaFormComponent {
     }
   }
 
+
   excluir() {
-    if (this.formGroup.valid) {
-      const marca = this.formGroup.value;
+    if (this.formGroupMarca.valid) {
+      const marca = this.formGroupMarca.value;
       if (marca.id != null) {
         this.marcaService.delete(marca).subscribe({
           next: () => {
@@ -112,7 +118,7 @@ export class MarcaFormComponent {
       if (result === true && marca && marca.id !== undefined) {
         this.marcaService.delete(marca).subscribe(
           () => {
-            // Atualizar lista de marcas após exclusão
+            // Atualizar lista de administradores após exclusão
             this.marcas = this.marcas.filter(adm => adm.id !== marca.id);
 
             // Redirecionar para '/adm/list'
