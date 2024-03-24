@@ -9,10 +9,10 @@
         <a [routerLink]="['/modelos/list']">Lista de Administradores</a>
         /
         <a>Administrador</a>
-    
+
     </div>
     <div class="content">
-        <span>Dados do Usuário Administrador</span>
+        <span>Dados do Modelo de capinhas</span>
     </div>
     <form [formGroup]="formGroup">
 
@@ -27,63 +27,20 @@
                 </mat-error>
             </div>
             <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="text" id="email" formControlName="email">
-                <mat-error *ngIf="formGroup.get('email') 
-                                   && formGroup.get('email')?.invalid
-                                   && formGroup.get('email')?.touched">
-                    O email é obrigatorio.
+                <label for="modelo">Modelo:</label>
+                <input type="text" id="modelo" formControlName="modelo">
+                <mat-error *ngIf="formGroup.get('modelo') 
+                                   && formGroup.get('modelo')?.invalid
+                                   && formGroup.get('modelo')?.touched">
+                    O modelo é obrigatorio.
                 </mat-error>
             </div>
-        </div>
 
-        <div class="group">
-            <div class="form-group">
-                <label for="matricula">Matrícula:</label>
-                <input type="text" id="matricula" formControlName="matricula">
-                <mat-error *ngIf="formGroup.get('matricula') 
-                                   && formGroup.get('matricula')?.invalid
-                                   && formGroup.get('matricula')?.touched">
-                    A matricula é obrigatoria.
-                </mat-error>
-            </div>
-            <div class="form-group">
-                <label for="cpf">CPF:</label>
-                <input type="text" id="cpf" formControlName="cpf">
-                <mat-error *ngIf="formGroup.get('cpf') 
-                                   && formGroup.get('cpf')?.invalid
-                                   && formGroup.get('cpf')?.touched">
-                    O CPF é obrigatorio.
-                </mat-error>
-            </div>
-            <div class="form-group">
-                <label for="senha">Senha:</label>
-                <input type="text" id="senha" formControlName="senha">
-                <mat-error *ngIf="formGroup.get('senha') 
-                                   && formGroup.get('senha')?.invalid
-                                   && formGroup.get('senha')?.touched">
-                    O senha é obrigatorio.
-                </mat-error>
-            </div> 
-            <div class="form-group">
-                <label for="nivel">Nível:</label>
-                <mat-select id="nivel" formControlName="idNivelAcesso">
-                    <mat-option *ngFor="let nivel of niveisAcesso" [value]="nivel.id">
-                        {{ nivel.label }}
-                    </mat-option>
-                </mat-select>
-                <mat-error *ngIf="formGroup.get('idNivelAcesso') 
-                                   && formGroup.get('idNivelAcesso')?.invalid
-                                   && formGroup.get('idNivelAcesso')?.touched">
-                    O Nivel de Acesso é obrigatorio.
-                </mat-error>
-            </div>
-        </div>
-        
     </form>
     <div class="bnt-group">
-        <button type="submit" class="btn-cancelar" [routerLink]="['/adm/list']">Cancelar</button>
-        <button type="submit" class="btn-excluir"  (click)="confirmDelete(formGroup?.value)" *ngIf="formGroup?.get('id')?.value" >Excluir</button>
+        <button type="submit" class="btn-cancelar" [routerLink]="['/modelos/list']">Cancelar</button>
+        <button type="submit" class="btn-excluir" (click)="confirmDelete(formGroup?.value)"
+            *ngIf="formGroup?.get('id')?.value">Excluir</button>
         <button type="submit" class="btn-salvar" (click)="salvar()">Salvar</button>
     </div>
 

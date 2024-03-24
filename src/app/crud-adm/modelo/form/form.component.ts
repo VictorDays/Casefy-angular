@@ -1,22 +1,32 @@
-import { Component } from '@angular/core';
-import { NavsideComponent } from "../../../components/navside/navside.component";
+import { CommonModule, NgIf } from "@angular/common";
+import { HttpErrorResponse } from "@angular/common/http";
+import { ReactiveFormsModule, FormsModule, FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { MatOptionModule } from "@angular/material/core";
+import { MatDialog } from "@angular/material/dialog";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatIconModule } from "@angular/material/icon";
+import { MatInputModule } from "@angular/material/input";
+import { MatSelectModule } from "@angular/material/select";
+import { RouterModule, Router, ActivatedRoute } from "@angular/router";
+import { ConfirmationDialogComponent } from "../../../components/confirmation/confirmation-dialog.component";
+import { ErrorComponent } from "../../../components/error/error.component";
 import { HeaderComponent } from "../../../components/header/header.component";
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Modelo } from '../../models/modelo.models';
-import { ModeloService } from '../../services/modelo.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { MatDialog } from '@angular/material/dialog';
-import { Marca } from '../../models/marca.model';
-import { HttpErrorResponse } from '@angular/common/http';
-import { ConfirmationDialogComponent } from '../../../components/confirmation/confirmation-dialog.component';
-import { ErrorComponent } from '../../../components/error/error.component';
+import { NavsideComponent } from "../../../components/navside/navside.component";
+import { Marca } from "../../models/marca.model";
+import { Modelo } from "../../models/modelo.models";
+import { ModeloService } from "../../services/modelo.service";
+
 
 @Component({
     selector: 'app-form',
     standalone: true,
     templateUrl: './form.component.html',
     styleUrl: './form.component.css',
-    imports: [NavsideComponent, HeaderComponent]
+    imports: [ErrorComponent, CommonModule, MatSelectModule,
+      MatOptionModule, RouterModule, NgIf, HeaderComponent,
+      NavsideComponent, ReactiveFormsModule, FormsModule,
+      NavsideComponent, MatInputModule, MatFormFieldModule,
+      MatIconModule, ConfirmationDialogComponent]
 })
 export class ModeloFormComponent {
   modelos: Modelo[] = [];
@@ -133,3 +143,7 @@ export class ModeloFormComponent {
 
 
 }
+function Component(arg0: { selector: string; standalone: boolean; templateUrl: string; styleUrl: string; imports: any[]; }): (target: typeof ModeloFormComponent) => void | typeof ModeloFormComponent {
+  throw new Error("Function not implemented.");
+}
+
