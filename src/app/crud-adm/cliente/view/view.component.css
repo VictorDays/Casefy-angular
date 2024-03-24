@@ -1,17 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
-
-
 .popup-content {
-  top: 120px;
+  top: 50%; /* Centraliza verticalmente */
+  left: 50%; /* Centraliza horizontalmente */
+  transform: translate(-50%, -50%); /* Centraliza o popup */
+  position: fixed; /* Mantém o popup no lugar mesmo quando a página é rolada */
   background-color: #fff;
-  margin: 10% auto;
   padding: 32px;
   width: 80%;
-  height: 90%;
   max-width: 800px;
   border-radius: 10px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
   font-family: "Lato", sans-serif;
+  overflow-y: auto; /* Adiciona uma barra de rolagem vertical se o conteúdo exceder o tamanho do popup */
 }
 
 h2 {
@@ -25,18 +25,16 @@ h2 {
   font-size: 15px;
   color: #555;
   margin-bottom: 15px;
-  margin-top: -30px;
+
+  font-weight: normal; 
+  display: block; /* Altera a exibição para bloco */
+  margin-top: 5px; /* Adiciona margem superior para separar dos elementos acima */
 }
 
-.title {
-  margin-top: 10px;
-}
 
 .three {
-  margin-top: 10px;
   display: flex;
   flex-direction: column;
-  gap: -100px;
 }
 
 .two {
@@ -54,18 +52,16 @@ h2 {
   justify-self: center; /* Alinha o segundo span ao centro */
 }
 
-.twoo{
-  margin-top: 10px;
-}
-.telefones{
+.telefones {
   display: flex;
-  justify-content: space-between;
-  margin-left: 0%;
+  flex-wrap: wrap; /* Quebra os telefones em várias linhas se necessário */
+  gap: 10px; /* Espaçamento entre os telefones */
 }
 
-.enderecos{
+.enderecos {
   display: flex;
   flex-direction: column;
+  gap: 10px; /* Espaçamento entre os endereços */
 }
 
 .popup-bnt {
@@ -74,11 +70,11 @@ h2 {
   gap: 20px;
 }
 
-.bnt-cancelar {
+.bnt-cancelar,
+.bnt-editar {
   height: 40px;
   width: 100px;
   margin: 25px 0;
-  background: #CCCCCC;
   color: #555;
   font-weight: bold;
   text-decoration: none;
@@ -87,15 +83,14 @@ h2 {
   cursor: pointer;
 }
 
+.bnt-cancelar {
+  background: #CCCCCC;
+}
+
 .bnt-editar {
-  height: 40px;
-  width: 100px;
-  margin: 25px 0;
   background: #FFD700;
-  color: #555;
-  font-weight: bold;
-  text-decoration: none;
-  border-radius: 10px;
-  border-style: none;
-  cursor: pointer;
+}
+
+.data-info {
+  font-weight: normal; /* Remove o negrito dos dados dinâmicos */
 }

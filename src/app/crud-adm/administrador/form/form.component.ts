@@ -21,8 +21,11 @@ import { HttpErrorResponse } from '@angular/common/http';
 @Component({
   selector: 'app-form',
   standalone: true,
-  imports: [ErrorComponent, CommonModule, MatSelectModule, MatOptionModule, RouterModule, NgIf, HeaderComponent, NavsideComponent, ReactiveFormsModule, FormsModule,
-    NavsideComponent, MatInputModule, MatFormFieldModule, MatIconModule, ConfirmationDialogComponent],
+  imports: [ErrorComponent, CommonModule, MatSelectModule,
+    MatOptionModule, RouterModule, NgIf, HeaderComponent,
+    NavsideComponent, ReactiveFormsModule, FormsModule,
+    NavsideComponent, MatInputModule, MatFormFieldModule,
+    MatIconModule, ConfirmationDialogComponent],
   templateUrl: './form.component.html',
   styleUrl: './form.component.css'
 })
@@ -62,9 +65,6 @@ export class FormAdmComponent {
     console.log('Entrou no salvar');
     console.log('Formulário:', this.formGroup.value);
     console.log('Formulário válido:', this.formGroup.valid);
-
-    // Validar o formulário antes de prosseguir
-    this.enviarFormulario();
 
     // Verificar se o formulário é válido
     if (this.formGroup.valid) {
@@ -149,8 +149,4 @@ export class FormAdmComponent {
     });
   }
 
-  enviarFormulario(): void {
-
-
-  }
 }
