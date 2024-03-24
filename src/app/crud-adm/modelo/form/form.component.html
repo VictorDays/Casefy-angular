@@ -1,47 +1,47 @@
 <app-header></app-header>
 <app-navside></app-navside>
 <main>
-    <h2 class="titulo">Cadastro de Modelos</h2>
+    <h2 class="titulo">Cadastro de Marcas</h2>
     <div class="historic">
-
         <a [routerLink]="['/']">Home</a>
         /
-        <a [routerLink]="['/modelos/list']">Lista de Administradores</a>
+        <a [routerLink]="['modelos/list']">Lista de Marcas</a>
         /
-        <a>Administrador</a>
-
+        <a href="#">Marcas</a>
+        /
     </div>
     <div class="content">
-        <span>Dados do Modelo de capinhas</span>
+        <span>Dados da Marca</span>
     </div>
-    <form [formGroup]="formGroup">
+    <form [formGroup]="formGroupModelo">
 
         <div class="group-ini">
             <div class="form-group">
                 <label for="nome">Nome:</label>
                 <input type="text" id="nome" formControlName="nome">
-                <mat-error *ngIf="formGroup.get('nome') 
-                                   && formGroup.get('nome')?.invalid
-                                   && formGroup.get('nome')?.touched">
+                <mat-error *ngIf="formGroupModelo.get('nome') 
+                                   && formGroupModelo.get('nome')?.invalid
+                                   && formGroupModelo.get('nome')?.touched">
                     O nome é obrigatorio.
                 </mat-error>
             </div>
+        </div>
+
+        <div class="group-ini">
             <div class="form-group">
-                <label for="modelo">Modelo:</label>
-                <input type="text" id="modelo" formControlName="modelo">
-                <mat-error *ngIf="formGroup.get('modelo') 
-                                   && formGroup.get('modelo')?.invalid
-                                   && formGroup.get('modelo')?.touched">
-                    O modelo é obrigatorio.
+                <label for="marca">Marca:</label>
+                <input type="text" id="marca" formControlName="marca">
+                <mat-error *ngIf="formGroupModelo.get('marca') 
+                                   && formGroupModelo.get('marca')?.invalid
+                                   && formGroupModelo.get('marca')?.touched">
+                    O nome é obrigatorio.
                 </mat-error>
             </div>
-
+        </div>
     </form>
     <div class="bnt-group">
         <button type="submit" class="btn-cancelar" [routerLink]="['/modelos/list']">Cancelar</button>
-        <button type="submit" class="btn-excluir" (click)="confirmDelete(formGroup?.value)"
-            *ngIf="formGroup?.get('id')?.value">Excluir</button>
+        <button type="submit" class="btn-excluir"  (click)="excluir()" *ngIf="formGroupModelo?.get('id')?.value">Excluir</button>
         <button type="submit" class="btn-salvar" (click)="salvar()">Salvar</button>
     </div>
-
 </main>

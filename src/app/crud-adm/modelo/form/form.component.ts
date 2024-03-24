@@ -1,37 +1,34 @@
-import { CommonModule, NgIf } from "@angular/common";
-import { HttpErrorResponse } from "@angular/common/http";
-import { ReactiveFormsModule, FormsModule, FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { MatOptionModule } from "@angular/material/core";
-import { MatDialog } from "@angular/material/dialog";
-import { MatFormFieldModule } from "@angular/material/form-field";
-import { MatIconModule } from "@angular/material/icon";
-import { MatInputModule } from "@angular/material/input";
-import { MatSelectModule } from "@angular/material/select";
-import { RouterModule, Router, ActivatedRoute } from "@angular/router";
-import { ConfirmationDialogComponent } from "../../../components/confirmation/confirmation-dialog.component";
-import { ErrorComponent } from "../../../components/error/error.component";
-import { HeaderComponent } from "../../../components/header/header.component";
-import { NavsideComponent } from "../../../components/navside/navside.component";
-import { Marca } from "../../models/marca.model";
-import { Modelo } from "../../models/modelo.models";
-import { ModeloService } from "../../services/modelo.service";
+import { Component } from '@angular/core';
+import { FormsModule, ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { CommonModule, NgIf } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
+import { ActivatedRoute, Router } from '@angular/router';
+import { HeaderComponent } from '../../../components/header/header.component';
+import { NavsideComponent } from '../../../components/navside/navside.component';
+import { ConfirmationDialogComponent } from '../../../components/confirmation/confirmation-dialog.component';
+import { Modelo } from '../../models/modelo.models';
+import { ErrorComponent } from '../../../components/error/error.component';
+import { MatDialog } from '@angular/material/dialog';
+import { HttpErrorResponse } from '@angular/common/http';
+import { MatSelectModule } from '@angular/material/select';
+import { MatOptionModule } from '@angular/material/core';
+import { ModeloService } from '../../services/modelo.service';
 
 @Component({
-    selector: 'app-form',
-    standalone: true,
-    templateUrl: './form.component.html',
-    styleUrl: './form.component.css',
-    imports: [ErrorComponent, CommonModule, MatSelectModule,
-      MatOptionModule, RouterModule, NgIf, HeaderComponent,
-      NavsideComponent, ReactiveFormsModule, FormsModule,
-      NavsideComponent, MatInputModule, MatFormFieldModule,
-      MatIconModule, ConfirmationDialogComponent]
+  selector: 'app-form',
+  standalone: true,
+  imports: [ErrorComponent, CommonModule, MatSelectModule, MatOptionModule, RouterModule, NgIf, HeaderComponent, NavsideComponent, ReactiveFormsModule, FormsModule,
+    NavsideComponent, MatInputModule, MatFormFieldModule, MatIconModule, ConfirmationDialogComponent],
+  templateUrl: './form.component.html',
+  styleUrl: './form.component.css'
 })
 export class ModeloFormComponent {
   modelos: Modelo[] = [];
-  marca: Marca[] = [];
-  formGroup!: FormGroup;
+  formGroupModelo!: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -42,31 +39,32 @@ export class ModeloFormComponent {
     private dialogError: MatDialog
   ) {
     const modelo: Modelo = this.activatedRoute.snapshot.data['modelo'];
-    this.formGroup = this.formBuilder.group({
+    this.formGroupModelo = this.formBuilder.group({
       id: [modelo?.id || null],
       nome: [modelo?.nome || '', Validators.required],
-      marca: [modelo?.idMarca || '', Validators.required],
-
+      idMarca: [modelo?.idMarca || '', Validators.required],
     });
   }
 
 
 
   salvar() {
-    console.log(this.marca);
     console.log('Entrou no salvar');
-    console.log('Formulário:', this.formGroup.value);
-    console.log('Formulário válido:', this.formGroup.valid);
+    console.log('Formulário:', this.formGroupModelo.value);
+    console.log('Formulário válido:', this.formGroupModelo.valid);
+
+    // Validar o formulário antes de prosseguir
+    this.enviarFormulario();
 
     // Verificar se o formulário é válido
-    if (this.formGroup.valid) {
-      const modelo = this.formGroup.value;
+    if (this.formGroupModelo.valid) {
+      const modelo = this.formGroupModelo.value;
       // Verificar se é uma inserção ou atualização
       if (modelo.id == null) {
-        console.log(modelo.marca);
-        // Inserir novo modelo
+        console.log(modelo.idMarca);
+        // Inserir novo administrador
         this.modeloService.insert(modelo).subscribe({
-          next: (modeloService) => {
+          next: (marcaService) => {
             this.router.navigateByUrl('/modelos/list');
           },
           error: (err) => {
@@ -75,14 +73,14 @@ export class ModeloFormComponent {
               const errorMessage = err.error.errors[0].message;
               this.mostrarErro(errorMessage);
             } else {
-              this.mostrarErro('Erro ao criar modelo de capinha: ' + err.message);
+              this.mostrarErro('Erro ao criar modelos: ' + err.message);
             }
           }
         });
       } else {
-        // Atualizar modelo existente
+        // Atualizar administrador existente
         this.modeloService.update(modelo).subscribe({
-          next: (modeloService) => {
+          next: (ModeloService) => {
             this.router.navigateByUrl('/modelos/list');
           },
           error: (err) => {
@@ -99,8 +97,8 @@ export class ModeloFormComponent {
 
 
   excluir() {
-    if (this.formGroup.valid) {
-      const modelo = this.formGroup.value;
+    if (this.formGroupModelo.valid) {
+      const modelo = this.formGroupModelo.value;
       if (modelo.id != null) {
         this.modeloService.delete(modelo).subscribe({
           next: () => {
@@ -141,9 +139,8 @@ export class ModeloFormComponent {
     });
   }
 
+  enviarFormulario(): void {
 
-}
-function Component(arg0: { selector: string; standalone: boolean; templateUrl: string; styleUrl: string; imports: any[]; }): (target: typeof ModeloFormComponent) => void | typeof ModeloFormComponent {
-  throw new Error("Function not implemented.");
-}
 
+  }
+}

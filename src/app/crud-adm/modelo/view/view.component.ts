@@ -1,7 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router, RouterModule } from '@angular/router';
-import { Marca } from '../../models/marca.model';
 import { Modelo } from '../../models/modelo.models';
 
 @Component({
@@ -11,12 +10,12 @@ import { Modelo } from '../../models/modelo.models';
   templateUrl: './view.component.html',
   styleUrl: './view.component.css'
 })
-export class ViewMarcaComponent {
-  marcas: Modelo[] = [];
+export class ViewModeloComponent {
+  modelos: Modelo[] = [];
 
   constructor(
-    public dialogRef: MatDialogRef<ViewMarcaComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Marca,
+    public dialogRef: MatDialogRef<ViewModeloComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: Modelo,
     private router: Router
   ) { }
 
