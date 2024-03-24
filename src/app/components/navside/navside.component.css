@@ -1,11 +1,9 @@
 .navside {
     height: 100vh;
     width: 200px;
-
     position: fixed;
     top: 70px; 
     left: 0;
-
     background-color: #3839AF;
     padding: 20px;
 }
