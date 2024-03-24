@@ -5,7 +5,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { ConfirmationDialogComponent } from '../../../components/confirmation/confirmation-dialog.component';
 import { ViewMarcaComponent } from '../../marca/view/view.component';
-import { Modelo } from '../../models/modelo.models';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -14,6 +13,7 @@ import { MatTableModule } from '@angular/material/table';
 import { RouterModule } from '@angular/router';
 import { ViewAdmComponent } from '../../administrador/view/view-dialog.component';
 import { ModeloService } from '../../../components/services/modelo.service';
+import { Modelo } from '../../models/modelo.models';
 
 @Component({
     selector: 'app-list',
