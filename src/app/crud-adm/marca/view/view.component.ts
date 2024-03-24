@@ -1,28 +1,27 @@
-
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Administrador } from '../../crud-adm/models/administrador.model';
 import { Router, RouterModule } from '@angular/router';
+import { Marca } from '../../models/marca.model';
 
 @Component({
-  selector: 'app-view-dialog',
+  selector: 'app-view',
   standalone: true,
   imports: [RouterModule],
-  templateUrl: './view-dialog.component.html',
-  styleUrl: './view-dialog.component.css'
+  templateUrl: './view.component.html',
+  styleUrl: './view.component.css'
 })
-export class ViewDialogComponent {
-  administradores: Administrador[] = [];
+export class ViewMarcaComponent {
+  marcas: Marca[] = [];
 
   constructor(
-    public dialogRef: MatDialogRef<ViewDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Administrador,
+    public dialogRef: MatDialogRef<ViewMarcaComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: Marca,
     private router: Router
   ) { }
 
 
   editar(id: number): void {
-    this.router.navigate(['/adm/edit', id]);
+    this.router.navigate(['/marcas/edit', id]);
     this.dialogRef.close(); // Fechar o popup após a navegação
   }
 

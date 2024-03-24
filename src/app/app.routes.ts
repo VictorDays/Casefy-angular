@@ -1,13 +1,13 @@
 import { Routes } from '@angular/router';
-import { HeaderComponent } from './components/header/header.component';
-import { ModeloListComponent } from './crud-adm/modelo/list/list.component';
 import { FormAdmComponent } from './crud-adm/administrador/form/form.component';
 import { ListAdmComponent } from './crud-adm/administrador/list/list.component';
 import { estadoResolverAdm } from './crud-adm/administrador/resolver/estado-resolver-adm';
-import { estadoResolverModelo } from './crud-adm/modelo/resolver/estado-resolver-modelo';
-import { ModeloFormComponent } from './crud-adm/modelo/form/form.component';
 import { ClienteListComponent } from './crud-adm/cliente/list/list.component';
 import { ClienteFormComponent } from './crud-adm/cliente/form/form.component';
+import { MarcaListComponent } from './crud-adm/marca/list/list.component';
+import { FormMarcaComponent } from './crud-adm/marca/form/form.component';
+import { estadoResolverMarca } from './crud-adm/marca/resolver/estado-resolver-marca';
+import { HomeIndexComponent } from './home-index/home-index.component';
 
 export const routes: Routes = [
 
@@ -18,8 +18,8 @@ export const routes: Routes = [
     { path: 'cliente/list', component: ClienteListComponent, title: 'Clientes'},
     { path: 'cliente/form', component: ClienteFormComponent, title: 'Cadastro de Clientes'},
 
-    { path: 'modelos/list', component: ModeloListComponent, title: 'Modelos'},
-    { path: 'modelos/form', component: ModeloFormComponent, title: 'Modelos'},
-    { path: 'modelos/edit/:id', component: ModeloFormComponent, resolve: { modelo: estadoResolverModelo }},
-    
+    { path: 'marcas/list', component: MarcaListComponent, title: 'Marcas'},
+    { path: 'marcas/form', component: FormMarcaComponent, title: 'Cadastro de Administradores'},
+    { path: 'marcas/edit/:id', component: FormMarcaComponent, resolve: { marca: estadoResolverMarca }},
+    { path: 'home', component: HomeIndexComponent, title: 'Home'},
 ];

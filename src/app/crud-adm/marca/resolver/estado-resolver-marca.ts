@@ -1,10 +1,10 @@
 import { ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot } from "@angular/router";
 import { inject } from "@angular/core";
-import { Modelo } from "../../models/modelocapinha.model";
-import { ModeloService } from "../../services/modelo.service";
+import { Marca } from "../../models/marca.model";
+import { MarcaService } from "../../services/marca.service";
 
-export const estadoResolverModelo: ResolveFn<Modelo> =
+export const estadoResolverMarca: ResolveFn<Marca> =
     (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
         const id = Number(route.paramMap.get('id'));
-        return inject(ModeloService).findById(id);
+        return inject(MarcaService).findById(id);
     }

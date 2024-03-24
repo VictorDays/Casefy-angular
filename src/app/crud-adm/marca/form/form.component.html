@@ -1,0 +1,35 @@
+<app-header></app-header>
+<app-navside></app-navside>
+<main>
+    <h2 class="titulo">Cadastro de Marcas</h2>
+    <div class="historic">
+        <a [routerLink]="['/']">Home</a>
+        /
+        <a [routerLink]="['marcas/list']">Lista de Marcas</a>
+        /
+        <a href="#">Marcas</a>
+        /
+    </div>
+    <div class="content">
+        <span>Dados da Marca</span>
+    </div>
+    <form [formGroup]="formGroupMarca">
+
+        <div class="group-ini">
+            <div class="form-group">
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" formControlName="nome">
+                <mat-error *ngIf="formGroupMarca.get('nome') 
+                                   && formGroupMarca.get('nome')?.invalid
+                                   && formGroupMarca.get('nome')?.touched">
+                    O nome é obrigatorio.
+                </mat-error>
+            </div>
+        </div>
+    </form>
+    <div class="bnt-group">
+        <button type="submit" class="btn-cancelar" [routerLink]="['/marcas/list']">Cancelar</button>
+        <button type="submit" class="btn-excluir"  (click)="excluir()" >Excluir</button>
+        <button type="submit" class="btn-salvar" (click)="salvar()">Salvar</button>
+    </div>
+</main>
