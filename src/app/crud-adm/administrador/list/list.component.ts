@@ -94,8 +94,6 @@ export class ListAdmComponent {
 
   visualizarDados(administrador: Administrador): void {
     this.dialog.open(ViewAdmComponent, {
-      width: '600px',
-      height: '545px',
       data: administrador
     });
   }

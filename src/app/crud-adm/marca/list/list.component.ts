@@ -91,8 +91,6 @@ export class MarcaListComponent {
     
       visualizarDados(marca: Marca): void {
         this.dialog.open(ViewMarcaComponent, {
-          width: '600px',
-          height: '545px',
           data: marca
         });
       }

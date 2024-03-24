@@ -31,18 +31,6 @@ h2 {
   margin-top: 5px; /* Adiciona margem superior para separar dos elementos acima */
 }
 
-.three {
-  display: flex;
-  flex-direction: column;
-}
-
-.two {
-  display: grid;
-  grid-template-columns: auto 1fr; 
-  gap: 10px; 
-  margin-top: 10px;
-}
-
 .two span:first-child {
   justify-self: start; /* Alinha o primeiro span à esquerda */
 }
