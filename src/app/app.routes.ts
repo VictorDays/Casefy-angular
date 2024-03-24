@@ -8,6 +8,8 @@ import { MarcaListComponent } from './crud-adm/marca/list/list.component';
 import { FormMarcaComponent } from './crud-adm/marca/form/form.component';
 import { estadoResolverMarca } from './crud-adm/marca/resolver/estado-resolver-marca';
 import { HomeIndexComponent } from './home-index/home-index.component';
+import { ModeloListComponent } from './components/modelo/modelo-list/modelo-list.component';
+import { ModeloFormComponent } from './crud-adm/modelo/form/form.component';
 
 export const routes: Routes = [
 
@@ -22,4 +24,8 @@ export const routes: Routes = [
     { path: 'marcas/form', component: FormMarcaComponent, title: 'Cadastro de Administradores'},
     { path: 'marcas/edit/:id', component: FormMarcaComponent, resolve: { marca: estadoResolverMarca }},
     { path: 'home', component: HomeIndexComponent, title: 'Home'},
+
+    { path: 'modelos/list', component: ModeloListComponent, title: 'Modelos de capinhas'},
+    { path: 'cliente/form', component: ModeloFormComponent, title: 'Cadastro de modelos de capinha'},
+    { path: 'modelos/edit/:id', component: ModeloFormComponent, resolve: { modelo: estadoResolverMarca }},
 ];
