@@ -12,6 +12,7 @@ import { ModeloListComponent } from './crud-adm/modelo/list/list.component';
 import { ModeloFormComponent } from './crud-adm/modelo/form/form.component';
 import { EstadoFormComponent } from './crud-adm/estado/form/form.component';
 import { EstadoListComponent } from './crud-adm/estado/list/list.component';
+import { resolverEstado } from './crud-adm/estado/resolver/resolver-estado';
 
 export const routes: Routes = [
 
@@ -21,6 +22,7 @@ export const routes: Routes = [
 
     { path: 'estado/list', component: EstadoListComponent, title: 'Estados'},
     { path: 'estado/form', component: EstadoFormComponent, title: 'Cadastro de Estados'},
+    { path: 'estado/edit/:id', component: EstadoFormComponent, resolve: { estado: resolverEstado}},
 
     { path: 'marcas/list', component: MarcaListComponent, title: 'Marcas'},
     { path: 'marcas/form', component: FormMarcaComponent, title: 'Cadastro de Administradores'},

@@ -26,9 +26,9 @@
             <td mat-cell *matCellDef="let element"> {{element.nome}} </td>
         </ng-container>
 
-        <ng-container matColumnDef="matricula">
+        <ng-container matColumnDef="sigla">
             <th mat-header-cell *matHeaderCellDef> Sigla </th>
-            <td mat-cell *matCellDef="let element"> {{element.matricula}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.sigla}} </td>
         </ng-container>
 
         <!-- Acao Column -->
@@ -38,7 +38,7 @@
                 <button class="bnt-visualizar" (click)="visualizarDados(element)">
                     <mat-icon>visibility</mat-icon>
                 </button>
-                <button class="bnt-editar" [routerLink]="['/estados/edit', element.id]">
+                <button class="bnt-editar" [routerLink]="['/estado/edit', element.id]">
                     <mat-icon>edit</mat-icon>
                 </button>
                 <button class="bnt-apagar" (click)="confirmDelete(element)">

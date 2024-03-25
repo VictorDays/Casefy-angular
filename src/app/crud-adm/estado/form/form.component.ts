@@ -29,7 +29,7 @@ import { NavsideComponent } from '../../../components/navside/navside.component'
 })
 export class EstadoFormComponent {
   estados: Estado[] = [];
-  formGroup!: FormGroup;
+  formEstado!: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -40,10 +40,10 @@ export class EstadoFormComponent {
     private dialogError: MatDialog
   ) {
     const estado: Estado = this.activatedRoute.snapshot.data['estado'];
-    this.formGroup = this.formBuilder.group({
+    this.formEstado = this.formBuilder.group({
       id: [estado?.id || null],
       nome: [estado?.nome || '', Validators.required],
-      sigla: []
+      sigla: [estado?.sigla || '', Validators.required]
     });
   }
 
@@ -51,19 +51,19 @@ export class EstadoFormComponent {
 
   salvar() {
     console.log('Entrou no salvar');
-    console.log('Formulário:', this.formGroup.value);
-    console.log('Formulário válido:', this.formGroup.valid);
+    console.log('Formulário:', this.formEstado.value);
+    console.log('Formulário válido:', this.formEstado.valid);
 
     // Verificar se o formulário é válido
-    if (this.formGroup.valid) {
-      const estado = this.formGroup.value;
+    if (this.formEstado.valid) {
+      const estado = this.formEstado.value;
       // Verificar se é uma inserção ou atualização
       if (estado.id == null) {
         console.log(estado.nivelAcesso);
         // Inserir novo estado
         this.estadoService.insert(estado).subscribe({
           next: (estadoService) => {
-            this.router.navigateByUrl('/adm/list');
+            this.router.navigateByUrl('/estado/list');
           },
           error: (err) => {
             console.log('Erro ao Incluir' + JSON.stringify(err));
@@ -79,7 +79,7 @@ export class EstadoFormComponent {
         // Atualizar estado existente
         this.estadoService.update(estado).subscribe({
           next: (estadoService) => {
-            this.router.navigateByUrl('/adm/list');
+            this.router.navigateByUrl('/estado/list');
           },
           error: (err) => {
             console.log('Erro ao Editar' + JSON.stringify(err));
@@ -95,12 +95,12 @@ export class EstadoFormComponent {
 
 
   excluir() {
-    if (this.formGroup.valid) {
-      const estado = this.formGroup.value;
+    if (this.formEstado.valid) {
+      const estado = this.formEstado.value;
       if (estado.id != null) {
         this.estadoService.delete(estado).subscribe({
           next: () => {
-            this.router.navigateByUrl('/adm/list');
+            this.router.navigateByUrl('/estado/list');
           },
           error: (err) => {
             console.log('Erro ao Excluir' + JSON.stringify(err));
@@ -120,8 +120,7 @@ export class EstadoFormComponent {
             // Atualizar lista de estados após exclusão
             this.estados = this.estados.filter(adm => adm.id !== estado.id);
 
-            // Redirecionar para '/adm/list'
-            this.router.navigateByUrl('/adm/list');
+            this.router.navigateByUrl('/estado/list');
           },
           error => {
             console.log('Erro ao excluir estado:', error);
