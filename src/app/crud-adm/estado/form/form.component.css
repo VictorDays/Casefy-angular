@@ -13,6 +13,7 @@ main {
 h2 {
     font-size: 25px;
 }
+
 a {
     text-decoration: none; 
     display: inline-block; 
@@ -20,6 +21,7 @@ a {
     margin: 0px 0px;
     padding: 5px; 
 }
+
 .content {
     background-color: #33BDFE;
     color: #fff;
@@ -38,22 +40,12 @@ form {
     border: 1px solid #33BDFE;
     border-radius: 10px;
     padding: 25px; 
-    height: 210px;
-    display: flex;
-    flex-direction: column;
-}
+    height: 120px;
 
-form .group-ini {
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    margin-top: 25px;
-}
-form .group {
-    margin-top: 15px;
-    display: flex;
-    justify-content: space-around;
-    margin-top: 45px;
+    align-items: center;
+    justify-content: center;
+    gap: 60px;
 }
 
 .form-group {
@@ -85,6 +77,28 @@ form .group {
     border-color: #007bff;
 }
 
+mat-select{
+    flex: 3;
+    font-size: 15px;
+    font-family: "Lato", sans-serif;
+    font-weight: 500;
+    width: 35px;
+    border-radius: 8px;
+    padding: 8px;
+    border: 1px solid #808080;
+    transition: border-color 0.3s ease;
+}
+.mat-select:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+mat-error{
+    color: #f36b7f;
+    font-family: "Lato", sans-serif;
+    font-size: 10px;
+}
+
 .form-group select{
     flex: 3;
     font-size: 15px;
@@ -105,22 +119,14 @@ form .group {
 #nome{
     width: 320px;
 }
-#matricula{
+#sigla{
     width: 120px;
-}
-#cpf{
-    width: 150px;
-}
-#email{
-    width: 320px;
-}
-#nivel{
-    width: 150px;
 }
 
 .bnt-group{
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
+    gap: 25px;
 
     margin-top: 15px;
 }

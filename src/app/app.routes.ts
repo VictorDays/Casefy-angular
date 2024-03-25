@@ -10,6 +10,8 @@ import { estadoResolverMarca } from './crud-adm/marca/resolver/estado-resolver-m
 import { HomeIndexComponent } from './home-index/home-index.component';
 import { ModeloListComponent } from './crud-adm/modelo/list/list.component';
 import { ModeloFormComponent } from './crud-adm/modelo/form/form.component';
+import { EstadoFormComponent } from './crud-adm/estado/form/form.component';
+import { EstadoListComponent } from './crud-adm/estado/list/list.component';
 
 export const routes: Routes = [
 
@@ -17,8 +19,8 @@ export const routes: Routes = [
     { path: 'adm/form', component: FormAdmComponent, title: 'Cadastro de Administradores'},
     { path: 'adm/edit/:id', component: FormAdmComponent, resolve: { administrador: estadoResolverAdm }},
 
-    { path: 'cliente/list', component: ClienteListComponent, title: 'Clientes'},
-    { path: 'cliente/form', component: ClienteFormComponent, title: 'Cadastro de Clientes'},
+    { path: 'estado/list', component: EstadoListComponent, title: 'Estados'},
+    { path: 'estado/form', component: EstadoFormComponent, title: 'Cadastro de Estados'},
 
     { path: 'marcas/list', component: MarcaListComponent, title: 'Marcas'},
     { path: 'marcas/form', component: FormMarcaComponent, title: 'Cadastro de Administradores'},
