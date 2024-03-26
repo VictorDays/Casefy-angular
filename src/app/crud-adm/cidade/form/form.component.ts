@@ -1,20 +1,22 @@
-import { Component } from '@angular/core';
-import { Estado } from '../../models/estado.models';
-import { EstadoService } from '../../services/estado.service';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Cidade } from '../../models/cidade.models';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { CidadeService } from '../../services/cidade.service';
+import { MatDialog } from '@angular/material/dialog';
 import { CommonModule, NgIf } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ReactiveFormsModule, FormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatOptionModule } from '@angular/material/core';
-import { MatDialog } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { RouterModule, Router, ActivatedRoute } from '@angular/router';
 import { ConfirmationDialogComponent } from '../../../components/confirmation/confirmation-dialog.component';
 import { ErrorComponent } from '../../../components/error/error.component';
 import { HeaderComponent } from '../../../components/header/header.component';
 import { NavsideComponent } from '../../../components/navside/navside.component';
+import { Estado } from '../../models/estado.models';
+import { EstadoService } from '../../services/estado.service';
 
 @Component({
   selector: 'app-form',
@@ -27,42 +29,63 @@ import { NavsideComponent } from '../../../components/navside/navside.component'
   templateUrl: './form.component.html',
   styleUrl: './form.component.css'
 })
-export class EstadoFormComponent {
+export class CidadeFormComponent implements OnInit {
+  cidades: Cidade[] = [];
   estados: Estado[] = [];
-  formEstado!: FormGroup;
+  
+  formCidade!: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
+    private cidadeService: CidadeService,
     private estadoService: EstadoService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private dialog: MatDialog,
     private dialogError: MatDialog
   ) {
-    const estado: Estado = this.activatedRoute.snapshot.data['estado'];
-    this.formEstado = this.formBuilder.group({
-      nome: [estado?.nome || '', Validators.required],
-      sigla: [estado?.sigla || '', Validators.required]
+    const cidade: Cidade = this.activatedRoute.snapshot.data['cidade'];
+    this.formCidade = this.formBuilder.group({
+      nome: [cidade?.nome || '', Validators.required],
+      estado: [cidade?.estado || '', Validators.required]
     });
   }
 
+  ngOnInit(): void {
+    this.estadoService.findAll().subscribe(data => {
+      this.estados = data;
+      this.initializeForm();
+    });
+  }
 
+  //Inicializa o select 
+  initializeForm() {
+    const cidade: Cidade = this.activatedRoute.snapshot.data['municipio'];
+    // selecionando o estado
+    const estado = this.estados
+      .find(estado => estado.id === (cidade?.estado?.id || null)); 
+    this.formCidade = this.formBuilder.group({
+      id: [(cidade && cidade.id) ? cidade.id : null],
+      nome: [(cidade && cidade.nome) ? cidade.nome : '', Validators.required],
+      estado: [estado]
+    });
+  }
 
   salvar() {
     console.log('Entrou no salvar');
-    console.log('Formulário:', this.formEstado.value);
-    console.log('Formulário válido:', this.formEstado.valid);
+    console.log('Formulário:', this.formCidade.value);
+    console.log('Formulário válido:', this.formCidade.valid);
 
     // Verificar se o formulário é válido
-    if (this.formEstado.valid) {
-      const estado = this.formEstado.value;
+    if (this.formCidade.valid) {
+      const cidade = this.formCidade.value;
       // Verificar se é uma inserção ou atualização
-      if (estado.id == null) {
-        console.log(estado.nivelAcesso);
-        // Inserir novo estado
-        this.estadoService.insert(estado).subscribe({
-          next: (estadoService) => {
-            this.router.navigateByUrl('/estado/list');
+      if (cidade.id == null) {
+        console.log(cidade.nivelAcesso);
+        // Inserir novo cidade
+        this.cidadeService.insert(cidade).subscribe({
+          next: (cidadeService) => {
+            this.router.navigateByUrl('/cidade/list');
           },
           error: (err) => {
             console.log('Erro ao Incluir' + JSON.stringify(err));
@@ -70,15 +93,15 @@ export class EstadoFormComponent {
               const errorMessage = err.error.errors[0].message;
               this.mostrarErro(errorMessage);
             } else {
-              this.mostrarErro('Erro ao criar estado: ' + err.message);
+              this.mostrarErro('Erro ao criar cidade: ' + err.message);
             }
           }
         });
       } else {
-        // Atualizar estado existente
-        this.estadoService.update(estado).subscribe({
-          next: (estadoService) => {
-            this.router.navigateByUrl('/estado/list');
+        // Atualizar cidade existente
+        this.cidadeService.update(cidade).subscribe({
+          next: (cidadeService) => {
+            this.router.navigateByUrl('/cidade/list');
           },
           error: (err) => {
             console.log('Erro ao Editar' + JSON.stringify(err));
@@ -94,12 +117,12 @@ export class EstadoFormComponent {
 
 
   excluir() {
-    if (this.formEstado.valid) {
-      const estado = this.formEstado.value;
-      if (estado.id != null) {
-        this.estadoService.delete(estado).subscribe({
+    if (this.formCidade.valid) {
+      const cidade = this.formCidade.value;
+      if (cidade.id != null) {
+        this.cidadeService.delete(cidade).subscribe({
           next: () => {
-            this.router.navigateByUrl('/estado/list');
+            this.router.navigateByUrl('/cidade/list');
           },
           error: (err) => {
             console.log('Erro ao Excluir' + JSON.stringify(err));
@@ -109,20 +132,20 @@ export class EstadoFormComponent {
     }
   }
 
-  confirmDelete(estado: Estado): void {
+  confirmDelete(cidade: Cidade): void {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent);
 
     dialogRef.afterClosed().subscribe((result: boolean) => {
-      if (result === true && estado && estado.id !== undefined) {
-        this.estadoService.delete(estado).subscribe(
+      if (result === true && cidade && cidade.id !== undefined) {
+        this.cidadeService.delete(cidade).subscribe(
           () => {
-            // Atualizar lista de estados após exclusão
-            this.estados = this.estados.filter(adm => adm.id !== estado.id);
+            // Atualizar lista de cidades após exclusão
+            this.cidades = this.cidades.filter(adm => adm.id !== cidade.id);
 
-            this.router.navigateByUrl('/estado/list');
+            this.router.navigateByUrl('/cidade/list');
           },
           error => {
-            console.log('Erro ao excluir estado:', error);
+            console.log('Erro ao excluir cidade:', error);
           }
         );
       }
