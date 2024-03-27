@@ -28,6 +28,10 @@
     color: #fff;
 }
 
+.links-bnt{
+    gap: 10px;
+}
+
 .nav-links button {
     font-family: lato;
     background: none;

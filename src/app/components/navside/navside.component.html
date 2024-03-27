@@ -27,16 +27,30 @@
                 </button>
                 <div class="submenu" [class.active]="isSubmenuOpen[1]">
                     <ul>
-                        <li><a href="marcas/list">*Marcas de modelos</a></li>
+                        <li><a href="marcas/list">*Marcas</a></li>
+                        <li><a href="modelos/list">*Modelos</a></li>
                     </ul>
                 </div>
             </li>
             <li>
                 <button href="#" class="links-bnt" (click)="toggleSubmenu(2)">
+                    <mat-icon>insert_chart_outlined</mat-icon>
+                    <span>Estoque</span>
+                </button>
+                <div class="submenu" [class.active]="isSubmenuOpen[2]">
+                    <ul>
+                        <li><a href="#">Estoque</a></li>
+                        <li><a href="fornecedor/list">Fornecedores</a></li>
+                        <li><a href="#">Lotes</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li>
+                <button href="#" class="links-bnt" (click)="toggleSubmenu(3)">
                     <mat-icon>shopping_cart</mat-icon>
                     <span>Pedidos</span>
                 </button>
-                <div class="submenu" [class.active]="isSubmenuOpen[2]">
+                <div class="submenu" [class.active]="isSubmenuOpen[3]">
                     <ul>
                         <li><a href="#">Opção 1</a></li>
                         <li><a href="#">Opção 2</a></li>
@@ -45,11 +59,11 @@
                 </div>
             </li>
             <li>
-                <button href="#" class="links-bnt" (click)="toggleSubmenu(3)">
+                <button href="#" class="links-bnt" (click)="toggleSubmenu(4)">
                     <mat-icon>assignment</mat-icon>
                     <span>Relatorios</span>
                 </button>
-                <div class="submenu" [class.active]="isSubmenuOpen[3]">
+                <div class="submenu" [class.active]="isSubmenuOpen[4]">
                     <ul>
                         <li><a href="#">Opção 1</a></li>
                         <li><a href="#">Opção 2</a></li>
