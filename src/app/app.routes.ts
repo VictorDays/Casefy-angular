@@ -16,6 +16,8 @@ import { resolverEstado } from './crud-adm/estado/resolver/resolver-estado';
 import { CidadeListComponent } from './crud-adm/cidade/list/list.component';
 import { CidadeFormComponent } from './crud-adm/cidade/form/form.component';
 import { resolverCidade } from './crud-adm/cidade/resolver/resolver-cidade';
+import { FornecedorListComponent } from './crud-adm/fornecedor/list/list.component';
+import { FornecedorFormComponent } from './crud-adm/fornecedor/form/form.component';
 
 export const routes: Routes = [
 
@@ -30,6 +32,9 @@ export const routes: Routes = [
     { path: 'cidade/list', component: CidadeListComponent, title: 'Cidades'},
     { path: 'cidade/form', component: CidadeFormComponent, title: 'Cadastro de Cidades'},
     { path: 'cidade/edit/:id', component: CidadeFormComponent, resolve: { cidade: resolverCidade}},
+
+    { path: 'fornecedor/list', component: FornecedorListComponent, title: 'Fornecedores'},
+    { path: 'fornecedor/form', component: FornecedorFormComponent, title: 'Cadastro de Fornecedores'},
 
     { path: 'marcas/list', component: MarcaListComponent, title: 'Marcas'},
     { path: 'marcas/form', component: FormMarcaComponent, title: 'Cadastro de Administradores'},

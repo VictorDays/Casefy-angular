@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
-import { Cidade } from '../../models/cidade.models';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Router, RouterModule } from '@angular/router';
+import { Fornecedor } from '../../models/Fornecedor.models';
 
 @Component({
   selector: 'app-view',
@@ -10,18 +10,18 @@ import { Router, RouterModule } from '@angular/router';
   templateUrl: './view.component.html',
   styleUrl: './view.component.css'
 })
-export class ViewCidadeComponent {
-  cidades: Cidade[] = [];
+export class ViewFornecedorComponent {
+  fornecedores: Fornecedor[] = [];
 
   constructor(
-    public dialogRef: MatDialogRef<ViewCidadeComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Cidade,
+    public dialogRef: MatDialogRef<ViewFornecedorComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: Fornecedor,
     private router: Router
   ) { }
 
 
   editar(id: number): void {
-    this.router.navigate(['/cidade/edit', id]);
+    this.router.navigate(['/fornecedor/edit', id]);
     this.dialogRef.close(); 
   }
 
