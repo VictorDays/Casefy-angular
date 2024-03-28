@@ -18,6 +18,7 @@ import { CidadeFormComponent } from './crud-adm/cidade/form/form.component';
 import { resolverCidade } from './crud-adm/cidade/resolver/resolver-cidade';
 import { FornecedorListComponent } from './crud-adm/fornecedor/list/list.component';
 import { FornecedorFormComponent } from './crud-adm/fornecedor/form/form.component';
+import { resolverFornecedor } from './crud-adm/fornecedor/resolver/resolver-fornecedor';
 
 export const routes: Routes = [
 
@@ -35,6 +36,7 @@ export const routes: Routes = [
 
     { path: 'fornecedor/list', component: FornecedorListComponent, title: 'Fornecedores'},
     { path: 'fornecedor/form', component: FornecedorFormComponent, title: 'Cadastro de Fornecedores'},
+    { path: 'fornecedor/edit/:id', component: FornecedorFormComponent, resolve: { fornecedor: resolverFornecedor}},
 
     { path: 'marcas/list', component: MarcaListComponent, title: 'Marcas'},
     { path: 'marcas/form', component: FormMarcaComponent, title: 'Cadastro de Administradores'},

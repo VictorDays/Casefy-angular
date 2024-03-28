@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Router, RouterModule } from '@angular/router';
-import { Fornecedor } from '../../models/Fornecedor.models';
+import { Fornecedor } from '../../models/fornecedor.models';
 
 @Component({
   selector: 'app-view',

@@ -12,7 +12,7 @@ import { HeaderComponent } from '../../../components/header/header.component';
 import { NavsideComponent } from '../../../components/navside/navside.component';
 import { FornecedorService } from '../../services/fornecedor.service';
 import { ViewFornecedorComponent } from '../view/view.component';
-import { Fornecedor } from '../../models/Fornecedor.models';
+import { Fornecedor } from '../../models/fornecedor.models';
 
 @Component({
   selector: 'app-list',
@@ -90,9 +90,9 @@ export class FornecedorListComponent {
     });
   }
 
-  visualizarDados(cidade: Fornecedor): void {
+  visualizarDados(fornecedor: Fornecedor): void {
     this.dialog.open(ViewFornecedorComponent, {
-      data: cidade
+      data: fornecedor
     });
   }
 }

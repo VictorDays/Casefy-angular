@@ -7,7 +7,7 @@
         <span>Lista de Fornecedores</span>
     </div>
     <div class="content">
-        <button class="bnt-cadastro" [routerLink]="['/cidade/form']">Cadastrar</button>
+        <button class="bnt-cadastro" [routerLink]="['/fornecedor/form']">Cadastrar</button>
         <div class="search">
             <label for="">Buscar: </label>
             <input type="text" placeholder=" Pesquise pelo nome" [(ngModel)]="searchText" (keyup)="search()">
@@ -33,7 +33,7 @@
 
         <ng-container matColumnDef="email">
             <th mat-header-cell *matHeaderCellDef> Email: </th>
-            <td mat-cell *matCellDef="let element"> {{element.estado.nome}}</td>
+            <td mat-cell *matCellDef="let element"> {{element.email}}</td>
         </ng-container>
 
         <!-- Acao Column -->
@@ -43,7 +43,7 @@
                 <button class="bnt-visualizar" (click)="visualizarDados(element)">
                     <mat-icon>visibility</mat-icon>
                 </button>
-                <button class="bnt-editar" [routerLink]="['/cidade/edit', element.id]">
+                <button class="bnt-editar" [routerLink]="['/fornecedor/edit', element.id]">
                     <mat-icon>edit</mat-icon>
                 </button>
                 <button class="bnt-apagar" (click)="confirmDelete(element)">

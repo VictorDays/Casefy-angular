@@ -1,1 +1,55 @@
-<p>form works!</p>
+<app-header></app-header>
+<app-navside></app-navside>
+<main>
+    <h2 class="titulo">Cadastro de Fornecedores</h2>
+    <div class="historic">
+
+        <a [routerLink]="['/']">Home</a>
+        /
+        <a [routerLink]="['/fornecedor/list']">Lista de Fornecedores</a>
+        /
+        <a>Fornecedor</a>
+
+    </div>
+    <div class="content">
+        <span>Dados da Fornecedor</span>
+    </div>
+    <form [formGroup]="formFornecedor">
+
+        <div class="form-group">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" formControlName="nome">
+            <mat-error *ngIf="formFornecedor.get('nome') 
+                                   && formFornecedor.get('nome')?.invalid
+                                   && formFornecedor.get('nome')?.touched">
+                O nome é obrigatorio.
+            </mat-error>
+        </div>
+        <div class="form-group">
+            <label for="cnpj">CNPJ:</label>
+            <input type="text" id="cnpj" formControlName="cnpj">
+            <mat-error *ngIf="formFornecedor.get('cnpj') 
+                                   && formFornecedor.get('cnpj')?.invalid
+                                   && formFornecedor.get('cnpj')?.touched">
+                O CNPJ é obrigatorio.
+            </mat-error>
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" formControlName="email">
+            <mat-error *ngIf="formFornecedor.get('email') 
+                                   && formFornecedor.get('email')?.invalid
+                                   && formFornecedor.get('email')?.touched">
+                O email é obrigatorio.
+            </mat-error>
+        </div>
+
+    </form>
+    <div class="bnt-group">
+        <button type="submit" class="btn-cancelar" [routerLink]="['/fornecedor/list']">Cancelar</button>
+        <button type="submit" class="btn-excluir" (click)="confirmDelete(formFornecedor?.value)"
+            *ngIf="formFornecedor?.get('id')?.value">Excluir</button>
+        <button type="submit" class="btn-salvar" (click)="salvar()">Salvar</button>
+    </div>
+
+</main>
