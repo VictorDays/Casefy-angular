@@ -14,7 +14,9 @@
     left: 0px;
     right: 0px;
 }
-
+.logo{
+  margin-left: 25px;
+}
 .logo-bnt{
   background: none;
   border: none;
