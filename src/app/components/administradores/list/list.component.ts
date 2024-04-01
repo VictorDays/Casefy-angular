@@ -1,4 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { HeaderComponent } from '../../header/header.component';
+import { NavsideComponent } from '../../navside/navside.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
@@ -6,20 +8,17 @@ import { MatTableModule } from '@angular/material/table';
 import { Subscription } from 'rxjs';
 import { FormsModule, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { Router, RouterModule } from '@angular/router';
+import { ConfirmationDialogComponent } from '../confirmation/confirmation-dialog.component';
+import { ViewDialogComponent } from '../view/view-dialog.component';
+import { RouterModule } from '@angular/router';
 
-import { AdministradorService } from '../../../crud-adm/services/admistrador.service';
-import { Administrador } from '../../../crud-adm/models/administrador.model';
-
-import { HeaderComponent } from '../../../components/header/header.component';
-import { NavsideComponent } from '../../../components/navside/navside.component';
-import { ViewAdmComponent } from '../view/view-dialog.component';
-import { ConfirmationDialogComponent } from '../../../components/confirmation/confirmation-dialog.component';
+import { AdministradorService } from '../../services/admistrador.service';
+import { Administrador } from '../../models/administrador.model';
 
 @Component({
   selector: 'app-list',
   standalone: true,
-  imports: [RouterModule, ViewAdmComponent, ConfirmationDialogComponent, ReactiveFormsModule, FormsModule,
+  imports: [RouterModule, ViewDialogComponent, ConfirmationDialogComponent, ReactiveFormsModule, FormsModule,
     HeaderComponent, NavsideComponent, MatInputModule, MatFormFieldModule,
     MatIconModule, MatTableModule],
   templateUrl: './list.component.html',
@@ -27,13 +26,13 @@ import { ConfirmationDialogComponent } from '../../../components/confirmation/co
 })
 export class ListAdmComponent {
   displayedColumns: string[] = ['id', 'nome', 'matricula', 'nivel', 'acao'];
+
   administradores: Administrador[] = [];
 
   administradoresSubscription: Subscription | undefined;
 
   constructor(private dialog: MatDialog,
-    private administradorService: AdministradorService,
-    private router: Router) { }
+    private administradorService: AdministradorService) { }
 
   ngOnInit(): void {
     this.administradoresSubscription = this.administradorService.findAll().subscribe(data => {
@@ -94,11 +93,12 @@ export class ListAdmComponent {
   }
 
   visualizarDados(administrador: Administrador): void {
-    this.dialog.open(ViewAdmComponent, {
+    this.dialog.open(ViewDialogComponent, {
+      width: '600px',
+      height: '545px',
       data: administrador
     });
   }
-  editar(id: number): void {
-    this.router.navigate(['/adm/edit', id]);
-  }
+
+
 }

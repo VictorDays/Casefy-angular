@@ -4,7 +4,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { ConfirmationDialogComponent } from '../../../components/confirmation/confirmation-dialog.component';
 import { HeaderComponent } from '../../../components/header/header.component';
 import { NavsideComponent } from '../../../components/navside/navside.component';
@@ -30,7 +30,8 @@ export class CidadeListComponent {
   cidadesSubscription: Subscription | undefined;
 
   constructor(private dialog: MatDialog,
-    private cidadeService: CidadeService) { }
+    private cidadeService: CidadeService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.cidadesSubscription = this.cidadeService.findAll().subscribe(data => {
@@ -94,5 +95,8 @@ export class CidadeListComponent {
     this.dialog.open(ViewCidadeComponent, {
       data: cidade
     });
+  }
+  editar(id: number): void {
+    this.router.navigate(['/cidade/edit', id]);
   }
 }

@@ -5,7 +5,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ConfirmationDialogComponent } from '../../../components/confirmation/confirmation-dialog.component';
 import { HeaderComponent } from '../../../components/header/header.component';
@@ -30,7 +30,8 @@ export class FornecedorListComponent {
   fornecedoresSubscription: Subscription | undefined;
 
   constructor(private dialog: MatDialog,
-    private cidadeService: FornecedorService) { }
+    private cidadeService: FornecedorService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.fornecedoresSubscription = this.cidadeService.findAll().subscribe(data => {
@@ -94,5 +95,8 @@ export class FornecedorListComponent {
     this.dialog.open(ViewFornecedorComponent, {
       data: fornecedor
     });
+  }
+  editar(id: number): void {
+    this.router.navigate(['/adm/edit', id]);
   }
 }
