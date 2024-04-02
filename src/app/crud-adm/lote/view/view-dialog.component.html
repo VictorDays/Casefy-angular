@@ -3,14 +3,12 @@
     <h2>Informações do Usuário</h2>
 
     <div class="userInfo">
-        <h3>Nome: <span class="data-info">{{data.nome}}</span></h3>
-        <h3>CPF: <span class="data-info">{{data.cpf}}</span></h3>
-        <h3>Matricula: <span class="data-info">{{data.matricula}}</span></h3>
-        <h3>Nivel de Acesso: <span class="data-info">{{data.idNivelAcesso?.label}}</span></h3>
-        <h3>Email: <span class="data-info">{{data.email}}</span></h3>
-        <h3>Senha: <span class="data-info">{{data.senha}}</span></h3>
-        <h3>Perfil de Usuário: <span class="data-info">{{data.perfil}}</span></h3>
-    </div>
+        <h3>ID: <span class="data-info">{{data.id}}</span></h3>
+        <h3>quantidadeItens: <span class="data-info">{{data.quantidadeItens}}</span></h3>
+        <h3>valorUnitario: <span class="data-info">{{data.valorUnitario}}</span></h3>
+        <h3>valorTotal: <span class="data-info">{{data.valorTotal}}</span></h3>
+        <h3>dataCompra: <span class="data-info">{{data.fornecedor.nome}}</span></h3>
+     </div>
 
     <div class="popup-bnt">
         <button class="bnt-cancelar" (click)="cancelar()">Cancelar</button>

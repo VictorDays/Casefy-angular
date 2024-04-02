@@ -15,8 +15,8 @@ export class LoteService {
       return this.httpClient.get<Lote[]>(this.baseUrl);
     }
 
-    findByNome(nome: string): Observable<Lote[]> {
-      return this.httpClient.get<Lote[]>(`${this.baseUrl}/search/nome/${nome}`);
+    findByDataCompra(nome: string): Observable<Lote[]> {
+      return this.httpClient.get<Lote[]>(`${this.baseUrl}/search/data/${nome}`);
     }
   
     findById(id: number): Observable<Lote> {

@@ -1,1 +1,58 @@
-<p>list works!</p>
+<app-header></app-header>
+<app-navside></app-navside>
+<main>
+    <h2 class="titulo">Lotes</h2>
+    <div class="historic">
+        <a href="/src/app/components/administradores/form/form.component.html">Home /</a>
+        <span>Lista de lotes</span>
+    </div>
+    <div class="content">
+        <button class="bnt-cadastro" [routerLink]="['/cidade/form']">Cadastrar</button>
+        <div class="search">
+            <label for="">Buscar: </label>
+            <input type="text" placeholder=" Pesquise pela data" [(ngModel)]="searchText" (keyup)="search()">
+        </div>
+    </div>
+
+    <table mat-table [dataSource]="lotes" class="mat-elevation-z8">
+
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> Id </th>
+            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="data">
+            <th mat-header-cell *matHeaderCellDef> Data da compra </th>
+            <td mat-cell *matCellDef="let element"> {{element.dataCompra}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="quantidadeItens">
+            <th mat-header-cell *matHeaderCellDef> Quantidade de Itens </th>
+            <td mat-cell *matCellDef="let element"> {{element.quantidadeItens}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="fornecedor">
+            <th mat-header-cell *matHeaderCellDef> fornecedor </th>
+            <td mat-cell *matCellDef="let element"> {{element.fornecedor.nome}}</td>
+        </ng-container>
+
+        <!-- Acao Column -->
+        <ng-container matColumnDef="acao">
+            <th mat-header-cell *matHeaderCellDef> Ação </th>
+            <td mat-cell *matCellDef="let element">
+                <button class="bnt-visualizar" (click)="visualizarDados(element)">
+                    <mat-icon>visibility</mat-icon>
+                </button>
+                <button class="bnt-editar" (click)="editar(element.id)">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <button class="bnt-apagar" (click)="confirmDelete(element)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</main>
