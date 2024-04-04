@@ -1,22 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-
-import { ViewClienteComponent } from '../view/view.component';
-import { HeaderComponent } from '../../../components/header/header.component';
-import { NavsideComponent } from '../../../components/navside/navside.component';
-import { ClienteService } from '../../services/cliente.service';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Cliente } from '../../models/cliente.models';
-import { ErrorComponent } from '../../../components/error/error.component';
-import { CommonModule, NgIf } from '@angular/common';
-import { MatSelectModule } from '@angular/material/select';
-import { MatOptionModule } from '@angular/material/core';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { FormControl, FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MatInputModule } from '@angular/material/input';
+import { ClienteService } from '../../services/cliente.service';
+import { MatDialog } from '@angular/material/dialog';
+import { CommonModule, NgIf } from '@angular/common';
+import { HttpErrorResponse } from '@angular/common/http';
+import { MatOptionModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 import { ConfirmationDialogComponent } from '../../../components/confirmation/confirmation-dialog.component';
-import { MatDialog } from '@angular/material/dialog';
-import { HttpErrorResponse } from '@angular/common/http';
+import { ErrorComponent } from '../../../components/error/error.component';
+import { HeaderComponent } from '../../../components/header/header.component';
+import { NavsideComponent } from '../../../components/navside/navside.component';
+import { Estado } from '../../models/estado.models';
+import { EstadoService } from '../../services/estado.service';
 
 @Component({
   selector: 'app-form',
@@ -29,77 +29,47 @@ import { HttpErrorResponse } from '@angular/common/http';
   templateUrl: './form.component.html',
   styleUrl: './form.component.css'
 })
-export class ClienteFormComponent implements OnInit {
+export class ClienteFormComponent {
   clientes: Cliente[] = [];
-  formGroup!: FormGroup;
+  estados: Estado[] = [];
+
+  formCliente!: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
     private clienteService: ClienteService,
+    private estadoService: EstadoService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private dialog: MatDialog,
     private dialogError: MatDialog
-  ) { }
-
-  ngOnInit(): void {
-    const cliente: Cliente | null = this.activatedRoute.snapshot.data['cliente'];
-    if (cliente) {
-      // Se cliente for definido, continue com a inicialização do formulário
-      this.formGroup = this.formBuilder.group({
-        id: [cliente.id || null],
-        nome: [cliente.nome || '', Validators.required],
-        login: [cliente.login || '', Validators.required],
-        senha: [cliente.senha || '', Validators.required],
-        cpf: [cliente.cpf || '', Validators.required],
-        dataNascimento: [cliente.dataNascimento || '', Validators.required],
-        listaTelefones: this.formBuilder.array([]) // inicialize o FormArray vazio
-      });
-  
-      // Preencher a lista de telefones se existir
-      if (cliente.listaTelefones && cliente.listaTelefones.length > 0) {
-        const listaTelefonesFormArray = this.formGroup.get('listaTelefones') as FormArray;
-        cliente.listaTelefones.forEach(telefone => {
-          listaTelefonesFormArray.push(this.formBuilder.control(telefone));
-        });
-      }
-    }
-  }
-  
-  get listaTelefones(): FormArray {
-    return this.formGroup.get('listaTelefones') as FormArray;
-  }
-
-  adicionarTelefone() {
-    this.listaTelefones.push(this.criarTelefoneFormGroup());
-  }
-
-  removerTelefone(index: number) {
-    this.listaTelefones.removeAt(index);
-  }
-
-  criarTelefoneFormGroup(): FormGroup {
-    return this.formBuilder.group({
-      codigoArea: ['', Validators.required],
-      numero: ['', Validators.required]
+  ) {
+    const cliente: Cliente = this.activatedRoute.snapshot.data['cliente'];
+    this.formCliente = this.formBuilder.group({
+      nome: [cliente?.nome || '', Validators.required],
+      login: [cliente?.login || '', Validators.required],
+      senha: [cliente?.senha || '', Validators.required],
+      cpf: [cliente?.cpf || '', Validators.required],
+      dataNascimento: [cliente?.dataNascimento || '', Validators.required]
     });
   }
 
+
   salvar() {
     console.log('Entrou no salvar');
-    console.log('Formulário:', this.formGroup.value);
-    console.log('Formulário válido:', this.formGroup.valid);
+    console.log('Formulário:', this.formCliente.value);
+    console.log('Formulário válido:', this.formCliente.valid);
 
     // Verificar se o formulário é válido
-    if (this.formGroup.valid) {
-      const cliente = this.formGroup.value;
+    if (this.formCliente.valid) {
+      const cliente = this.formCliente.value;
       // Verificar se é uma inserção ou atualização
       if (cliente.id == null) {
         console.log(cliente.nivelAcesso);
         // Inserir novo cliente
         this.clienteService.insert(cliente).subscribe({
           next: (clienteService) => {
-            this.router.navigateByUrl('/adm/list');
+            this.router.navigateByUrl('/cliente/list');
           },
           error: (err) => {
             console.log('Erro ao Incluir' + JSON.stringify(err));
@@ -115,7 +85,7 @@ export class ClienteFormComponent implements OnInit {
         // Atualizar cliente existente
         this.clienteService.update(cliente).subscribe({
           next: (clienteService) => {
-            this.router.navigateByUrl('/adm/list');
+            this.router.navigateByUrl('/cliente/list');
           },
           error: (err) => {
             console.log('Erro ao Editar' + JSON.stringify(err));
@@ -131,12 +101,12 @@ export class ClienteFormComponent implements OnInit {
 
 
   excluir() {
-    if (this.formGroup.valid) {
-      const cliente = this.formGroup.value;
+    if (this.formCliente.valid) {
+      const cliente = this.formCliente.value;
       if (cliente.id != null) {
         this.clienteService.delete(cliente).subscribe({
           next: () => {
-            this.router.navigateByUrl('/adm/list');
+            this.router.navigateByUrl('/cliente/list');
           },
           error: (err) => {
             console.log('Erro ao Excluir' + JSON.stringify(err));
@@ -153,11 +123,10 @@ export class ClienteFormComponent implements OnInit {
       if (result === true && cliente && cliente.id !== undefined) {
         this.clienteService.delete(cliente).subscribe(
           () => {
-            // Atualizar lista de clientees após exclusão
+            // Atualizar lista de clientes após exclusão
             this.clientes = this.clientes.filter(adm => adm.id !== cliente.id);
 
-            // Redirecionar para '/adm/list'
-            this.router.navigateByUrl('/adm/list');
+            this.router.navigateByUrl('/cliente/list');
           },
           error => {
             console.log('Erro ao excluir cliente:', error);
@@ -172,52 +141,4 @@ export class ClienteFormComponent implements OnInit {
       data: mensagemErro
     });
   }
-
-  formatarCPF(event: any) {
-    let cpf = event.target.value.replace(/\D/g, '');
-    if (cpf.length > 0) {
-      // Verificar se o comprimento é maior que 3, para adicionar o primeiro ponto
-      if (cpf.length > 3) {
-        cpf = cpf.substring(0, 3) + '.' + cpf.substring(3);
-      }
-      // Verificar se o comprimento é maior que 7, para adicionar o segundo ponto
-      if (cpf.length > 7) {
-        cpf = cpf.substring(0, 7) + '.' + cpf.substring(7);
-      }
-      // Verificar se o comprimento é maior que 11, para adicionar o traço
-      if (cpf.length > 11) {
-        cpf = cpf.substring(0, 11) + '-' + cpf.substring(11);
-      }
-      // Limitar o CPF a 14 caracteres
-      if (cpf.length > 14) {
-        cpf = cpf.substring(0, 14);
-      }
-    }
-    event.target.value = cpf;
-  }
-
-  formatarData(event: any) {
-    let dataNascimento = event.target.value.replace(/\D/g, ''); // Remover caracteres não numéricos
-    if (dataNascimento.length > 0) {
-      // Verificar se o comprimento é maior que 2, para adicionar o dia
-      if (dataNascimento.length > 2) {
-        dataNascimento = dataNascimento.substring(0, 2) + '-' + dataNascimento.substring(2);
-      }
-      // Verificar se o comprimento é maior que 4, para adicionar o mês
-      if (dataNascimento.length > 5) {
-        dataNascimento = dataNascimento.substring(0, 5) + '-' + dataNascimento.substring(5);
-      }
-      // Limitar a dataNascimento a 10 caracteres
-      if (dataNascimento.length > 10) {
-        dataNascimento = dataNascimento.substring(0, 10);
-      }
-    }
-    event.target.value = dataNascimento;
-  }
-
-  exibirTexto: boolean = false;
-  mostrarTexto(valor: boolean) {
-    this.exibirTexto = valor;
-  }
-
 }

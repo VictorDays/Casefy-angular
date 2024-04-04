@@ -24,12 +24,17 @@ import { LoteFormComponent } from './crud-adm/lote/form/form.component';
 import { PromocaoFormComponent } from './crud-adm/promocao/form/form.component';
 import { PromocaoListComponent } from './crud-adm/promocao/list/list.component';
 import { resolverPromocao } from './crud-adm/promocao/resolver/resolver-promocao';
+import { resolverCliente } from './crud-adm/cliente/resolver/estado-resolver-adm';
 
 export const routes: Routes = [
 
     { path: 'adm/list', component: ListAdmComponent, title: 'Administradores'},
     { path: 'adm/form', component: FormAdmComponent, title: 'Cadastro de Administradores'},
     { path: 'adm/edit/:id', component: FormAdmComponent, resolve: { administrador: estadoResolverAdm }},
+
+    { path: 'cliente/list', component: ClienteListComponent, title: 'Clientes'},
+    { path: 'cliente/form', component: ClienteFormComponent, title: 'Cadastro de Clientes'},
+    { path: 'cliente/edit/:id', component: ClienteFormComponent, resolve: { cliente: resolverCliente}},
 
     { path: 'estado/list', component: EstadoListComponent, title: 'Estados'},
     { path: 'estado/form', component: EstadoFormComponent, title: 'Cadastro de Estados'},
