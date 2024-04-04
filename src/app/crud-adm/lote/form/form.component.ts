@@ -1,4 +1,3 @@
-
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Lote } from '../../models/lote.models';
@@ -33,45 +32,40 @@ import { FornecedorService } from '../../services/fornecedor.service';
 export class LoteFormComponent implements OnInit {
   lotes: Lote[] = [];
   fornecedores: Fornecedor[] = [];
-  
+
   formLote!: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
     private loteService: LoteService,
-    private fornecedorService: FornecedorService,
+    private fornecedoresService: FornecedorService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private dialog: MatDialog,
     private dialogError: MatDialog
   ) {
+  }
+
+  ngOnInit(): void {
+    this.fornecedoresService.findAll().subscribe(data => {
+      this.fornecedores = data;
+      
+    });
+    this.initializeForm();
+  }
+
+  initializeForm() {
     const lote: Lote = this.activatedRoute.snapshot.data['lote'];
+    // selecionando o fornecedor
+    const fornecedor = this.fornecedores.find(fornecedor => fornecedor.id === (lote?.fornecedor?.id || null));
     this.formLote = this.formBuilder.group({
+      codigo: [lote?.codigo || '', Validators.required],
       quantidadeItens: [lote?.quantidadeItens || '', Validators.required],
       valorUnitario: [lote?.valorUnitario || '', Validators.required],
       valorTotal: [lote?.valorTotal || '', Validators.required],
       dataCompra: [lote?.dataCompra || '', Validators.required],
-      fornecedor: [lote?.fornecedor || '', Validators.required]
-    });
-  }
-
-  ngOnInit(): void {
-    this.fornecedorService.findAll().subscribe(data => {
-      this.fornecedores = data;
-      this.initializeForm();
-    });
-  }
-
-  //Inicializa o select 
-  initializeForm() {
-    const lote: Lote = this.activatedRoute.snapshot.data['fornededores'];
-    // selecionando o fornecedor
-    const fornecedor = this.fornecedores
-      .find(fornecedor => fornecedor.id === (lote?.fornecedor?.id || null)); 
-    this.formLote = this.formBuilder.group({
-      id: [(lote && lote.id) ? lote.id : null],
-      nome: [(lote && lote.fornecedor.nome) ? lote.fornecedor.nome : '', Validators.required],
-      fornecedor: [fornecedor]
+      estoque: [lote?.estoque || '', Validators.required],
+      fornecedor: [fornecedor || '', Validators.required]
     });
   }
 
@@ -85,14 +79,14 @@ export class LoteFormComponent implements OnInit {
       const lote = this.formLote.value;
       // Verificar se é uma inserção ou atualização
       if (lote.id == null) {
-        console.log(lote.nivelAcesso);
+        console.log(lote.fornecedor.id);
         // Inserir novo lote
         this.loteService.insert(lote).subscribe({
           next: (loteService) => {
             this.router.navigateByUrl('/lote/list');
           },
           error: (err) => {
-            console.log('Erro ao Incluir' + JSON.stringify(err));
+            console.log('Erro ao Incluir:' + JSON.stringify(err));
             if (err instanceof HttpErrorResponse && err.error && err.error.errors && err.error.errors.length > 0) {
               const errorMessage = err.error.errors[0].message;
               this.mostrarErro(errorMessage);

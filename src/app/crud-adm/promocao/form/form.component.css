@@ -13,6 +13,7 @@ main {
 h2 {
     font-size: 25px;
 }
+
 a {
     text-decoration: none; 
     display: inline-block; 
@@ -20,6 +21,7 @@ a {
     margin: 0px 0px;
     padding: 5px; 
 }
+
 .content {
     background-color: #33BDFE;
     color: #fff;
@@ -38,24 +40,12 @@ form {
     border: 1px solid #33BDFE;
     border-radius: 10px;
     padding: 25px; 
-    height: 210px;
-    display: flex;
-    flex-direction: column;
-}
+    height: 120px;
 
-form .group-ini {
     display: flex;
-    flex-direction: row;
+    align-items: center;
     justify-content: center;
-    margin-top: 25px;
-    gap: 5.2rem;
-}
-form .group {
-    margin-top: 15px;
-    display: flex;
-    justify-content: center;
-    margin-top: 45px;
-    gap: 5.2rem;
+    gap: 60px;
 }
 
 .form-group {
@@ -126,26 +116,11 @@ mat-error{
     border-color: #007bff;
 }
 
-#quantidadeItens{
+#nome{
+    width: 320px;
+}
+#sigla{
     width: 120px;
-}
-#codigo{
-    width: 120px;
-}
-#valorUnitario{
-    width: 150px;
-}
-#valorTotal{
-    width: 150px;
-}
-#dataCompra{
-    width: 150px;
-}
-#fornecedor{
-    width: 150px;
-}
-#estoque{
-    width: 100px;
 }
 
 .bnt-group{

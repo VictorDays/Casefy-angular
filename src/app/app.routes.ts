@@ -21,6 +21,9 @@ import { FornecedorFormComponent } from './crud-adm/fornecedor/form/form.compone
 import { resolverFornecedor } from './crud-adm/fornecedor/resolver/resolver-fornecedor';
 import { LoteListComponent } from './crud-adm/lote/list/list.component';
 import { LoteFormComponent } from './crud-adm/lote/form/form.component';
+import { PromocaoFormComponent } from './crud-adm/promocao/form/form.component';
+import { PromocaoListComponent } from './crud-adm/promocao/list/list.component';
+import { resolverPromocao } from './crud-adm/promocao/resolver/resolver-promocao';
 
 export const routes: Routes = [
 
@@ -39,9 +42,14 @@ export const routes: Routes = [
     { path: 'fornecedor/list', component: FornecedorListComponent, title: 'Fornecedores'},
     { path: 'fornecedor/form', component: FornecedorFormComponent, title: 'Cadastro de Fornecedores'},
     { path: 'fornecedor/edit/:id', component: FornecedorFormComponent, resolve: { fornecedor: resolverFornecedor}},
-
+    
     { path: 'lote/list', component: LoteListComponent, title: 'Lotes'},
     { path: 'lote/form', component: LoteFormComponent, title: 'Cadastro de lotes'},
+    { path: 'lote/edit/:id', component: FornecedorFormComponent, resolve: { fornecedor: resolverFornecedor}},
+
+    { path: 'promocao/list', component: PromocaoListComponent, title: 'Promoções'},
+    { path: 'promocao/form', component: PromocaoFormComponent, title: 'Cadastro de Promoções'},
+    { path: 'promocao/edit/:id', component: FornecedorFormComponent, resolve: { promocao: resolverPromocao}},
 
     { path: 'marcas/list', component: MarcaListComponent, title: 'Marcas'},
     { path: 'marcas/form', component: FormMarcaComponent, title: 'Cadastro de Administradores'},
