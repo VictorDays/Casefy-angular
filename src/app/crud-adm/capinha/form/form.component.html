@@ -1,0 +1,70 @@
+<app-header></app-header>
+<app-navside></app-navside>
+<main>
+    <h2 class="titulo">Cadastro de Capinhas</h2>
+    <div class="historic">
+
+        <a [routerLink]="['/']">Home</a>
+        /
+        <a [routerLink]="['/capinhas/list']">Lista de Cidades</a>
+        /
+        <a>Cidade</a>
+
+    </div>
+    <div class="content">
+        <span>Dados da Capinha</span>
+    </div>
+    <form [formGroup]="formCapinha">
+
+        <div class="form-group">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" formControlName="nome">
+            <mat-error *ngIf="formCapinha.get('nome') 
+                                   && formCapinha.get('nome')?.invalid
+                                   && formCapinha.get('nome')?.touched">
+                O nome é obrigatorio.
+            </mat-error>
+        </div>
+
+        <div class="form-group">
+            <label for="descricao">Descrição:</label>
+            <input type="text" id="descricao" formControlName="descricao">
+            <mat-error *ngIf="formCapinha.get('descricao') 
+                                   && formCapinha.get('descricao')?.invalid
+                                   && formCapinha.get('descricao')?.touched">
+                A descrição é obrigatorio.
+            </mat-error>
+        </div>
+
+        <div class="form-group">
+            <label for="estado">Modelo:</label>
+            <mat-select id="modelo" formControlName="modelo">
+                @for (modelo of modelos; track modelo.id) {
+                    <mat-option [value]="modelo">
+                        {{modelo.nome}}
+                    </mat-option>
+                }
+            </mat-select>
+        </div>
+
+        <div class="form-group">
+            <label for="valor">Valor:</label>
+            <input type="text" id="valor" formControlName="valor">
+            <mat-error *ngIf="formCapinha.get('valor') 
+                                   && formCapinha.get('valor')?.invalid
+                                   && formCapinha.get('valor')?.touched">
+                O valor é obrigatorio.
+            </mat-error>
+        </div>
+
+        <button class="bnt-cadastro" [routerLink]="['/capinhas/form']">Adicionar Estado</button>
+
+    </form>
+    <div class="bnt-group">
+        <button type="submit" class="btn-cancelar" [routerLink]="['/capinhas/list']">Cancelar</button>
+        <button type="submit" class="btn-excluir" (click)="confirmDelete(formCapinha?.value)"
+            *ngIf="formCapinha?.get('id')?.value">Excluir</button>
+        <button type="submit" class="btn-salvar" (click)="salvar()">Salvar</button>
+    </div>
+
+</main>

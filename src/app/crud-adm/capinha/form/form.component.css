@@ -85,6 +85,10 @@ form .group {
     border-color: #007bff;
 }
 
+mat-error{
+    color: #f36b7f;
+    font-family: "Lato", sans-serif;
+}
 .form-group select{
     flex: 3;
     font-size: 15px;
@@ -95,6 +99,11 @@ form .group {
     padding: 8px;
     border: 1px solid #808080;
     transition: border-color 0.3s ease;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
 }
 
 .form-group select:focus {

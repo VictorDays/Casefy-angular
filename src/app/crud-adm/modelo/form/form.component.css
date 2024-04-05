@@ -101,6 +101,11 @@ mat-error{
     transition: border-color 0.3s ease;
 }
 
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
 .form-group select:focus {
     outline: none;
     border-color: #007bff;

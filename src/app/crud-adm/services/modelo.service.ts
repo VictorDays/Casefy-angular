@@ -7,7 +7,7 @@ import { Modelo } from '../models/modelo.models';
   providedIn: 'root'
 })
 export class ModeloService {
-    private baseUrl = 'http://localhost:8080/marcas';
+    private baseUrl = 'http://localhost:8080/modelos';
   
     constructor(private httpClient: HttpClient) {  }
   
@@ -19,8 +19,8 @@ export class ModeloService {
       return this.httpClient.get<Modelo[]>(`${this.baseUrl}/search/nome/${nome}`);
     }
 
-    findByMarca(modelo: string): Observable<Modelo[]> {
-      return this.httpClient.get<Modelo[]>(`${this.baseUrl}/search/marca/${modelo}`);
+    findByModelo(modelo: string): Observable<Modelo[]> {
+      return this.httpClient.get<Modelo[]>(`${this.baseUrl}/search/modelo/${modelo}`);
     }
   
     findById(id: number): Observable<Modelo> {

@@ -24,24 +24,24 @@ import { ModeloService } from '../../services/modelo.service';
     MatIconModule, MatTableModule]
 })
 export class ModeloListComponent {
-  displayedColumns: string[] = ['id', 'nome', 'acao'];
+  displayedColumns: string[] = ['id', 'nome', 'marca', 'acao'];
   modelo: Modelo[] = [];
-  marcaSubscription: Subscription | undefined;
+  modeloSubscription: Subscription | undefined;
 
   constructor(private dialog: MatDialog,
     private modeloService: ModeloService) { }
 
   ngOnInit(): void {
-    this.marcaSubscription = this.modeloService.findAll().subscribe(data => {
+    this.modeloSubscription = this.modeloService.findAll().subscribe(data => {
       this.modelo = data;
       console.log(data);
     });
   }
 
-  //Verifica se this.administradoresSubscription existe e não é nulo.
+  //Verifica se this.modeloSubscription existe e não é nulo.
   ngOnDestroy(): void {
-    if (this.marcaSubscription) {
-      this.marcaSubscription.unsubscribe();
+    if (this.modeloSubscription) {
+      this.modeloSubscription.unsubscribe();
     }
   }
 
@@ -81,7 +81,7 @@ export class ModeloListComponent {
 
         this.modeloService.delete(modelo).subscribe(
           () => {
-            // Atualizar lista de administradores após exclusão
+            // Atualizar lista de modelos após exclusão
             this.modelo = this.modelo.filter(adm => adm.id !== modelo.id);
           }
         );

@@ -26,7 +26,7 @@ import { MatOptionModule } from '@angular/material/core';
   templateUrl: './form.component.html',
   styleUrl: './form.component.css'
 })
-export class FormMarcaComponent {
+export class MarcaFormComponent {
   marcas: Marca[] = [];
   formGroupMarca!: FormGroup;
 

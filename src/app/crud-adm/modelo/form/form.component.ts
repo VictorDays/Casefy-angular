@@ -17,6 +17,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { ModeloService } from '../../services/modelo.service';
+import { Marca } from '../../models/marca.model';
+import { MarcaService } from '../../services/marca.service';
 
 @Component({
   selector: 'app-form',
@@ -28,11 +30,13 @@ import { ModeloService } from '../../services/modelo.service';
 })
 export class ModeloFormComponent {
   modelos: Modelo[] = [];
+  marcas: Marca[] = [];
   formGroupModelo!: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
     private modeloService: ModeloService,
+    private marcaService: MarcaService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private dialog: MatDialog,
@@ -42,11 +46,28 @@ export class ModeloFormComponent {
     this.formGroupModelo = this.formBuilder.group({
       id: [modelo?.id || null],
       nome: [modelo?.nome || '', Validators.required],
-      idMarca: [modelo?.idMarca || '', Validators.required],
+      marca: [modelo?.marca || '', Validators.required],
     });
   }
 
+  ngOnInit(): void {
+    this.marcaService.findAll().subscribe(data => {
+      this.marcas = data;
+      this.initializeFormMarca();
+    });
+  }
 
+  //Inicializa o select 
+  initializeFormMarca() {
+    const modelo: any = this.activatedRoute.snapshot.data['modelo'];
+    const marcaId = modelo && modelo.marca ? modelo.marca.id : null;
+  
+    this.formGroupModelo = this.formBuilder.group({
+      id: [modelo && modelo.id ? modelo.id : null],
+      nome: [modelo && modelo.nome ? modelo.nome : '', Validators.required],
+      marca: [marcaId]
+    });
+  }
 
   salvar() {
     console.log('Entrou no salvar');
@@ -59,11 +80,14 @@ export class ModeloFormComponent {
     // Verificar se o formulário é válido
     if (this.formGroupModelo.valid) {
       const modelo = this.formGroupModelo.value;
-      // Verificar se é uma inserção ou atualização
+      const modeloAtualizado = {
+        ...modelo,
+        marca: { id: modelo.marca } // Passa apenas o ID da marca
+      };
+      
       if (modelo.id == null) {
-        console.log(modelo.idMarca);
-        // Inserir novo administrador
-        this.modeloService.insert(modelo).subscribe({
+        // Inserir novo modelo
+        this.modeloService.insert(modeloAtualizado).subscribe({
           next: (marcaService) => {
             this.router.navigateByUrl('/modelos/list');
           },
@@ -78,8 +102,8 @@ export class ModeloFormComponent {
           }
         });
       } else {
-        // Atualizar administrador existente
-        this.modeloService.update(modelo).subscribe({
+        // Atualizar modelo existente
+        this.modeloService.update(modeloAtualizado).subscribe({
           next: (ModeloService) => {
             this.router.navigateByUrl('/modelos/list');
           },

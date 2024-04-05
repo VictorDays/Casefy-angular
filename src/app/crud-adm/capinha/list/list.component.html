@@ -1,21 +1,21 @@
 <app-header></app-header>
 <app-navside></app-navside>
 <main>
-    <h2 class="titulo">Administradores</h2>
+    <h2 class="titulo">Modelos de Capinhas</h2>
     <div class="historic">
-        <a href="/src/app/components/administradores/form/form.component.html">Home</a>
-        /
-        <a href="/src/app/components/administradores/list/list.component.html">Lista de Administradores</a>
+        Home/ Lista de Modelos
     </div>
+
     <div class="content">
-        <button class="bnt-cadastro" [routerLink]="['/adm/form']">Cadastrar</button>
+        <button class="bnt-cadastro" [routerLink]="['/capinhas/form']">Cadastrar</button>
         <div class="search">
             <label for="">Buscar: </label>
             <input type="text" placeholder=" Pesquise pelo nome" [(ngModel)]="searchText" (keyup)="search()">
         </div>
     </div>
 
-    <table mat-table [dataSource]="administradores" class="mat-elevation-z8">
+
+    <table mat-table [dataSource]="capinha" class="mat-elevation-z8">
 
         <ng-container matColumnDef="id">
             <th mat-header-cell *matHeaderCellDef> Id </th>
@@ -27,14 +27,19 @@
             <td mat-cell *matCellDef="let element"> {{element.nome}} </td>
         </ng-container>
 
-        <ng-container matColumnDef="matricula">
-            <th mat-header-cell *matHeaderCellDef> Matricula </th>
-            <td mat-cell *matCellDef="let element"> {{element.matricula}} </td>
+        <ng-container matColumnDef="descricao">
+            <th mat-header-cell *matHeaderCellDef> Descrição </th>
+            <td mat-cell *matCellDef="let element"> {{element.descricao}} </td>
         </ng-container>
 
-        <ng-container matColumnDef="nivel">
-            <th mat-header-cell *matHeaderCellDef> Nivel </th>
-            <td mat-cell *matCellDef="let element"> {{element.nivel}} </td>
+        <ng-container matColumnDef="marca">
+            <th mat-header-cell *matHeaderCellDef> Modelo </th>
+            <td mat-cell *matCellDef="let element"> {{element.modelo.nome}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="valor">
+            <th mat-header-cell *matHeaderCellDef> Valor </th>
+            <td mat-cell *matCellDef="let element"> {{element.valor}} </td>
         </ng-container>
 
         <!-- Acao Column -->
@@ -44,7 +49,7 @@
                 <button class="bnt-visualizar" (click)="visualizarDados(element)">
                     <mat-icon>visibility</mat-icon>
                 </button>
-                <button class="bnt-editar" [routerLink]="['/adm/edit', element.id]">
+                <button class="bnt-editar" [routerLink]="['/capinhas/edit', element.id]">
                     <mat-icon>edit</mat-icon>
                 </button>
                 <button class="bnt-apagar" (click)="confirmDelete(element)">

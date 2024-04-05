@@ -25,7 +25,7 @@ import { ConfirmationDialogComponent } from '../../../components/confirmation/co
   templateUrl: './list.component.html',
   styleUrl: './list.component.css'
 })
-export class ListAdmComponent {
+export class AdmListComponent {
   displayedColumns: string[] = ['id', 'nome', 'matricula', 'nivel', 'acao'];
   administradores: Administrador[] = [];
 

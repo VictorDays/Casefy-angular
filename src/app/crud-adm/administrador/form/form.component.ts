@@ -29,7 +29,7 @@ import { HttpErrorResponse } from '@angular/common/http';
   templateUrl: './form.component.html',
   styleUrl: './form.component.css'
 })
-export class FormAdmComponent {
+export class AdmFormComponent {
   administradores: Administrador[] = [];
   formGroup!: FormGroup;
   niveisAcesso = [
