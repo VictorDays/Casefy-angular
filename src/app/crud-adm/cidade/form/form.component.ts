@@ -81,7 +81,6 @@ export class CidadeFormComponent implements OnInit {
       const cidade = this.formCidade.value;
       // Verificar se é uma inserção ou atualização
       if (cidade.id == null) {
-        console.log(cidade.nivelAcesso);
         // Inserir novo cidade
         this.cidadeService.insert(cidade).subscribe({
           next: (cidadeService) => {

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Cliente } from '../../models/cliente.models';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ClienteService } from '../../services/cliente.service';
@@ -15,8 +15,7 @@ import { ConfirmationDialogComponent } from '../../../components/confirmation/co
 import { ErrorComponent } from '../../../components/error/error.component';
 import { HeaderComponent } from '../../../components/header/header.component';
 import { NavsideComponent } from '../../../components/navside/navside.component';
-import { Estado } from '../../models/estado.models';
-import { EstadoService } from '../../services/estado.service';
+import { Telefone } from '../../models/telefone.models';
 
 @Component({
   selector: 'app-form',
@@ -31,29 +30,77 @@ import { EstadoService } from '../../services/estado.service';
 })
 export class ClienteFormComponent {
   clientes: Cliente[] = [];
-  estados: Estado[] = [];
+  telefones: Telefone[] = [];
 
   formCliente!: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
     private clienteService: ClienteService,
-    private estadoService: EstadoService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private dialog: MatDialog,
-    private dialogError: MatDialog
-  ) {
-    const cliente: Cliente = this.activatedRoute.snapshot.data['cliente'];
+    private dialog: MatDialog
+  ) { }
+
+  ngOnInit() {
     this.formCliente = this.formBuilder.group({
-      nome: [cliente?.nome || '', Validators.required],
-      login: [cliente?.login || '', Validators.required],
-      senha: [cliente?.senha || '', Validators.required],
-      cpf: [cliente?.cpf || '', Validators.required],
-      dataNascimento: [cliente?.dataNascimento || '', Validators.required]
+      nome: ['', Validators.required],
+      login: ['', Validators.required],
+      senha: ['', Validators.required],
+      cpf: ['', Validators.required],
+      dataNascimento: ['', Validators.required],
+      listaTelefones: this.formBuilder.array([
+        this.createTelefoneFormGroup() ]),
+      listaEnderecos: this.formBuilder.array([
+        this.createEnderecoFormGroup() ])
+    });
+
+    const routeData = this.activatedRoute.snapshot.data;
+    if (routeData['cliente']) {
+      this.formCliente.patchValue(routeData['cliente']);
+    }
+  }
+
+  createTelefoneFormGroup(): FormGroup {
+    return this.formBuilder.group({
+      codigoArea: ['', Validators.required],
+      numero: ['', Validators.required],
     });
   }
 
+  createEnderecoFormGroup(): FormGroup {
+    return this.formBuilder.group({
+      logradouro: ['', Validators.required],
+      numero: ['', Validators.required],
+      complemento: ['', Validators.required],
+      bairro: ['', Validators.required],
+      cep: ['', Validators.required],
+    });
+  }
+
+  get listaTelefones(): FormArray {
+    return this.formCliente.get('listaTelefones') as FormArray;
+  }
+
+  adicionarTelefone() {
+    this.listaTelefones.push(this.createTelefoneFormGroup());
+  }
+
+  removerTelefone(index: number) {
+    this.listaTelefones.removeAt(index);
+  }
+
+  get listaEnderecos(): FormArray {
+    return this.formCliente.get('listaEnderecos') as FormArray;
+  }
+
+  adicionarEndereco() {
+    this.listaEnderecos.push(this.createEnderecoFormGroup());
+  }
+
+  removerEndereco(index: number) {
+    this.listaEnderecos.removeAt(index);
+  }
 
   salvar() {
     console.log('Entrou no salvar');
@@ -69,6 +116,7 @@ export class ClienteFormComponent {
         // Inserir novo cliente
         this.clienteService.insert(cliente).subscribe({
           next: (clienteService) => {
+            console.log('Formulário inserido ', this.formCliente.value);
             this.router.navigateByUrl('/cliente/list');
           },
           error: (err) => {

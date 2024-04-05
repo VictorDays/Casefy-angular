@@ -23,15 +23,15 @@ export class ClienteService {
       return this.httpClient.get<Cliente>(`${this.baseUrl}/${id}`);
     }
   
-    insert(administrador: Cliente): Observable<Cliente> {
-      return this.httpClient.post<Cliente>(this.baseUrl, administrador);
+    insert(cliente: Cliente): Observable<Cliente> {
+      return this.httpClient.post<Cliente>(this.baseUrl, cliente);
     }
     
-    update(administrador: Cliente): Observable<Cliente> {
-      return this.httpClient.put<Cliente>(`${this.baseUrl}/${administrador.id}`, administrador);
+    update(cliente: Cliente): Observable<Cliente> {
+      return this.httpClient.put<Cliente>(`${this.baseUrl}/${cliente.id}`, cliente);
     }
   
-    delete(administrador: Cliente): Observable<any> {
-      return this.httpClient.delete<any>(`${this.baseUrl}/${administrador.id}`);
+    delete(cliente: Cliente): Observable<any> {
+      return this.httpClient.delete<any>(`${this.baseUrl}/${cliente.id}`);
     }
 }

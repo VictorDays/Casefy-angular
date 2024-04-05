@@ -8,6 +8,6 @@ export class Cliente {
     senha!: string;
     cpf!: string;
     dataNascimento!: string;
-    listaTelefones!: Telefone[];
-    listaEnderecos!: Endereco[]
+    listaTelefones: Telefone[] = [];
+    listaEnderecos: Endereco[] = [];
 }
