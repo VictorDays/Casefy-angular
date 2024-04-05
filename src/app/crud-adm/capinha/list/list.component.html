@@ -32,11 +32,6 @@
             <td mat-cell *matCellDef="let element"> {{element.descricao}} </td>
         </ng-container>
 
-        <ng-container matColumnDef="marca">
-            <th mat-header-cell *matHeaderCellDef> Modelo </th>
-            <td mat-cell *matCellDef="let element"> {{element.modelo.nome}} </td>
-        </ng-container>
-
         <ng-container matColumnDef="valor">
             <th mat-header-cell *matHeaderCellDef> Valor </th>
             <td mat-cell *matCellDef="let element"> {{element.valor}} </td>

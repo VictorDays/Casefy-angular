@@ -24,7 +24,7 @@ import { RouterModule } from '@angular/router';
       MatIconModule, MatTableModule]
 })
 export class CapinhaListComponent {
-  displayedColumns: string[] = ['id', 'nome', 'descricao','modelo', 'valor','acao'];
+  displayedColumns: string[] = ['id', 'nome', 'descricao', 'valor','acao'];
   capinha: Capinha[] = [];
   capinhaSubscription: Subscription | undefined;
 
