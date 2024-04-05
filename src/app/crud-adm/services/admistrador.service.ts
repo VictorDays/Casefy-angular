@@ -10,9 +10,24 @@ export class AdministradorService {
     private baseUrl = 'http://localhost:8080/administradores';
   
     constructor(private httpClient: HttpClient) {  }
-  
+/*
     findAll(): Observable<Administrador[]> {
       return this.httpClient.get<Administrador[]>(this.baseUrl);
+    }
+*/
+    findAll(page?: number, pageSize?: number): Observable<Administrador[]>{
+      let params = {}
+      if(page !== undefined && pageSize !== undefined){
+        params = {
+          page: page.toString(),
+          pageSize: pageSize.toString()
+        }
+      }
+      return this.httpClient.get<Administrador[]>(`${this.baseUrl}`, {params});
+    }
+
+    count(): Observable<number>{
+      return this.httpClient.get<number>(`${this.baseUrl}/count`);
     }
 
     findByNome(nome: string): Observable<Administrador[]> {
