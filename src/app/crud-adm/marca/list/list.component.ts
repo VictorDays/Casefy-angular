@@ -13,6 +13,8 @@ import { MatInputModule } from '@angular/material/input';
 import { RouterModule } from '@angular/router';
 import { Marca } from '../../models/marca.model';
 import { MarcaService } from '../../services/marca.service';
+import { PageEvent } from '@angular/material/paginator';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-marca-list',
@@ -21,21 +23,38 @@ import { MarcaService } from '../../services/marca.service';
   styleUrl: './list.component.css',
   imports: [RouterModule, ViewMarcaComponent, ConfirmationDialogComponent, ReactiveFormsModule, FormsModule,
     HeaderComponent, NavsideComponent, MatInputModule, MatFormFieldModule,
-    MatIconModule, MatTableModule]
+    MatIconModule, MatTableModule, MatPaginatorModule]
 })
 export class MarcaListComponent {
   displayedColumns: string[] = ['id', 'nome', 'acao'];
   marca: Marca[] = [];
   marcaSubscription: Subscription | undefined;
 
+  totalRecords = 0;
+  pageSize = 2;
+  page = 0;
+  searchText: string = '';
+  administradoresSubscription: Subscription | undefined;
+
   constructor(private dialog: MatDialog,
     private marcaService: MarcaService) { }
 
   ngOnInit(): void {
-    this.marcaSubscription = this.marcaService.findAll().subscribe(data => {
+    this.marcaService.findAll(this.page, this.pageSize).subscribe(data => {
       this.marca = data;
-      console.log(data);
+      console.log(this.marca);
     });
+
+    this.marcaService.count().subscribe(data => {
+      this.totalRecords = data;
+      console.log(this.marca);
+    });
+  }
+
+  paginar(event: PageEvent): void {
+    this.page = event.pageIndex;
+    this.pageSize = event.pageSize;
+    this.ngOnInit();
   }
 
   //Verifica se this.administradoresSubscription existe e não é nulo.
@@ -45,8 +64,6 @@ export class MarcaListComponent {
     }
   }
 
-  // Campo de Pesquisa:
-  searchText: string = '';
   search() {
     // Se o texto de busca estiver vazio, busque todos os administradores
     if (!this.searchText.trim()) {
