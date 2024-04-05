@@ -15,20 +15,26 @@ import { HeaderComponent } from '../../../components/header/header.component';
 import { NavsideComponent } from '../../../components/navside/navside.component';
 import { ViewAdmComponent } from '../view/view-dialog.component';
 import { ConfirmationDialogComponent } from '../../../components/confirmation/confirmation-dialog.component';
+import { PageEvent } from '@angular/material/paginator';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-list',
   standalone: true,
   imports: [RouterModule, ViewAdmComponent, ConfirmationDialogComponent, ReactiveFormsModule, FormsModule,
     HeaderComponent, NavsideComponent, MatInputModule, MatFormFieldModule,
-    MatIconModule, MatTableModule],
+    MatIconModule, MatTableModule, MatPaginatorModule],
   templateUrl: './list.component.html',
   styleUrl: './list.component.css'
 })
-export class AdmListComponent {
+export class AdmListComponent implements OnInit, OnDestroy {
   displayedColumns: string[] = ['id', 'nome', 'matricula', 'nivel', 'acao'];
   administradores: Administrador[] = [];
 
+  totalRecords = 0;
+  pageSize = 2;
+  page = 0;
+  searchText: string = '';
   administradoresSubscription: Subscription | undefined;
 
   constructor(private dialog: MatDialog,
@@ -36,35 +42,36 @@ export class AdmListComponent {
     private router: Router) { }
 
   ngOnInit(): void {
-    this.administradoresSubscription = this.administradorService.findAll().subscribe(data => {
+    this.carregarDados();
+  }
+
+  carregarDados(): void {
+    this.administradorService.findAll(this.page, this.pageSize).subscribe(data =>{
       this.administradores = data;
-      console.log(data);
+    });
+
+    this.administradorService.count().subscribe(data =>{
+      this.totalRecords = data;
     });
   }
 
-  //Verifica se this.administradoresSubscription existe e não é nulo.
+  paginar(event: PageEvent): void {
+    this.page = event.pageIndex;
+    this.pageSize = event.pageSize;
+    this.carregarDados();
+  }
+
   ngOnDestroy(): void {
     if (this.administradoresSubscription) {
       this.administradoresSubscription.unsubscribe();
     }
   }
 
-  // Campo de Pesquisa:
-  searchText: string = '';
   search() {
-    // Se o texto de busca estiver vazio, busque todos os administradores
     if (!this.searchText.trim()) {
-      this.administradorService.findAll().subscribe(
-        data => {
-          this.administradores = data;
-        },
-        error => {
-          console.error('Erro ao buscar administradores:', error);
-        }
-      );
+      this.carregarDados();
       return;
     }
-    // Converter searchText para minúsculas para busca insensível a maiúsculas e minúsculas
     const termoDeBusca = this.searchText.toLowerCase();
     this.administradorService.findByNome(termoDeBusca).subscribe(
       data => {
@@ -76,16 +83,13 @@ export class AdmListComponent {
     );
   }
 
-  //Caixa de dialogo para excluir 
   confirmDelete(administrador: Administrador): void {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent);
 
     dialogRef.afterClosed().subscribe(result => {
       if (result === true && administrador && administrador.id !== undefined) {
-
         this.administradorService.delete(administrador).subscribe(
           () => {
-            // Atualizar lista de administradores após exclusão
             this.administradores = this.administradores.filter(adm => adm.id !== administrador.id);
           }
         );
@@ -98,6 +102,7 @@ export class AdmListComponent {
       data: administrador
     });
   }
+
   editar(id: number): void {
     this.router.navigate(['/adm/edit', id]);
   }

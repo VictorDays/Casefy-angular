@@ -26,12 +26,10 @@ import { Fornecedor } from '../../models/fornecedor.models';
 export class FornecedorListComponent {
   displayedColumns: string[] = ['id', 'nome', 'cnpj', 'email', 'acao'];
   fornecedores: Fornecedor[] = [];
-
   fornecedoresSubscription: Subscription | undefined;
 
   constructor(private dialog: MatDialog,
-    private cidadeService: FornecedorService,
-    private router: Router) { }
+    private cidadeService: FornecedorService) { }
 
   ngOnInit(): void {
     this.fornecedoresSubscription = this.cidadeService.findAll().subscribe(data => {
@@ -95,8 +93,5 @@ export class FornecedorListComponent {
     this.dialog.open(ViewFornecedorComponent, {
       data: fornecedor
     });
-  }
-  editar(id: number): void {
-    this.router.navigate(['/adm/edit', id]);
   }
 }

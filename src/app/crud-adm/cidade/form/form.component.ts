@@ -46,6 +46,7 @@ export class CidadeFormComponent implements OnInit {
   ) {
     const cidade: Cidade = this.activatedRoute.snapshot.data['cidade'];
     this.formCidade = this.formBuilder.group({
+      id: [cidade?.id || null],
       nome: [cidade?.nome || '', Validators.required],
       estado: [cidade?.estado || '', Validators.required]
     });
@@ -60,14 +61,13 @@ export class CidadeFormComponent implements OnInit {
 
   //Inicializa o select 
   initializeForm() {
-    const cidade: Cidade = this.activatedRoute.snapshot.data['municipio'];
+    const cidade: any = this.activatedRoute.snapshot.data['cidade'];
+    const estadoId = cidade && cidade.estado ? cidade.estado.id : null;
     // selecionando o estado
-    const estado = this.estados
-      .find(estado => estado.id === (cidade?.estado?.id || null)); 
     this.formCidade = this.formBuilder.group({
-      id: [(cidade && cidade.id) ? cidade.id : null],
-      nome: [(cidade && cidade.nome) ? cidade.nome : '', Validators.required],
-      estado: [estado]
+      id: [cidade && cidade.id ? cidade.id : null],
+      nome: [cidade && cidade.nome ? cidade.nome : '', Validators.required],
+      estado: [estadoId]
     });
   }
 
@@ -80,9 +80,14 @@ export class CidadeFormComponent implements OnInit {
     if (this.formCidade.valid) {
       const cidade = this.formCidade.value;
       // Verificar se é uma inserção ou atualização
+      const modeloAtualizado = {
+        ...cidade,
+        estado: { id: cidade.estado } // Passa apenas o ID do estado
+      };
+
       if (cidade.id == null) {
         // Inserir novo cidade
-        this.cidadeService.insert(cidade).subscribe({
+        this.cidadeService.insert(modeloAtualizado).subscribe({
           next: (cidadeService) => {
             this.router.navigateByUrl('/cidade/list');
           },
@@ -98,7 +103,7 @@ export class CidadeFormComponent implements OnInit {
         });
       } else {
         // Atualizar cidade existente
-        this.cidadeService.update(cidade).subscribe({
+        this.cidadeService.update(modeloAtualizado).subscribe({
           next: (cidadeService) => {
             this.router.navigateByUrl('/cidade/list');
           },

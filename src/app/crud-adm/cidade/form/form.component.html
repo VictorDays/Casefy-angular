@@ -25,15 +25,16 @@
                 O nome é obrigatorio.
             </mat-error>
         </div>
+
         <div class="form-group">
-            <label for="estado">Estado:</label>
-            <mat-select id="estado" formControlName="estado">
-                @for (estado of estados; track estado.id) {
-                    <mat-option [value]="estado">
-                        {{estado.nome}}
+            <div class="form-group">
+                <label for="estado">Estado:</label>
+                <mat-select id="estado" formControlName="estado">
+                    <mat-option *ngFor="let estado of estados" [value]="estado.id">
+                        {{ estado.nome }}
                     </mat-option>
-                }
-            </mat-select>
+                </mat-select>
+            </div>
             <mat-error *ngIf="formCidade.get('sigla') 
                                    && formCidade.get('sigla')?.invalid
                                    && formCidade.get('sigla')?.touched">

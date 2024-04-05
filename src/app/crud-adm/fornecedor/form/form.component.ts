@@ -40,8 +40,9 @@ export class FornecedorFormComponent {
     private dialog: MatDialog,
     private dialogError: MatDialog
   ) {
-    const fornecedor: Fornecedor = this.activatedRoute.snapshot.data['fornecedores'];
+    const fornecedor: Fornecedor = this.activatedRoute.snapshot.data['fornecedor'];
     this.formFornecedor = this.formBuilder.group({
+      id: [fornecedor?.id || null],
       nome: [fornecedor?.nome || '', Validators.required],
       cnpj: [fornecedor?.cnpj || '', Validators.required],
       email: [fornecedor?.email || '', Validators.required]
@@ -52,6 +53,10 @@ export class FornecedorFormComponent {
     console.log('Entrou no salvar');
     console.log('Formulário:', this.formFornecedor.value);
     console.log('Formulário válido:', this.formFornecedor.valid);
+
+    
+    // Validar o formulário antes de prosseguir
+    this.enviarFormulario();
 
     // Verificar se o formulário é válido
     if (this.formFornecedor.valid) {
@@ -133,6 +138,11 @@ export class FornecedorFormComponent {
     this.dialog.open(ErrorComponent, {
       data: mensagemErro
     });
+  }
+
+  enviarFormulario(): void {
+
+
   }
 
 }
