@@ -45,9 +45,9 @@ export class CapinhaFormComponent {
         this.formCapinha = this.formBuilder.group({
             id: [capinha?.id || null],
             nome: [capinha?.nome || '', Validators.required],
-            descicao: [capinha?.descricao || '', Validators.required],
-            marca: [capinha?.modelo || '', Validators.required],
-            valor: [capinha?.descricao || '', Validators.required],
+            descricao: [capinha?.descricao || '', Validators.required],
+            modelo: [capinha?.modelo || '', Validators.required],
+            valor: [capinha?.valor || '', Validators.required],
         });
     }
 

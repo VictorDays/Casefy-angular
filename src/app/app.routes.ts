@@ -25,6 +25,7 @@ import { AdmFormComponent } from './crud-adm/administrador/form/form.component';
 import { CapinhaListComponent } from './crud-adm/capinha/list/list.component';
 import { CapinhaFormComponent } from './crud-adm/capinha/form/form.component';
 import { resolverCapinha } from './crud-adm/capinha/resolver/resolver-capinha';
+import { resolverCliente } from './crud-adm/cliente/resolver/estado-resolver-adm';
 
 export const routes: Routes = [
 //HOME    
@@ -41,6 +42,10 @@ export const routes: Routes = [
     { path: 'cidade/list', component: CidadeListComponent, title: 'Cidades'},
     { path: 'cidade/form', component: CidadeFormComponent, title: 'Cadastro de Cidades'},
     { path: 'cidade/edit/:id', component: CidadeFormComponent, resolve: { cidade: resolverCidade}},
+//Cliente
+    { path: 'cliente/list', component: ClienteListComponent, title: 'Clientes'},
+    { path: 'cliente/form', component: ClienteFormComponent, title: 'Cadastro de Cliente'},
+    { path: 'cliente/edit/:id', component: ClienteFormComponent, resolve: { cidade: resolverCliente}},
 //FORNECEDOR
     { path: 'fornecedor/list', component: FornecedorListComponent, title: 'Fornecedores'},
     { path: 'fornecedor/form', component: FornecedorFormComponent, title: 'Cadastro de Fornecedores'},
