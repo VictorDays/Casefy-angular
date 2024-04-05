@@ -97,5 +97,6 @@ export class ClienteListComponent {
       height: '455px',
       data: cliente
     });
+    console.log(cliente)
   }
 }

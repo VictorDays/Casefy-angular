@@ -17,6 +17,7 @@ import { FornecedorFormComponent } from './crud-adm/fornecedor/form/form.compone
 import { resolverFornecedor } from './crud-adm/fornecedor/resolver/resolver-fornecedor';
 import { LoteListComponent } from './crud-adm/lote/list/list.component';
 import { LoteFormComponent } from './crud-adm/lote/form/form.component';
+<<<<<<< HEAD
 import { resolverModelo } from './crud-adm/modelo/resolver/resolver-modelos';
 import { resolverMarca } from './crud-adm/marca/resolver/resolver-marca';
 import { MarcaFormComponent } from './crud-adm/marca/form/form.component';
@@ -34,6 +35,23 @@ export const routes: Routes = [
     { path: 'adm/form', component: AdmFormComponent, title: 'Cadastro de Administradores'},
     { path: 'adm/edit/:id', component: AdmFormComponent, resolve: { administrador: estadoResolverAdm }},
 //ESTADO
+=======
+import { PromocaoFormComponent } from './crud-adm/promocao/form/form.component';
+import { PromocaoListComponent } from './crud-adm/promocao/list/list.component';
+import { resolverPromocao } from './crud-adm/promocao/resolver/resolver-promocao';
+import { resolverCliente } from './crud-adm/cliente/resolver/estado-resolver-adm';
+
+export const routes: Routes = [
+
+    { path: 'adm/list', component: ListAdmComponent, title: 'Administradores'},
+    { path: 'adm/form', component: FormAdmComponent, title: 'Cadastro de Administradores'},
+    { path: 'adm/edit/:id', component: FormAdmComponent, resolve: { administrador: estadoResolverAdm }},
+
+    { path: 'cliente/list', component: ClienteListComponent, title: 'Clientes'},
+    { path: 'cliente/form', component: ClienteFormComponent, title: 'Cadastro de Clientes'},
+    { path: 'cliente/edit/:id', component: ClienteFormComponent, resolve: { cliente: resolverCliente}},
+
+>>>>>>> a7181129e7d52a1006f7e0f8e6bba8e0ca415326
     { path: 'estado/list', component: EstadoListComponent, title: 'Estados'},
     { path: 'estado/form', component: EstadoFormComponent, title: 'Cadastro de Estados'},
     { path: 'estado/edit/:id', component: EstadoFormComponent, resolve: { estado: resolverEstado}},
@@ -45,10 +63,22 @@ export const routes: Routes = [
     { path: 'fornecedor/list', component: FornecedorListComponent, title: 'Fornecedores'},
     { path: 'fornecedor/form', component: FornecedorFormComponent, title: 'Cadastro de Fornecedores'},
     { path: 'fornecedor/edit/:id', component: FornecedorFormComponent, resolve: { fornecedor: resolverFornecedor}},
+<<<<<<< HEAD
 //LOTE
     { path: 'lote/list', component: LoteListComponent, title: 'Lotes'},
     { path: 'lote/form', component: LoteFormComponent, title: 'Cadastro de lotes'},
 //MARCA
+=======
+    
+    { path: 'lote/list', component: LoteListComponent, title: 'Lotes'},
+    { path: 'lote/form', component: LoteFormComponent, title: 'Cadastro de lotes'},
+    { path: 'lote/edit/:id', component: FornecedorFormComponent, resolve: { fornecedor: resolverFornecedor}},
+
+    { path: 'promocao/list', component: PromocaoListComponent, title: 'Promoções'},
+    { path: 'promocao/form', component: PromocaoFormComponent, title: 'Cadastro de Promoções'},
+    { path: 'promocao/edit/:id', component: FornecedorFormComponent, resolve: { promocao: resolverPromocao}},
+
+>>>>>>> a7181129e7d52a1006f7e0f8e6bba8e0ca415326
     { path: 'marcas/list', component: MarcaListComponent, title: 'Marcas'},
     { path: 'marcas/form', component: MarcaFormComponent, title: 'Cadastro de Administradores'},
     { path: 'marcas/edit/:id', component: MarcaFormComponent, resolve: { marca: resolverMarca }},

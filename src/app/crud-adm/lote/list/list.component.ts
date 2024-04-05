@@ -25,7 +25,7 @@ import { ViewLoteComponent } from '../view/view-dialog.component';
 })
 
 export class LoteListComponent {
-  displayedColumns: string[] = ['id', 'data', 'quantidadeItens', 'fornecedor', 'acao'];
+  displayedColumns: string[] = ['id', 'codigo', 'data', 'quantidadeItens', 'fornecedor', 'acao'];
   lotes: Lote[] = [];
 
   lotesSubscription: Subscription | undefined;
@@ -65,7 +65,7 @@ export class LoteListComponent {
     }
     // Converter searchText para minúsculas para busca insensível a maiúsculas e minúsculas
     const termoDeBusca = this.searchText.toLowerCase();
-    this.loteService.findByDataCompra(termoDeBusca).subscribe(
+    this.loteService.findByCodigo(termoDeBusca).subscribe(
       data => {
         this.lotes = data;
       },

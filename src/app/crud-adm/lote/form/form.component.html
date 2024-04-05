@@ -14,15 +14,15 @@
     <div class="content">
         <span>Dados da Lote</span>
     </div>
-    <form [formGroup]="formLote">
+    <form [formGroup]="formLote" >
 
         <div class="group-ini">
             <div class="form-group">
-                <label for="nome">Código do lote:</label>
-                <input type="text" id="quantidadeItens" formControlName="quantidadeItens">
-                <mat-error *ngIf="formLote.get('quantidadeItens') 
-                                   && formLote.get('quantidadeItens')?.invalid
-                                   && formLote.get('quantidadeItens')?.touched">
+                <label for="codigo">Código do lote:</label>
+                <input type="text" id="codigo" formControlName="codigo" placeholder="#">
+                <mat-error *ngIf="formLote.get('codigo') 
+                                   && formLote.get('codigo')?.invalid
+                                   && formLote.get('codigo')?.touched">
                     Código do lote é obrigatorio.
                 </mat-error>
             </div>
@@ -37,11 +37,20 @@
             </div>
             <div class="form-group">
                 <label for="valorUnitario">Valor Unitario:</label>
-                <input type="text" id="valorUnitario" formControlName="valorUnitario">
+                <input type="text" id="valorUnitario" formControlName="valorUnitario" placeholder="R$">
                 <mat-error *ngIf="formLote.get('valorUnitario') 
                                    && formLote.get('valorUnitario')?.invalid
                                    && formLote.get('valorUnitario')?.touched">
                     O Valor Unitario é obrigatorio.
+                </mat-error>
+            </div>
+            <div class="form-group">
+                <label for="estoque">Estoque:</label>
+                <input type="text" id="estoque" formControlName="estoque" placeholder="#">
+                <mat-error *ngIf="formLote.get('estoque') 
+                                   && formLote.get('estoque')?.invalid
+                                   && formLote.get('estoque')?.touched">
+                    A quantidade de itens no estoque é obrigatorio.
                 </mat-error>
             </div>
         </div>
@@ -49,7 +58,7 @@
         <div class="group">
             <div class="form-group">
                 <label for="valorTotal">Valor Total:</label>
-                <input type="text" id="valorTotal" formControlName="valorTotal">
+                <input type="text" id="valorTotal" formControlName="valorTotal" placeholder="R$">
                 <mat-error *ngIf="formLote.get('valorTotal') 
                                    && formLote.get('valorTotal')?.invalid
                                    && formLote.get('valorTotal')?.touched">
@@ -57,8 +66,8 @@
                 </mat-error>
             </div>
             <div class="form-group">
-                <label for="cpf">Data da Compra:</label>
-                <input type="text" id="dataCompra" formControlName="dataCompra">
+                <label for="dataCompra">Data da Compra:</label>
+                <input type="date" id="dataCompra" formControlName="dataCompra">
                 <mat-error *ngIf="formLote.get('dataCompra') 
                                    && formLote.get('dataCompra')?.invalid
                                    && formLote.get('dataCompra')?.touched">
@@ -85,7 +94,7 @@
 
     </form>
     <div class="bnt-group">
-        <button type="submit" class="btn-cancelar" [routerLink]="['/cidade/list']">Cancelar</button>
+        <button type="submit" class="btn-cancelar" [routerLink]="['/lote/list']">Cancelar</button>
         <button type="submit" class="btn-excluir" (click)="confirmDelete(formLote?.value)"
             *ngIf="formLote?.get('id')?.value">Excluir</button>
         <button type="submit" class="btn-salvar" (click)="salvar()">Salvar</button>

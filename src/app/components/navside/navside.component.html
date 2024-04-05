@@ -31,7 +31,6 @@
                     <ul>
                         <li><a href="marcas/list">*Marcas</a></li>
                         <li><a href="modelos/list">*Modelos</a></li>
-                        <li><a href="capinhas/list">*Capinhas</a></li>
                     </ul>
                 </div>
             </li>
@@ -51,13 +50,11 @@
             <li>
                 <button href="#" class="links-bnt" (click)="toggleSubmenu(3)">
                     <mat-icon>shopping_cart_outlined</mat-icon>
-                    <span>Pedidos</span>
+                    <span>Vendas</span>
                 </button>
                 <div class="submenu" [class.active]="isSubmenuOpen[3]">
                     <ul>
-                        <li><a href="#">Opção 1</a></li>
-                        <li><a href="#">Opção 2</a></li>
-                        <li><a href="#">Opção 3</a></li>
+                        <li><a href="promocao/list">Promoções</a></li>
                     </ul>
                 </div>
             </li>
