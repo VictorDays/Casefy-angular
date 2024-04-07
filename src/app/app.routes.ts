@@ -26,43 +26,47 @@ import { CapinhaListComponent } from './crud-adm/capinha/list/list.component';
 import { CapinhaFormComponent } from './crud-adm/capinha/form/form.component';
 import { resolverCapinha } from './crud-adm/capinha/resolver/resolver-capinha';
 import { resolverCliente } from './crud-adm/cliente/resolver/estado-resolver-adm';
+import { HomeComponent } from './ecommerce/home/home.component';
 
 export const routes: Routes = [
-//HOME    
-    { path: 'home', component: HomeIndexComponent, title: 'Home'},
-//ADM
-    { path: 'adm/list', component: AdmListComponent, title: 'Administradores'},
-    { path: 'adm/form', component: AdmFormComponent, title: 'Cadastro de Administradores'},
-    { path: 'adm/edit/:id', component: AdmFormComponent, resolve: { administrador: estadoResolverAdm }},
-//ESTADO
-    { path: 'estado/list', component: EstadoListComponent, title: 'Estados'},
-    { path: 'estado/form', component: EstadoFormComponent, title: 'Cadastro de Estados'},
-    { path: 'estado/edit/:id', component: EstadoFormComponent, resolve: { estado: resolverEstado}},
-//CIDADE
-    { path: 'cidade/list', component: CidadeListComponent, title: 'Cidades'},
-    { path: 'cidade/form', component: CidadeFormComponent, title: 'Cadastro de Cidades'},
-    { path: 'cidade/edit/:id', component: CidadeFormComponent, resolve: { cidade: resolverCidade}},
-//Cliente
-    { path: 'cliente/list', component: ClienteListComponent, title: 'Clientes'},
-    { path: 'cliente/form', component: ClienteFormComponent, title: 'Cadastro de Cliente'},
-    { path: 'cliente/edit/:id', component: ClienteFormComponent, resolve: { cidade: resolverCliente}},
-//FORNECEDOR
-    { path: 'fornecedor/list', component: FornecedorListComponent, title: 'Fornecedores'},
-    { path: 'fornecedor/form', component: FornecedorFormComponent, title: 'Cadastro de Fornecedores'},
-    { path: 'fornecedor/edit/:id', component: FornecedorFormComponent, resolve: { fornecedor: resolverFornecedor}},
-//LOTE
-    { path: 'lote/list', component: LoteListComponent, title: 'Lotes'},
-    { path: 'lote/form', component: LoteFormComponent, title: 'Cadastro de lotes'},
-//MARCA
-    { path: 'marcas/list', component: MarcaListComponent, title: 'Marcas'},
-    { path: 'marcas/form', component: MarcaFormComponent, title: 'Cadastro de Administradores'},
-    { path: 'marcas/edit/:id', component: MarcaFormComponent, resolve: { marca: resolverMarca }},
-//MODELO
-    { path: 'modelos/list', component: ModeloListComponent, title: 'Modelos de capinhas'},
-    { path: 'modelos/form', component: ModeloFormComponent, title: 'Cadastro de modelos de capinha'},
-    { path: 'modelos/edit/:id', component: ModeloFormComponent, resolve: { modelo: resolverModelo }},
-//CAPINHA
-    { path: 'capinhas/list', component: CapinhaListComponent, title: 'Capinhas'},
-    { path: 'capinhas/form', component: CapinhaFormComponent, title: 'Cadastro de capinha'},
-    { path: 'capinhas/edit/:id', component: CapinhaFormComponent, resolve: { capinha: resolverCapinha }},
+    //HOME    
+    { path: 'home', component: HomeIndexComponent, title: 'Home' },
+    //ADM
+    { path: 'adm/list', component: AdmListComponent, title: 'Administradores' },
+    { path: 'adm/form', component: AdmFormComponent, title: 'Cadastro de Administradores' },
+    { path: 'adm/edit/:id', component: AdmFormComponent, resolve: { administrador: estadoResolverAdm } },
+    //ESTADO
+    { path: 'estado/list', component: EstadoListComponent, title: 'Estados' },
+    { path: 'estado/form', component: EstadoFormComponent, title: 'Cadastro de Estados' },
+    { path: 'estado/edit/:id', component: EstadoFormComponent, resolve: { estado: resolverEstado } },
+    //CIDADE
+    { path: 'cidade/list', component: CidadeListComponent, title: 'Cidades' },
+    { path: 'cidade/form', component: CidadeFormComponent, title: 'Cadastro de Cidades' },
+    { path: 'cidade/edit/:id', component: CidadeFormComponent, resolve: { cidade: resolverCidade } },
+    //Cliente
+    { path: 'cliente/list', component: ClienteListComponent, title: 'Clientes' },
+    { path: 'cliente/form', component: ClienteFormComponent, title: 'Cadastro de Cliente' },
+    { path: 'cliente/edit/:id', component: ClienteFormComponent, resolve: { cidade: resolverCliente } },
+    //FORNECEDOR
+    { path: 'fornecedor/list', component: FornecedorListComponent, title: 'Fornecedores' },
+    { path: 'fornecedor/form', component: FornecedorFormComponent, title: 'Cadastro de Fornecedores' },
+    { path: 'fornecedor/edit/:id', component: FornecedorFormComponent, resolve: { fornecedor: resolverFornecedor } },
+    //LOTE
+    { path: 'lote/list', component: LoteListComponent, title: 'Lotes' },
+    { path: 'lote/form', component: LoteFormComponent, title: 'Cadastro de lotes' },
+    //MARCA
+    { path: 'marcas/list', component: MarcaListComponent, title: 'Marcas' },
+    { path: 'marcas/form', component: MarcaFormComponent, title: 'Cadastro de Administradores' },
+    { path: 'marcas/edit/:id', component: MarcaFormComponent, resolve: { marca: resolverMarca } },
+    //MODELO
+    { path: 'modelos/list', component: ModeloListComponent, title: 'Modelos de capinhas' },
+    { path: 'modelos/form', component: ModeloFormComponent, title: 'Cadastro de modelos de capinha' },
+    { path: 'modelos/edit/:id', component: ModeloFormComponent, resolve: { modelo: resolverModelo } },
+    //CAPINHA
+    { path: 'capinhas/list', component: CapinhaListComponent, title: 'Capinhas' },
+    { path: 'capinhas/form', component: CapinhaFormComponent, title: 'Cadastro de capinha' },
+    { path: 'capinhas/edit/:id', component: CapinhaFormComponent, resolve: { capinha: resolverCapinha } },
+
+    //HOME
+    { path: 'casefy/home', component: HomeComponent, title: 'Casefy | Home' },
 ];
