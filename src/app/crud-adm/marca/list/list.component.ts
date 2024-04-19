@@ -31,7 +31,7 @@ export class MarcaListComponent {
   marcaSubscription: Subscription | undefined;
 
   totalRecords = 0;
-  pageSize = 2;
+  pageSize = 10;
   page = 0;
   searchText: string = '';
   administradoresSubscription: Subscription | undefined;
