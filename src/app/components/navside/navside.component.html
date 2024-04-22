@@ -1,15 +1,15 @@
 <div class="navside">
     <div class="top">
-        <div style="color: white;">
+        <button>
             <mat-icon>menu</mat-icon>
-        </div>
+        </button>
         <span>Menu de Navegação</span>
     </div>
     <hr>
     <nav class="nav-links">
         <ul>
             <li>
-                <button class="links-bnt" href="#" (click)="toggleSubmenu(0)">
+                <button class="links-bnt" (click)="toggleSubmenu(0)">
                     <mat-icon>group_outlined</mat-icon>
                     <span>Gerência de Usuário</span>
                 </button>
@@ -23,20 +23,20 @@
                 </div>
             </li>
             <li>
-                <button class="links-bnt" href="#" (click)="toggleSubmenu(1)">
+                <button class="links-bnt" (click)="toggleSubmenu(1)">
                     <mat-icon>photo_album_outlined</mat-icon>
                     <span>Gerência de Produtos</span>
                 </button>
                 <div class="submenu" [class.active]="isSubmenuOpen[1]">
                     <ul>
-                        <li><a href="marcas/list">*Marcas</a></li>
-                        <li><a href="modelos/list">*Modelos</a></li>
-                        <li><a href="capinhas/list">*Capinhas</a></li>
+                        <li><a href="marcas/list">Marcas</a></li>
+                        <li><a href="modelos/list">Modelos</a></li>
+                        <li><a href="capinhas/list">Capinhas</a></li>
                     </ul>
                 </div>
             </li>
             <li>
-                <button href="#" class="links-bnt" (click)="toggleSubmenu(2)">
+                <button class="links-bnt" (click)="toggleSubmenu(2)">
                     <mat-icon>assignment_outlined</mat-icon>
                     <span>Estoque</span>
                 </button>
@@ -49,7 +49,7 @@
                 </div>
             </li>
             <li>
-                <button href="#" class="links-bnt" (click)="toggleSubmenu(3)">
+                <button class="links-bnt" (click)="toggleSubmenu(3)">
                     <mat-icon>shopping_cart_outlined</mat-icon>
                     <span>Vendas</span>
                 </button>
@@ -60,9 +60,9 @@
                 </div>
             </li>
             <li>
-                <button href="#" class="links-bnt" (click)="toggleSubmenu(4)">
+                <button class="links-bnt" (click)="toggleSubmenu(4)">
                     <mat-icon>insert_chart_outlined</mat-icon>
-                    <span>Relatorios</span>
+                    <span>Relatórios</span>
                 </button>
                 <div class="submenu" [class.active]="isSubmenuOpen[4]">
                     <ul>

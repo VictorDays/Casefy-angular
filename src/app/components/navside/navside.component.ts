@@ -11,19 +11,18 @@ import { CommonModule, NgFor } from '@angular/common';
   styleUrl: './navside.component.css'
 })
 export class NavsideComponent {
-  isSubmenuOpen: boolean[] = [false, false, false, false]; // Array para controlar o estado de cada submenu
+  isSubmenuOpen: boolean[] = [false, false, false, false, false]; // Adapte de acordo com o número de submenus
 
   toggleSubmenu(index: number) {
-    // Alterna o estado do submenu correspondente ao índice passado
     this.isSubmenuOpen[index] = !this.isSubmenuOpen[index];
-    console.log('Submenu aberto:', this.isSubmenuOpen[index]);
+    this.closeOtherSubmenus(index);
+  }
 
-    // Adiciona ou remove a classe 'active' conforme o estado do submenu
-    const submenu = document.getElementsByClassName('submenu')[index];
-    if (this.isSubmenuOpen[index]) {
-      submenu.classList.add('active');
-    } else {
-      submenu.classList.remove('active');
+  closeOtherSubmenus(index: number) {
+    for (let i = 0; i < this.isSubmenuOpen.length; i++) {
+      if (i !== index) {
+        this.isSubmenuOpen[i] = false;
+      }
     }
   }
 }
