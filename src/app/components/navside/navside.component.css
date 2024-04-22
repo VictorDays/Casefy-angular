@@ -9,18 +9,6 @@
     color: #fff;
 }
 
-.top button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    outline: none;
-    color: inherit;
-}
-
-.top span {
-    font-size: 20px;
-}
-
 .links-bnt {
     display: flex;
     align-items: center;
@@ -60,5 +48,5 @@
 }
 
 .nav-links li {
-    margin: 25px 0; /* Adicionando margem vertical */
+    margin: 25px 0;
 }
