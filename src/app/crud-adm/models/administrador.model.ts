@@ -8,7 +8,7 @@ export class Administrador {
     matricula!: number;
     cpf!: string;
     email!: string;
-    senha!: string;
+    senha?: string;
     perfil!: string;
     idNivelAcesso!: NivelAcesso;
 }
