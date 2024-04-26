@@ -13,6 +13,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { RouterModule } from '@angular/router';
+import { ViewCapinhaComponent } from '../view/view.component';
 
 @Component({
     selector: 'app-list',
@@ -90,7 +91,7 @@ export class CapinhaListComponent {
   }
 
   visualizarDados(capinha: Capinha): void {
-    this.dialog.open(ViewModeloComponent, {
+    this.dialog.open(ViewCapinhaComponent, {
       data: capinha
     });
   }
