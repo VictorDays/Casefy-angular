@@ -10,7 +10,7 @@
         <button class="bnt-cadastro" [routerLink]="['/adm/form']">Cadastrar</button>
         <div class="search">
             <label for="">Buscar: </label>
-            <input type="text" placeholder=" Pesquise pelo nome" [(ngModel)]="searchText" (keyup)="search()">
+            <input type="text" placeholder=" Pesquise pelo nome" [(ngModel)]="searchText" (keyup)="carregarDados()">
         </div>
     </div>
 

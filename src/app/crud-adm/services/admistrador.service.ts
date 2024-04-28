@@ -15,12 +15,13 @@ export class AdministradorService {
       return this.httpClient.get<Administrador[]>(this.baseUrl);
     }
 */
-    findAll(page?: number, pageSize?: number): Observable<Administrador[]>{
+    findAll(page?: number, pageSize?: number, nome ?: String): Observable<Administrador[]>{
       let params = {}
       if(page !== undefined && pageSize !== undefined){
         params = {
           page: page.toString(),
-          pageSize: pageSize.toString()
+          pageSize: pageSize.toString(),
+          nome: nome
         }
       }
       return this.httpClient.get<Administrador[]>(`${this.baseUrl}`, {params});

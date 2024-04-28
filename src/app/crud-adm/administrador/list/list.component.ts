@@ -46,7 +46,8 @@ export class AdmListComponent implements OnInit, OnDestroy {
   }
 
   carregarDados(): void {
-    this.administradorService.findAll(this.page, this.pageSize).subscribe(data =>{
+    this.administradores = [];
+    this.administradorService.findAll(this.page, this.pageSize, this.searchText).subscribe(data =>{
       this.administradores = data;
     });
 
@@ -65,22 +66,6 @@ export class AdmListComponent implements OnInit, OnDestroy {
     if (this.administradoresSubscription) {
       this.administradoresSubscription.unsubscribe();
     }
-  }
-
-  search() {
-    if (!this.searchText.trim()) {
-      this.carregarDados();
-      return;
-    }
-    const termoDeBusca = this.searchText.toLowerCase();
-    this.administradorService.findByNome(termoDeBusca).subscribe(
-      data => {
-        this.administradores = data;
-      },
-      error => {
-        console.error('Erro ao buscar por nome:', error);
-      }
-    );
   }
 
   confirmDelete(administrador: Administrador): void {
