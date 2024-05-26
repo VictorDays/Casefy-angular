@@ -1,0 +1,4 @@
+
+.mdc-line-ripple::before, .mdc-line-ripple::after {
+  position: relative;
+}
