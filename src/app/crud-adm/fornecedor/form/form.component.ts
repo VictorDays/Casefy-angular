@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators, AbstractControl  } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { FornecedorService } from '../../services/fornecedor.service';
+import { FornecedorService } from '../../../services/fornecedor.service';
 import { MatDialog } from '@angular/material/dialog';
 import { CommonModule, NgIf } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -14,7 +14,7 @@ import { ConfirmationDialogComponent } from '../../../components/confirmation/co
 import { ErrorComponent } from '../../../components/error/error.component';
 import { HeaderComponent } from '../../../components/header/header.component';
 import { NavsideComponent } from '../../../components/navside/navside.component';
-import { Fornecedor } from '../../models/fornecedor.models';
+import { Fornecedor } from '../../../models/fornecedor.models';
 import { resolverFornecedor } from '../resolver/resolver-fornecedor';
 
 @Component({

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Cidade } from '../models/cidade.models';
+import { Cidade } from '../crud-adm/models/cidade.models';
 
 
 @Injectable({

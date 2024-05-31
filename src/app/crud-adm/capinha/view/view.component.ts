@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Router, RouterModule } from '@angular/router';
-import { Capinha } from '../../models/capinha.model';
+import { Capinha } from '../../../models/capinha.model';
 
 @Component({
   selector: 'app-view',

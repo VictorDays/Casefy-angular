@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { Promocao } from '../../models/Promocao.model';
+import { Promocao } from '../../../models/Promocao.model';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 

@@ -27,7 +27,7 @@ import { CapinhaFormComponent } from './crud-adm/capinha/form/form.component';
 import { resolverCapinha } from './crud-adm/capinha/resolver/resolver-capinha';
 import { resolverCliente } from './crud-adm/cliente/resolver/estado-resolver-adm';
 import { LoginComponent } from './ecommerce/login/login.component';
-
+import { CadastroComponent } from './ecommerce/cadastro/cadastro.component';
 export const routes: Routes = [
     
     //ADM
@@ -71,4 +71,6 @@ export const routes: Routes = [
 
     //Login Cliente
     { path: 'casefy/login', component: LoginComponent, title: 'Casefy | Login' },
+    //CADASTRO Cliente
+    { path: 'casefy/cadastro', component: CadastroComponent, title: 'Casefy | Cadastro' },
 ];

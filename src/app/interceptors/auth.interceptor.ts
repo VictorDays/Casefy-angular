@@ -3,7 +3,7 @@ de autorização de solicitações HTTP em uma aplicação Angular.*/
 import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { AuthService } from '../crud-adm/services/auth.service'; // Importa o serviço AuthService para obter o token JWT
+import { AuthService } from '../services/auth.service'; // Importa o serviço AuthService para obter o token JWT
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {

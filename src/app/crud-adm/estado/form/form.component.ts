@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Estado } from '../../models/estado.models';
-import { EstadoService } from '../../services/estado.service';
+import { Estado } from '../../../models/estado.models';
+import { EstadoService } from '../../../services/estado.service';
 import { CommonModule, NgIf } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';

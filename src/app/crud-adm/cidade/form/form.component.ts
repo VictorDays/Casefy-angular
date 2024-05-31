@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Cidade } from '../../models/cidade.models';
+import { Cidade } from '../../../models/cidade.models';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { CidadeService } from '../../services/cidade.service';
+import { CidadeService } from '../../../services/cidade.service';
 import { MatDialog } from '@angular/material/dialog';
 import { CommonModule, NgIf } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -15,8 +15,8 @@ import { ConfirmationDialogComponent } from '../../../components/confirmation/co
 import { ErrorComponent } from '../../../components/error/error.component';
 import { HeaderComponent } from '../../../components/header/header.component';
 import { NavsideComponent } from '../../../components/navside/navside.component';
-import { Estado } from '../../models/estado.models';
-import { EstadoService } from '../../services/estado.service';
+import { Estado } from '../../../models/estado.models';
+import { EstadoService } from '../../../services/estado.service';
 
 @Component({
   selector: 'app-form',

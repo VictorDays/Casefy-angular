@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Lote } from '../../models/lote.models';
+import { Lote } from '../../../models/lote.models';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { LoteService } from '../../services/lote.service';
+import { LoteService } from '../../../services/lote.service';
 import { MatDialog } from '@angular/material/dialog';
 import { CommonModule, NgIf } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -15,8 +15,8 @@ import { ConfirmationDialogComponent } from '../../../components/confirmation/co
 import { ErrorComponent } from '../../../components/error/error.component';
 import { HeaderComponent } from '../../../components/header/header.component';
 import { NavsideComponent } from '../../../components/navside/navside.component';
-import { Fornecedor } from '../../models/fornecedor.models';
-import { FornecedorService } from '../../services/fornecedor.service';
+import { Fornecedor } from '../../../models/fornecedor.models';
+import { FornecedorService } from '../../../services/fornecedor.service';
 
 @Component({
   selector: 'app-form',

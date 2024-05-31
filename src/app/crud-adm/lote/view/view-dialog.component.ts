@@ -3,7 +3,7 @@ import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { Router, RouterModule } from '@angular/router';
-import { Lote } from '../../models/lote.models';
+import { Lote } from '../../../models/lote.models';
 
 @Component({
   selector: 'app-view-dialog',

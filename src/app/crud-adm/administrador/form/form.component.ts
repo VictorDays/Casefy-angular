@@ -8,8 +8,8 @@ import { RouterModule } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 
 
-import { AdministradorService } from '../../../crud-adm/services/admistrador.service';
-import { Administrador } from '../../../crud-adm/models/administrador.model';
+import { AdministradorService } from '../../../services/admistrador.service';
+import { Administrador } from '../../../models/administrador.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmationDialogComponent } from '../../../components/confirmation/confirmation-dialog.component';
 import { HeaderComponent } from '../../../components/header/header.component';

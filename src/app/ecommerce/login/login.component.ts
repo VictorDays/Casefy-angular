@@ -1,75 +1,73 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'; 
-import { Router, RouterModule } from '@angular/router'; 
-import { MatSnackBar } from '@angular/material/snack-bar'; 
-import { MatFormFieldModule } from '@angular/material/form-field'; 
-import { MatInputModule } from '@angular/material/input'; 
-import { MatButtonModule } from '@angular/material/button'; 
-import { MatCardModule } from '@angular/material/card'; 
-import { MatToolbarModule } from '@angular/material/toolbar'; 
-import { AuthService } from '../../crud-adm/services/auth.service'; // Importa serviço de autenticação
-import { NgIf } from '@angular/common'; 
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router, RouterModule } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { AuthService } from '../../services/auth.service'; // Importa serviço de autenticação
+import { NgIf } from '@angular/common';
+import { Subject } from 'rxjs';
+import { AlertComponent } from "../alert/alert.component";
 
 @Component({
-  selector: 'app-login', 
-  standalone: true, 
-  imports: [NgIf, ReactiveFormsModule, MatFormFieldModule, 
+  selector: 'app-login',
+  standalone: true,
+  templateUrl: './login.component.html',
+  styleUrl: './login.component.css',
+  imports: [NgIf, ReactiveFormsModule, MatFormFieldModule,
     MatInputModule, MatButtonModule, MatCardModule, MatToolbarModule,
-    RouterModule],
-  templateUrl: './login.component.html', 
-  styleUrl: './login.component.css' ,
+    RouterModule, AlertComponent]
 })
 export class LoginComponent implements OnInit {
-  loginForm!: FormGroup; // Declara uma propriedade para armazenar o formulário de login
+  loginForm!: FormGroup;
+  alertMessage: string = '';
+  showAlert$ = new Subject<void>();
 
   constructor(
-     private formBuilder: FormBuilder, 
-     private authService: AuthService, 
-    private router: Router, 
-    private snackBar: MatSnackBar 
+    private formBuilder: FormBuilder,
+    private authService: AuthService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
-    // Inicializa o formulário de login com campos vazios e regras de validação
     this.loginForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.minLength(3)]], 
-      password: ['', [Validators.required, Validators.minLength(3)]] 
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
 
-  // Método chamado ao enviar o formulário de login
   onSubmit() {
-    if (this.loginForm.valid) { // Verifica se o formulário é válido
-      const email = this.loginForm.get('email')!.value; // Obtém o valor do campo de e-mail
-      const password = this.loginForm.get('password')!.value; // Obtém o valor do campo de senha
+    if (this.loginForm.valid) {
+      const email = this.loginForm.get('email')!.value;
+      const password = this.loginForm.get('password')!.value;
 
-      // Chama o método de login do serviço de autenticação, passando o e-mail e a senha
       this.authService.login(email, password).subscribe({
-        next: (resp) => { 
-          // redirecionar para a página principal
-          this.router.navigateByUrl('/home'); // Redireciona para a página principal em caso de sucesso
+        next: (resp) => {
+          this.router.navigateByUrl('/home');
         },
-        error: (err) => { 
-          console.log(err); // Registra o erro no console
-          this.showSnackbarTopPosition("Usuário ou senha Inválidos", 'Fechar', 2000); // Exibe uma mensagem de Snackbar indicando credenciais inválidas
-        }
+        error: (err) => {
+          console.error(err);
+          this.showAlert('Usuário ou senha inválidos');
+        },
       });
-    } else { // Se o formulário não for válido
-      this.showSnackbarTopPosition("Dados inválidos", 'Fechar', 2000); // Exibe uma mensagem de Snackbar indicando dados inválidos
+    } else {
+      this.showAlert('Dados inválidos');
     }
   }
 
-  // Método chamado para registrar um novo usuário
   onRegister() {
-    // criar usuário
+    this.router.navigate(['/casefy/cadastro']);
   }
 
-  // Método para exibir uma mensagem de Snackbar na parte superior da tela
-  showSnackbarTopPosition(content: any, action: any, duration: any) {
-    this.snackBar.open(content, action, {
-      duration: 2000, // Duração da exibição da mensagem em milissegundos
-      verticalPosition: "top", // Posição vertical da mensagem
-      horizontalPosition: "center" // Posição horizontal da mensagem
-    });
+  showAlert(message: string) {
+    this.alertMessage = message;
+    this.showAlert$.next();
+
+    setTimeout(() => {
+      this.alertMessage = '';
+    }, 2000);
   }
 }

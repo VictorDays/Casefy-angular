@@ -12,8 +12,8 @@ import { ViewClienteComponent } from '../view/view.component';
 import { HeaderComponent } from '../../../components/header/header.component';
 import { NavsideComponent } from '../../../components/navside/navside.component';
 import { ConfirmationDialogComponent } from '../../../components/confirmation/confirmation-dialog.component';
-import { ClienteService } from '../../services/cliente.service';
-import { Cliente } from '../../models/cliente.models';
+import { ClienteService } from '../../../services/cliente.service';
+import { Cliente } from '../../../models/cliente.models';
 
 @Component({
   selector: 'app-list',
