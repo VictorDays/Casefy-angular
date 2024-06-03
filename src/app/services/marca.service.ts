@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Marca } from '../crud-adm/models/marca.model';
+import { Marca } from '../models/marca.model';
 
 @Injectable({
   providedIn: 'root'

@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Capinha } from "../crud-adm/models/capinha.model";
+import { Capinha } from "../models/capinha.model";
 import { Observable } from 'rxjs';
 
 @Injectable({

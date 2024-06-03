@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Administrador } from '../crud-adm/models/administrador.model'; 
+import { Administrador } from '../models/administrador.model'; 
 
 @Injectable({
   providedIn: 'root'
