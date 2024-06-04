@@ -6,4 +6,5 @@ export class Capinha {
     descricao!: string;
     modelo!: Modelo;
     valor!: number;
+    imagem!: string;
 }
