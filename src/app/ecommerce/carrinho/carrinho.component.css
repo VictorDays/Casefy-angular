@@ -1,0 +1,6 @@
+hr{
+    border: none; /* Remover a borda padrão */
+  height: 1px; /* Definir a altura desejada */
+  background-color: #5E4BFE; /* Cor da linha */
+  margin: 20px 0; /* Margem superior e inferior */
+}

@@ -28,6 +28,8 @@ import { resolverCapinha } from './crud-adm/capinha/resolver/resolver-capinha';
 import { resolverCliente } from './crud-adm/cliente/resolver/estado-resolver-adm';
 import { LoginComponent } from './ecommerce/login/login.component';
 import { CadastroComponent } from './ecommerce/cadastro/cadastro.component';
+import { DetalhesProdutoComponent } from './ecommerce/detalhes-produto/detalhes-produto.component';
+import { CarrinhoComponent } from './ecommerce/carrinho/carrinho.component';
 export const routes: Routes = [
     
     //ADM
@@ -73,4 +75,9 @@ export const routes: Routes = [
     { path: 'casefy/login', component: LoginComponent, title: 'Casefy | Login' },
     //CADASTRO Cliente
     { path: 'casefy/cadastro', component: CadastroComponent, title: 'Casefy | Cadastro' },
+
+    { path: 'produto/:id', component: DetalhesProdutoComponent, title: 'produto/:nome' },
+
+    { path: 'casefy/carrinho', component: CarrinhoComponent, title: 'Carrinho' }
+    
 ];

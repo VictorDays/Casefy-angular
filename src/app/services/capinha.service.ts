@@ -8,9 +8,18 @@ import { Observable } from 'rxjs';
   })
   export class CapinhaService {
       private baseUrl = 'http://localhost:8080/capinhas';
+  http: any;
     
       constructor(private httpClient: HttpClient) {  }
     
+      getAllPaginacao(pagina: number, tamanhoPagina: number): Observable<Capinha[]> {
+        const params = {
+          page: pagina.toString(),
+          pageSize: tamanhoPagina.toString()
+        }
+        return this.httpClient.get<Capinha[]>(`${this.baseUrl}`, { params });
+      }
+      
       findAll(): Observable<Capinha[]> {
         return this.httpClient.get<Capinha[]>(this.baseUrl);
       }
@@ -33,6 +42,19 @@ import { Observable } from 'rxjs';
     
       delete(capinha: Capinha): Observable<any> {
         return this.httpClient.delete<any>(`${this.baseUrl}/${capinha.id}`);
+      }
+
+      getUrlImagem(nomeImagem: string): string {
+        return `${this.baseUrl}/image/download/${nomeImagem}`;
+      }
+    
+      uploadImagem(id: number, nomeImagem: string, imagem: File): Observable<any> {
+        const formData: FormData = new FormData();
+        formData.append('id', id.toString());
+        formData.append('nomeImagem', imagem.name);
+        formData.append('imagem', imagem, imagem.name);
+        
+        return this.httpClient.patch<Capinha>(`${this.baseUrl}/image/upload`, formData);
       }
   }
   
