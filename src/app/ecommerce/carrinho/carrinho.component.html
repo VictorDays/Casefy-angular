@@ -26,20 +26,22 @@
                 </form>
             </div>
 
-            <button class="bg-indigo-500 rounded-xl hover:bg-indigo-900 text-white p-4 text-lg my-3 mt-10 w-full md:w-auto">Proceed to
+            <button
+                class="bg-indigo-500 rounded-xl hover:bg-indigo-900 text-white p-4 text-lg my-3 mt-10 w-full md:w-auto">Proceed
+                to
                 shipping</button>
         </div>
 
         <!--Lista de pedidos-->
         <div
-            class="w-auto h-auto relative col-span-9 lg:col-span-4 xl:col-span-5 bg-gray-200 lg:h-auto xl:h-screen px-8 py-14 xl:px-12 xl:py-20">
+            class="w-max h-auto relative col-span-9 lg:col-span-4 xl:col-span-5 bg-gray-200 lg:h-auto xl:h-screen px-8 py-14 xl:px-12 xl:py-20">
             <div class="flex flex-col">
                 <h3 class="text-gray-800 font-semibold text-2xl -mt-7 mb-5">Items do seu carrinho:</h3>
-                <div class="flex flex-row justify-around space-x-6 mr-16 mt-5 -mb-6">
-                    <h4 class="text-gray-500 font-semibold text-base ">Nome</h4>
-                    <h4 class="text-gray-500 font-semibold text-base">Quat</h4>
-                    <h4 class="text-gray-500 font-semibold text-base">Unidade</h4>
-                    <h4 class="text-gray-500 font-semibold text-base">Valor</h4>
+                <div class="flex flex-row justify-between space-x-6 mr-0 mt-5 -mb-6">
+                    <h4 id="nome" class="text-gray-500 font-semibold text-base ">Nome</h4>
+                    <h4 id="quant" class="text-gray-500 font-semibold text-base ">Quatidade</h4>
+                    <h4 id="unidade" class="text-gray-500 font-semibold text-base ">Unidade</h4>
+                    <h4 id="valor" class="text-gray-500 font-semibold text-base ">Valor</h4>
                 </div>
 
             </div>
@@ -49,9 +51,21 @@
                 <div *ngFor="let item of carrinhoItens">
                     <div class="p-3 flex flex-row justify-center space-x-7">
                         <h3 class="w-40 ">{{ item.nome }}</h3>
-                        <h3 class="flex-auto text-right pr-4 md:pr-5 lg:pr-4">{{ item.quantidade }}</h3>
+                        <div class="flex items-center justify-center space-x-1">
+                            <h3 class="flex-auto text-right pr-4 md:pr-5 lg:pr-4">{{ item.quantidade }}</h3>
+                            <button
+                                class="px-1 h-8 w-8  bg-indigo-500 rounded-xl hover:bg-indigo-900 text-white  focus:outline-none focus:ring-2 "
+                                (click)="diminuirQuantidade(item)">
+                                -
+                            </button>
+                            <button
+                                class="px-1 h-8 w-8 bg-indigo-500 rounded-xl hover:bg-indigo-900 text-white focus:outline-none focus:ring-2 "
+                                (click)="aumentarQuantidade(item)">
+                                +
+                            </button>
+                        </div>
                         <h3>{{ item.valor }}</h3>
-                        <h3>{{ item.quantidade * item.valor  }}</h3>
+                        <h3>{{ formatarValor(item.quantidade * item.valor) }}</h3>
                         <button
                             class="flex items-center justify-center w-10 h-10 bg-indigo-500 text-white rounded-full hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-300"
                             (click)="removerItem(item)">
@@ -70,7 +84,8 @@
             <div
                 class="-bottom-7 px-8 xl:px-12 pb-5 md:-bottom-96 bg-gray-100 md:pt-80 md:pb-10 lg:pb-10 lg:pt-0 lg:mt-0 lg:bottom-0 absolute left-0 w-full text-lg font-medium text-gray-800">
                 <span aria-label="Total" class="float-left text-2xl text-gray-800 font-normal">Total</span>
-                <span aria-label="Total Price" class="float-right font-semibold text-gray-800 text-2xl">${{ calcularTotal() }}</span>
+                <span aria-label="Total Price" class="float-right font-semibold text-gray-800 text-2xl">${{
+                    calcularTotal() }}</span>
                 <div class="clear-both"></div>
             </div>
         </div>

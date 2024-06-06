@@ -4,3 +4,15 @@ hr{
   background-color: #5E4BFE; /* Cor da linha */
   margin: 20px 0; /* Margem superior e inferior */
 }
+#nome{
+  margin-left: 1.2rem;
+}
+#quant{
+  margin-left: 7.5rem;
+}
+#unidade{
+  margin-left: 3.1rem;
+}
+#valor{
+  margin-right: 5.2rem;
+}
