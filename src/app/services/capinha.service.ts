@@ -23,6 +23,8 @@ import { Observable } from 'rxjs';
       findAll(): Observable<Capinha[]> {
         return this.httpClient.get<Capinha[]>(this.baseUrl);
       }
+
+      
   
       findByNome(nome: string): Observable<Capinha[]> {
         return this.httpClient.get<Capinha[]>(`${this.baseUrl}/search/nome/${nome}`);
@@ -45,7 +47,7 @@ import { Observable } from 'rxjs';
       }
 
       getUrlImagem(nomeImagem: string): string {
-        return `${this.baseUrl}/image/download/${nomeImagem}`;
+        return `http://localhost:8080/capinhas/image/download/${nomeImagem}`;
       }
     
       uploadImagem(id: number, nomeImagem: string, imagem: File): Observable<any> {

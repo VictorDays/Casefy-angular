@@ -1,7 +1,7 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { Capinha } from '../../models/capinha.model';
 import { CommonModule, NgFor } from '@angular/common';
-import { RouterModule } from '@angular/router'; 
+import { Router, RouterModule } from '@angular/router'; 
 import { CapinhaService } from '../../services/capinha.service';
 import { CarrinhoService } from '../../services/carrinho.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -30,14 +30,15 @@ export class GridProdutosComponent implements OnInit{
 
   constructor(private capinhaService: CapinhaService, 
               private carrinhoService: CarrinhoService,
-              private snackBar: MatSnackBar ) {}
+              private snackBar: MatSnackBar,
+              private router: Router ) {}
 
   ngOnInit(): void {
     this.carregarConsultas();
   }
 
   carregarConsultas() {
-    // buscando todos as consultas
+    // buscando todos as capinhas
     this.capinhaService.getAllPaginacao(0, 10).subscribe(data => {
       this.produtos = data;
       this.carregarCards();
@@ -59,7 +60,6 @@ export class GridProdutosComponent implements OnInit{
   }
 
   adicionarAoCarrinho(card: Card) {
-    this.showSnackbarTopPosition('Produto adicionado ao carrinho!', 'Fechar');
     this.carrinhoService.adicionar({
       id: card.idCapinha,
       nome: card.titulo,
@@ -75,5 +75,9 @@ export class GridProdutosComponent implements OnInit{
       verticalPosition: "top", 
       horizontalPosition: "center" 
     });
+  }
+
+  onDetalhesProduto(id: number): void {
+    this.router.navigate(['/produto', id]);
   }
 }

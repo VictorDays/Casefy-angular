@@ -51,4 +51,8 @@ export class CarrinhoService {
   private atualizarArmazenamentoLocal(): void {
     localStorage.setItem('carrinho', JSON.stringify(this.carrinhoSubject.value));
   }
+
+  tamanho(): number {
+    return this.carrinhoSubject.value.length;
+  }
 }

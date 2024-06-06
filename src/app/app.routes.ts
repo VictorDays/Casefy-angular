@@ -76,7 +76,7 @@ export const routes: Routes = [
     //CADASTRO Cliente
     { path: 'casefy/cadastro', component: CadastroComponent, title: 'Casefy | Cadastro' },
 
-    { path: 'produto/:id', component: DetalhesProdutoComponent, title: 'produto/:nome' },
+    { path: 'produto/:id', component: DetalhesProdutoComponent, title: 'Detalhes da Capinha' },
 
     { path: 'casefy/carrinho', component: CarrinhoComponent, title: 'Carrinho' }
     
