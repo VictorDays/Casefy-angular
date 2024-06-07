@@ -34,7 +34,6 @@ export class MarcaListComponent {
   pageSize = 10;
   page = 0;
   searchText: string = '';
-  administradoresSubscription: Subscription | undefined;
 
   constructor(private dialog: MatDialog,
     private marcaService: MarcaService) { }
@@ -72,7 +71,7 @@ export class MarcaListComponent {
           this.marca = data;
         },
         error => {
-          console.error('Erro ao buscar administradores:', error);
+          console.error('Erro ao buscar marcas:', error);
         }
       );
       return;

@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
 
       this.authService.login(email, password).subscribe({
         next: (resp) => {
-          this.router.navigateByUrl('/home');
+          this.router.navigateByUrl('casefy/home');
         },
         error: (err) => {
           console.error(err);

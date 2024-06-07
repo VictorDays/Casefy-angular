@@ -1,16 +1,15 @@
 <app-header></app-header>
 <app-navside></app-navside>
 <main>
-    <h2 class="titulo">Administradores</h2>
+    <<h2 class="titulo">Administradores</h2>
     <div class="historic">
-        <a href="/src/app/components/administradores/form/form.component.html">Home /</a>
-        <span>Lista de Administradores</span>
+        Home/ Lista de Administradores
     </div>
     <div class="content">
         <button class="bnt-cadastro" [routerLink]="['/adm/form']">Cadastrar</button>
         <div class="search">
             <label for="">Buscar: </label>
-            <input type="text" placeholder=" Pesquise pelo nome" [(ngModel)]="searchText" (keyup)="carregarDados()">
+            <input type="text" placeholder=" Pesquise pelo nome" [(ngModel)]="searchText" (keyup)="search()">
         </div>
     </div>
 
@@ -26,11 +25,6 @@
             <td mat-cell *matCellDef="let element"> {{element.nome}} </td>
         </ng-container>
 
-        <ng-container matColumnDef="matricula">
-            <th mat-header-cell *matHeaderCellDef> Matricula </th>
-            <td mat-cell *matCellDef="let element"> {{element.matricula}} </td>
-        </ng-container>
-
         <ng-container matColumnDef="nivel">
             <th mat-header-cell *matHeaderCellDef> Nivel </th>
             <td mat-cell *matCellDef="let element"> {{element.idNivelAcesso.label}} </td>
@@ -43,7 +37,7 @@
                 <button class="bnt-visualizar" (click)="visualizarDados(element)">
                     <mat-icon>visibility</mat-icon>
                 </button>
-                <button class="bnt-editar" (click)="editar(element.id)">
+                <button class="bnt-editar" [routerLink]="['/adm/edit', element.id]">
                     <mat-icon>edit</mat-icon>
                 </button>
                 <button class="bnt-apagar" (click)="confirmDelete(element)">
@@ -56,7 +50,7 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
     <mat-paginator
-    [pageSizeOptions]="[2, 4, 8, 16]"
+    [pageSizeOptions]="[10, 20, 30, 40]"
     [pageSize]="pageSize"
     [length]="totalRecords"
     (page)="paginar($event)"></mat-paginator>

@@ -3,7 +3,7 @@ import { Administrador } from "../../../models/administrador.model";
 import { inject } from "@angular/core";
 import { AdministradorService } from "../../../services/admistrador.service";
 
-export const estadoResolverAdm: ResolveFn<Administrador> =
+export const resolverAdm: ResolveFn<Administrador> =
     (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
         const id = Number(route.paramMap.get('id'));
         return inject(AdministradorService).findById(id);

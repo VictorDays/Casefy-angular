@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { estadoResolverAdm } from './crud-adm/administrador/resolver/estado-resolver-adm';
+import { resolverAdm } from './crud-adm/administrador/resolver/resolver-adm';
 import { ClienteListComponent } from './crud-adm/cliente/list/list.component';
 import { ClienteFormComponent } from './crud-adm/cliente/form/form.component';
 import { MarcaListComponent } from './crud-adm/marca/list/list.component';
@@ -35,7 +35,7 @@ export const routes: Routes = [
     //ADM
     { path: 'adm/list', component: AdmListComponent, title: 'Administradores' },
     { path: 'adm/form', component: AdmFormComponent, title: 'Cadastro de Administradores' },
-    { path: 'adm/edit/:id', component: AdmFormComponent, resolve: { administrador: estadoResolverAdm } },
+    { path: 'adm/edit/:id', component: AdmFormComponent, resolve: { administrador: resolverAdm } },
     //ESTADO
     { path: 'estado/list', component: EstadoListComponent, title: 'Estados' },
     { path: 'estado/form', component: EstadoFormComponent, title: 'Cadastro de Estados' },

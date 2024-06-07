@@ -38,7 +38,7 @@ export class AuthService {
     const params = {
       login: email,
       senha: senha,
-      perfil: 1 // paciente 
+      perfil: 2 // paciente 
     }
 
     //{ observe: 'response' } para garantir que a resposta completa seja retornada (incluindo o cabeçalho)
