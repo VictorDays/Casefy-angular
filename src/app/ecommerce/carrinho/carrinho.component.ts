@@ -4,21 +4,26 @@ import { ItemVenda } from '../../models/ItemVenda.models';
 import { CarrinhoService } from '../../services/carrinho.service';
 import { FooterComponent } from '../footer/footer.component';
 import { HeaderComponent } from '../header/header.component';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-carrinho',
   standalone: true,
-  imports: [NgFor, NgIf, FooterComponent, HeaderComponent],
+  imports: [NgFor, NgIf, FooterComponent, HeaderComponent, CommonModule ],
   templateUrl: './carrinho.component.html',
   styleUrl: './carrinho.component.css'
 })
 export class CarrinhoComponent implements OnInit {
-
+  openTab: number = 1;
+  isToggle: any;
+  country: string = "United States";
   carrinhoItens: ItemVenda[] = [];
 
   constructor(private carrinhoService: CarrinhoService
   ) { }
 
+  
   ngOnInit(): void {
     this.carrinhoService.carrinho$.subscribe(itens => {
       this.carrinhoItens = itens;
@@ -51,6 +56,7 @@ export class CarrinhoComponent implements OnInit {
       this.carrinhoItens[index].quantidade--;
     }
   }
+  
   finalizarCompra(): void {
 
   }
