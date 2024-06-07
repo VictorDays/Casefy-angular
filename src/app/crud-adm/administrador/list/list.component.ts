@@ -8,8 +8,8 @@ import { FormsModule, FormBuilder, FormGroup, ReactiveFormsModule, Validators } 
 import { MatDialog } from '@angular/material/dialog';
 import { Router, RouterModule } from '@angular/router';
 
-import { AdministradorService } from '../../../crud-adm/services/admistrador.service';
-import { Administrador } from '../../../crud-adm/models/administrador.model';
+import { AdministradorService } from '../../../services/admistrador.service';
+import { Administrador } from '../../../models/administrador.model';
 
 import { HeaderComponent } from '../../../components/header/header.component';
 import { NavsideComponent } from '../../../components/navside/navside.component';

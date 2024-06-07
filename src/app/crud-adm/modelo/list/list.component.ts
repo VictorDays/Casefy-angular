@@ -11,8 +11,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { RouterModule } from '@angular/router';
-import { Modelo } from '../../models/modelo.models';
-import { ModeloService } from '../../services/modelo.service';
+import { Modelo } from '../../../models/modelo.models';
+import { ModeloService } from '../../../services/modelo.service';
 
 @Component({
   selector: 'app-marca-list',

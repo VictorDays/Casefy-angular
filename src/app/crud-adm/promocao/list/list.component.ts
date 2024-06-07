@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { Promocao } from '../../models/Promocao.model';
+import { Promocao } from '../../../models/Promocao.model';
 import { MatDialog } from '@angular/material/dialog';
-import { PromocaoService } from '../../services/promocao.service';
+import { PromocaoService } from '../../../services/promocao.service';
 import { ConfirmationDialogComponent } from '../../../components/confirmation/confirmation-dialog.component';
 import { ViewPromocaoComponent } from '../view/view.component';
 import { Subscription } from 'rxjs/internal/Subscription';

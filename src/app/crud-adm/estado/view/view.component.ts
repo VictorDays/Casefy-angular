@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { Estado } from '../../models/estado.models';
+import { Estado } from '../../../models/estado.models';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 

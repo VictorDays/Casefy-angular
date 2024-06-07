@@ -10,15 +10,15 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { HeaderComponent } from '../../../components/header/header.component';
 import { NavsideComponent } from '../../../components/navside/navside.component';
 import { ConfirmationDialogComponent } from '../../../components/confirmation/confirmation-dialog.component';
-import { Modelo } from '../../models/modelo.models';
+import { Modelo } from '../../../models/modelo.models';
 import { ErrorComponent } from '../../../components/error/error.component';
 import { MatDialog } from '@angular/material/dialog';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
-import { ModeloService } from '../../services/modelo.service';
-import { Marca } from '../../models/marca.model';
-import { MarcaService } from '../../services/marca.service';
+import { ModeloService } from '../../../services/modelo.service';
+import { Marca } from '../../../models/marca.model';
+import { MarcaService } from '../../../services/marca.service';
 
 @Component({
   selector: 'app-form',

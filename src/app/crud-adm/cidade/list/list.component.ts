@@ -8,9 +8,9 @@ import { Router, RouterModule } from '@angular/router';
 import { ConfirmationDialogComponent } from '../../../components/confirmation/confirmation-dialog.component';
 import { HeaderComponent } from '../../../components/header/header.component';
 import { NavsideComponent } from '../../../components/navside/navside.component';
-import { Cidade } from '../../models/cidade.models';
+import { Cidade } from '../../../models/cidade.models';
 import { MatDialog } from '@angular/material/dialog';
-import { CidadeService } from '../../services/cidade.service';
+import { CidadeService } from '../../../services/cidade.service';
 import { Subscription } from 'rxjs';
 import { ViewCidadeComponent } from '../view/view.component';
 

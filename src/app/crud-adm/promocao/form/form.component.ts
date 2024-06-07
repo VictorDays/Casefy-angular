@@ -1,7 +1,7 @@
 
 import { Component } from '@angular/core';
-import { Promocao } from '../../models/Promocao.model';
-import { PromocaoService } from '../../services/promocao.service';
+import { Promocao } from '../../../models/Promocao.model';
+import { PromocaoService } from '../../../services/promocao.service';
 import { CommonModule, NgIf } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';

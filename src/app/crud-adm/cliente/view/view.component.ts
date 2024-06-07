@@ -1,6 +1,6 @@
 import { Component, ElementRef, Inject } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
-import { Cliente } from '../../models/cliente.models';
+import { Cliente } from '../../../models/cliente.models';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
 

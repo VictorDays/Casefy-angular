@@ -10,9 +10,9 @@ import { Subscription } from 'rxjs';
 import { ConfirmationDialogComponent } from '../../../components/confirmation/confirmation-dialog.component';
 import { HeaderComponent } from '../../../components/header/header.component';
 import { NavsideComponent } from '../../../components/navside/navside.component';
-import { FornecedorService } from '../../services/fornecedor.service';
+import { FornecedorService } from '../../../services/fornecedor.service';
 import { ViewFornecedorComponent } from '../view/view.component';
-import { Fornecedor } from '../../models/fornecedor.models';
+import { Fornecedor } from '../../../models/fornecedor.models';
 
 @Component({
   selector: 'app-list',

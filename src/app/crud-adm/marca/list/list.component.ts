@@ -11,8 +11,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { RouterModule } from '@angular/router';
-import { Marca } from '../../models/marca.model';
-import { MarcaService } from '../../services/marca.service';
+import { Marca } from '../../../models/marca.model';
+import { MarcaService } from '../../../services/marca.service';
 import { PageEvent } from '@angular/material/paginator';
 import { MatPaginatorModule } from '@angular/material/paginator';
 

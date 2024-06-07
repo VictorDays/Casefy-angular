@@ -3,7 +3,7 @@ import { estadoResolverAdm } from './crud-adm/administrador/resolver/estado-reso
 import { ClienteListComponent } from './crud-adm/cliente/list/list.component';
 import { ClienteFormComponent } from './crud-adm/cliente/form/form.component';
 import { MarcaListComponent } from './crud-adm/marca/list/list.component';
-import { HomeIndexComponent } from './home-index/home-index.component';
+import { HomeComponent } from './ecommerce/home/home.component';
 import { ModeloListComponent } from './crud-adm/modelo/list/list.component';
 import { ModeloFormComponent } from './crud-adm/modelo/form/form.component';
 import { EstadoFormComponent } from './crud-adm/estado/form/form.component';
@@ -26,11 +26,12 @@ import { CapinhaListComponent } from './crud-adm/capinha/list/list.component';
 import { CapinhaFormComponent } from './crud-adm/capinha/form/form.component';
 import { resolverCapinha } from './crud-adm/capinha/resolver/resolver-capinha';
 import { resolverCliente } from './crud-adm/cliente/resolver/estado-resolver-adm';
-import { HomeComponent } from './ecommerce/home/home.component';
-
+import { LoginComponent } from './ecommerce/login/login.component';
+import { CadastroComponent } from './ecommerce/cadastro/cadastro.component';
+import { DetalhesProdutoComponent } from './ecommerce/detalhes-produto/detalhes-produto.component';
+import { CarrinhoComponent } from './ecommerce/carrinho/carrinho.component';
 export const routes: Routes = [
-    //HOME    
-    { path: 'home', component: HomeIndexComponent, title: 'Home' },
+    
     //ADM
     { path: 'adm/list', component: AdmListComponent, title: 'Administradores' },
     { path: 'adm/form', component: AdmFormComponent, title: 'Cadastro de Administradores' },
@@ -69,4 +70,14 @@ export const routes: Routes = [
 
     //HOME
     { path: 'casefy/home', component: HomeComponent, title: 'Casefy | Home' },
+
+    //Login Cliente
+    { path: 'casefy/login', component: LoginComponent, title: 'Casefy | Login' },
+    //CADASTRO Cliente
+    { path: 'casefy/cadastro', component: CadastroComponent, title: 'Casefy | Cadastro' },
+
+    { path: 'produto/:id', component: DetalhesProdutoComponent, title: 'Detalhes da Capinha' },
+
+    { path: 'casefy/carrinho', component: CarrinhoComponent, title: 'Carrinho' }
+    
 ];

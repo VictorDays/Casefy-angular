@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Cliente } from '../../models/cliente.models';
+import { Cliente } from '../../../models/cliente.models';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { ClienteService } from '../../services/cliente.service';
+import { ClienteService } from '../../../services/cliente.service';
 import { MatDialog } from '@angular/material/dialog';
 import { CommonModule, NgIf } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -15,7 +15,7 @@ import { ConfirmationDialogComponent } from '../../../components/confirmation/co
 import { ErrorComponent } from '../../../components/error/error.component';
 import { HeaderComponent } from '../../../components/header/header.component';
 import { NavsideComponent } from '../../../components/navside/navside.component';
-import { Telefone } from '../../models/telefone.models';
+import { Telefone } from '../../../models/telefone.models';
 
 @Component({
   selector: 'app-form',

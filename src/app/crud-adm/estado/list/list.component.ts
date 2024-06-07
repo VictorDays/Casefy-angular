@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { Estado } from '../../models/estado.models';
+import { Estado } from '../../../models/estado.models';
 import { MatDialog } from '@angular/material/dialog';
-import { EstadoService } from '../../services/estado.service';
+import { EstadoService } from '../../../services/estado.service';
 import { ConfirmationDialogComponent } from '../../../components/confirmation/confirmation-dialog.component';
 import { ViewEstadoComponent } from '../view/view.component';
 import { Subscription } from 'rxjs/internal/Subscription';

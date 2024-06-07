@@ -8,9 +8,9 @@ import { Router, RouterModule } from '@angular/router';
 import { ConfirmationDialogComponent } from '../../../components/confirmation/confirmation-dialog.component';
 import { HeaderComponent } from '../../../components/header/header.component';
 import { NavsideComponent } from '../../../components/navside/navside.component';
-import { Lote } from '../../models/lote.models';
+import { Lote } from '../../../models/lote.models';
 import { MatDialog } from '@angular/material/dialog';
-import { LoteService } from '../../services/lote.service';
+import { LoteService } from '../../../services/lote.service';
 import { Subscription } from 'rxjs';
 import { ViewLoteComponent } from '../view/view-dialog.component';
 

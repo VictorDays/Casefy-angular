@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { Capinha } from '../../models/capinha.model';
+import { Capinha } from '../../../models/capinha.model';
 import { Subscription } from 'rxjs';
-import { CapinhaService } from '../../services/capinha.service';
+import { CapinhaService } from '../../../services/capinha.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from '../../../components/confirmation/confirmation-dialog.component';
 import { ViewModeloComponent } from '../../modelo/view/view.component';
