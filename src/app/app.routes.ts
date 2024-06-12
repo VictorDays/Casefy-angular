@@ -30,6 +30,7 @@ import { LoginComponent } from './ecommerce/login/login.component';
 import { CadastroComponent } from './ecommerce/cadastro/cadastro.component';
 import { DetalhesProdutoComponent } from './ecommerce/detalhes-produto/detalhes-produto.component';
 import { CarrinhoComponent } from './ecommerce/carrinho/carrinho.component';
+import { MarcaGridComponent } from './ecommerce/marca-grid/marca-grid.component';
 export const routes: Routes = [
     
     //ADM
@@ -78,6 +79,8 @@ export const routes: Routes = [
 
     { path: 'produto/:id', component: DetalhesProdutoComponent, title: 'Detalhes da Capinha' },
 
-    { path: 'casefy/carrinho', component: CarrinhoComponent, title: 'Carrinho' }
+    { path: 'casefy/carrinho', component: CarrinhoComponent, title: 'Carrinho' },
+
+    { path: 'marca/:marca', component: MarcaGridComponent, title: 'marca/:marca' },
     
 ];

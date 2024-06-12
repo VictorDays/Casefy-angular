@@ -29,6 +29,10 @@ import { Observable } from 'rxjs';
       findByNome(nome: string): Observable<Capinha[]> {
         return this.httpClient.get<Capinha[]>(`${this.baseUrl}/search/nome/${nome}`);
       }
+
+      findByMarca(marca: string): Observable<Capinha[]> {
+        return this.httpClient.get<Capinha[]>(`${this.baseUrl}/search/${marca}`);
+      }
     
       findById(id: number): Observable<Capinha> {
         return this.httpClient.get<Capinha>(`${this.baseUrl}/${id}`);

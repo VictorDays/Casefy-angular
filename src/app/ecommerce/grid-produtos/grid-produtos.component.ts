@@ -6,6 +6,7 @@ import { CapinhaService } from '../../services/capinha.service';
 import { CarrinhoService } from '../../services/carrinho.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatButton } from '@angular/material/button';
+import { CarroselComponent } from '../carrosel/carrosel.component';
 import { MatCard, MatCardActions, MatCardContent, MatCardTitle, MatCardFooter } from '@angular/material/card';
 
 // tipo personalizado de dados, como classes e interfaces, porém mais simples.
@@ -19,7 +20,7 @@ type Card = {
 @Component({
   selector: 'app-grid-produtos',
   standalone: true,
-  imports: [CommonModule, RouterModule, MatCard, MatCardActions, MatCardContent, MatCardTitle, MatCardFooter, NgFor, MatButton],
+  imports: [CommonModule, CarroselComponent, RouterModule, MatCard, MatCardActions, MatCardContent, MatCardTitle, MatCardFooter, NgFor, MatButton],
   templateUrl: './grid-produtos.component.html',
   styleUrl: './grid-produtos.component.css'
 })
