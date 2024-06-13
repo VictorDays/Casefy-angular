@@ -37,8 +37,7 @@ export class AuthService {
   login(email: string, senha: string): Observable<any> {
     const params = {
       login: email,
-      senha: senha,
-      perfil: 1 // paciente 
+      senha: senha
     }
 
     //{ observe: 'response' } para garantir que a resposta completa seja retornada (incluindo o cabeçalho)
@@ -48,7 +47,7 @@ export class AuthService {
         if (authToken) {
           this.setToken(authToken);
           const usuarioLogado = res.body;
-          console.log(usuarioLogado);
+          console.log("usuario logado: " + usuarioLogado);
           if (usuarioLogado) {
             this.setUsuarioLogado(usuarioLogado);
             this.usuarioLogadoSubject.next(usuarioLogado);

@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { CapinhaService } from '../../services/capinha.service';
 import { FooterComponent } from "../footer/footer.component";
 import { HeaderComponent } from '../header/header.component';
+import { Capinha } from '../../models/capinha.model';
 
 @Component({
     selector: 'app-marca-grid',
@@ -15,7 +16,7 @@ import { HeaderComponent } from '../header/header.component';
 })
 export class MarcaGridComponent implements OnInit{
   marca!: string;
-  produtos: any[] = [];
+  produtos: Capinha[] = [];
   loading: boolean = true;
 
   constructor(private route: ActivatedRoute, private productService: CapinhaService) {}

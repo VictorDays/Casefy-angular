@@ -1,8 +1,10 @@
 
+<!-- <app-header></app-header> -->
 <div>
 <div *ngIf="loading">Carregando...</div>
 
 <div class="bg-white system-ui" *ngIf="!loading">
+ 
   <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
     <h2 class="sr-only">Products</h2>
 
@@ -10,7 +12,7 @@
       <div *ngFor="let produto of produtos" class="p-4 rounded-lg border-2 border-blue-100 shadow-2xl">
         <a  class="group">
           <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
-            <img mat-card-image [src]="produto.urlImagem"
+            <img mat-card-image [src]="produto.imagem"
               class="h-full w-full object-cover object-center group-hover:opacity-75">
           </div>
         </a>

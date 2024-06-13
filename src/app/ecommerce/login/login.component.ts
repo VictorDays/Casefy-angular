@@ -29,34 +29,48 @@ export class LoginComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+      email: ['', [Validators.required]],
+      password: ['', [Validators.required]],
     });
   }
 
   onSubmit() {
+    console.log('Formulário válido?', this.loginForm.valid);
+  
+    // Exibir os valores atuais dos campos
+    console.log('Valores do formulário:', JSON.stringify(this.loginForm.value));
+  
     if (this.loginForm.valid) {
       const email = this.loginForm.get('email')!.value;
       const password = this.loginForm.get('password')!.value;
-
+  
+      console.log('Email:', email);
+      console.log('Senha:', password);
+  
       this.authService.login(email, password).subscribe({
         next: (resp) => {
-          this.router.navigateByUrl('/home');
+          // redirecionar para a página principal
+          this.router.navigateByUrl('/casefy/home');
         },
         error: (err) => {
-          console.error(err);
+          console.log('Erro ao fazer login:', err);
           this.showAlert('Usuário ou senha inválidos');
-        },
+        }
       });
     } else {
+      console.log('Erros no formulário:', this.loginForm.errors);
+      // Exibir os erros específicos do campo de e-mail
+    console.log('Erros do campo de e-mail:', this.loginForm.get('email')!.errors);
       this.showAlert('Dados inválidos');
     }
   }
+  
 
   onRegister() {
     this.router.navigate(['/casefy/cadastro']);
