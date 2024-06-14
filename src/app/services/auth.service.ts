@@ -25,6 +25,7 @@ export class AuthService {
 
   private initUsuarioLogado() {
     const usuario = localStorage.getItem(this.usuarioLogadoKey);
+    console.log(usuario)
     if (usuario) {
       const usuarioLogado = JSON.parse(usuario);
 

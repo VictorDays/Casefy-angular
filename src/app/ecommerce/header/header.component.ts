@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { CarrinhoService } from '../../services/carrinho.service';
@@ -20,7 +20,7 @@ import { MarcaGridComponent } from '../marca-grid/marca-grid.component';
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit, OnDestroy{
   isListVisible = false;
   usuarioLogado: Usuario | null = null;
   private subscription = new Subscription();
@@ -30,6 +30,15 @@ export class HeaderComponent {
     private authService: AuthService,
     private localStorageService: LocalStorageService,
     private router: Router) { console.log("Cabeçalho") }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+    
+  }
+  ngOnInit(): void {
+    this.obterUsuarioLogado();
+    console.log(this.usuarioLogado?.nome)
+  }
 
     
   toggleList() {
@@ -55,8 +64,17 @@ export class HeaderComponent {
   obterUsuarioLogado() {
     this.subscription.add(this.authService.getUsuarioLogado().subscribe(
       usuario => this.usuarioLogado = usuario
+    ));this.subscription.add(this.authService.getUsuarioLogado().subscribe(
+      usuario => {
+        this.usuarioLogado = usuario;
+        console.log('usuário logado',this.usuarioLogado); // Linha de depuração
+      },
+      error => {
+        console.error('Falha ao obter usuário logado', error); // Linha de depuração
+      }
     ));
   }
+
   menuVisible = false;
 
   toggleMenu() {
@@ -85,5 +103,6 @@ export class HeaderComponent {
 
   showBrands() {
     this.showMobileBrands = !this.showMobileBrands;
+    
   }
 }

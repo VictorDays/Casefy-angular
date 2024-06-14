@@ -11,6 +11,7 @@ import { AuthService } from '../../services/auth.service'; // Importa serviço d
 import { NgIf } from '@angular/common';
 import { Subject } from 'rxjs';
 import { AlertComponent } from "../alert/alert.component";
+import { Usuario } from '../../models/usuario.model';
 
 @Component({
   selector: 'app-login',
@@ -59,14 +60,12 @@ export class LoginComponent implements OnInit {
           this.router.navigateByUrl('/casefy/home');
         },
         error: (err) => {
-          console.log('Erro ao fazer login:', err);
           this.showAlert('Usuário ou senha inválidos');
         }
       });
     } else {
       console.log('Erros no formulário:', this.loginForm.errors);
       // Exibir os erros específicos do campo de e-mail
-    console.log('Erros do campo de e-mail:', this.loginForm.get('email')!.errors);
       this.showAlert('Dados inválidos');
     }
   }
