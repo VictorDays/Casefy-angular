@@ -12,6 +12,7 @@ import { NgIf } from '@angular/common';
 import { Subject } from 'rxjs';
 import { AlertComponent } from "../alert/alert.component";
 import { Usuario } from '../../models/usuario.model';
+import { LocalStorageService } from '../../services/local-storage.service';
 
 @Component({
   selector: 'app-login',
@@ -31,7 +32,8 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private local: LocalStorageService
   ) { }
 
   ngOnInit(): void {
@@ -70,6 +72,9 @@ export class LoginComponent implements OnInit {
     }
   }
   
+  armazenarToken(token:string){
+    this.local.setItem("Authorization", token);
+  }
 
   onRegister() {
     this.router.navigate(['/casefy/cadastro']);

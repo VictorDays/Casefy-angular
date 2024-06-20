@@ -25,7 +25,6 @@ export class AuthService {
 
   private initUsuarioLogado() {
     const usuario = localStorage.getItem(this.usuarioLogadoKey);
-    console.log(usuario)
     if (usuario) {
       const usuarioLogado = JSON.parse(usuario);
 
@@ -38,17 +37,20 @@ export class AuthService {
   login(email: string, senha: string): Observable<any> {
     const params = {
       login: email,
-      senha: senha
+      senha: senha,
+      perfil: 1 
     }
 
     //{ observe: 'response' } para garantir que a resposta completa seja retornada (incluindo o cabeçalho)
     return this.http.post(`${this.baseURL}`, params, {observe: 'response'}).pipe(
       tap((res: any) => {
+        console.log('Resposta completa:', res);
         const authToken = res.headers.get('Authorization') ?? '';
+        console.log("Token: ",authToken);
         if (authToken) {
           this.setToken(authToken);
           const usuarioLogado = res.body;
-          console.log("usuario logado: " + usuarioLogado);
+          console.log(usuarioLogado);
           if (usuarioLogado) {
             this.setUsuarioLogado(usuarioLogado);
             this.usuarioLogadoSubject.next(usuarioLogado);
@@ -85,23 +87,18 @@ export class AuthService {
 
   isTokenExpired(): boolean {
     const token = this.getToken();
-    // Verifica se o token é nulo ou está expirado
-    return !token || this.jwtHelper.isTokenExpired(token);
-    // npm install @auth0/angular-jwt
-  }
-
-  // isTokenExpired(): boolean {
-  //   const token = localStorage.getItem('token');
-  //   if (!token) {
-  //     return true;
-  //   }
+    console.error('token: ' + token);
+    if (!token) {
+      return true;
+    }
     
-  //   try {
-  //     return this.jwtHelper.isTokenExpired(token);
-  //   } catch (error) {
-  //     console.error('Token inválido:', error);
-  //     return true; 
-  //   }
-  // }
+    try {
+      console.error('jwtHelper: ' + this.jwtHelper.isTokenExpired(token));
+      return this.jwtHelper.isTokenExpired(token);
+    } catch (error) {
+      console.error('Token inválido:', error);
+      return true; 
+    }
+  }
 
 }

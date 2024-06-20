@@ -11,6 +11,7 @@ import { LocalStorageService } from '../../services/local-storage.service';
 import { AuthService } from '../../services/auth.service';
 import { Usuario } from '../../models/usuario.model';
 import { MarcaGridComponent } from '../marca-grid/marca-grid.component';
+import { UsuarioLogadoService } from '../../services/usuariologado.service';
 
 @Component({
   selector: 'app-header',
@@ -23,23 +24,32 @@ import { MarcaGridComponent } from '../marca-grid/marca-grid.component';
 export class HeaderComponent implements OnInit, OnDestroy{
   isListVisible = false;
   usuarioLogado: Usuario | null = null;
+  qtdItensCarrinho: number = 0;
+  
   private subscription = new Subscription();
   constructor(
 
     private carrinhoService: CarrinhoService,
     private authService: AuthService,
+    private usuarioLogadoService: UsuarioLogadoService,
     private localStorageService: LocalStorageService,
-    private router: Router) { console.log("Cabeçalho") }
+    private router: Router) {  }
 
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-    
-  }
   ngOnInit(): void {
+    this.obterQtdItensCarrinho();
     this.obterUsuarioLogado();
-    console.log(this.usuarioLogado?.nome)
   }
 
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
+
+  obterQtdItensCarrinho() {
+    this.carrinhoService.carrinho$.subscribe(itens => {
+      this.qtdItensCarrinho = itens.length
+    });
+  }
     
   toggleList() {
     this.isListVisible = !this.isListVisible;
@@ -49,34 +59,11 @@ export class HeaderComponent implements OnInit, OnDestroy{
     return this.carrinhoService.tamanho();
   }
 
-  onLoginClick(): void {
-    this.router.navigate(['/casefy/login']);
-  }
-
-  onCadastroClick(): void {
-    this.router.navigate(['/casefy/cadastro']);
-  }
-
   onCarrinhoClick(): void {
     this.router.navigate(['/casefy/carrinho']);
   }
 
-  obterUsuarioLogado() {
-    this.subscription.add(this.authService.getUsuarioLogado().subscribe(
-      usuario => this.usuarioLogado = usuario
-    ));this.subscription.add(this.authService.getUsuarioLogado().subscribe(
-      usuario => {
-        this.usuarioLogado = usuario;
-        console.log('usuário logado',this.usuarioLogado); // Linha de depuração
-      },
-      error => {
-        console.error('Falha ao obter usuário logado', error); // Linha de depuração
-      }
-    ));
-  }
-
   menuVisible = false;
-
   toggleMenu() {
     this.menuVisible = !this.menuVisible;
   }
@@ -94,13 +81,18 @@ export class HeaderComponent implements OnInit, OnDestroy{
     }
   }
 
+  obterUsuarioLogado() {
+    this.subscription.add(this.authService.getUsuarioLogado().subscribe(
+      usuario => this.usuarioLogado = usuario
+    ));
+  }
+
   deslogar() {
     this.authService.removeToken()
     this.authService.removeUsuarioLogado();
   }
 
   showMobileBrands = false;
-
   showBrands() {
     this.showMobileBrands = !this.showMobileBrands;
     
